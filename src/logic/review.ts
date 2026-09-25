@@ -9,6 +9,7 @@
  * 今天要复习的 = 下次复习日期 ≤ 今天、且没掌握的。
  */
 import { addDays, compareDates, type LocalDate } from './date';
+import { hasCheckedIn } from './streak';
 
 export const REVIEW_INTERVALS = [1, 2, 4, 7, 15, 30] as const;
 
@@ -91,4 +92,17 @@ export function gradeHint(s: ReviewSchedule, grade: ReviewGrade, today: LocalDat
   const days = intervalForLevel(next.reviewLevel);
   if (grade !== 'remember' || days === 1) return '明天再来';
   return `${days} 天后`;
+}
+
+export type ReviewOutcome =
+  | { kind: 'more-due'; count: number } // 这一轮卡片过完了，但今天还有到期的（比如跨了零点）
+  | { kind: 'done'; checkedIn: boolean }; // 今天的都评完了；checkedIn = 今天是否已打卡
+
+/**
+ * 复习页一轮卡片过完之后显示什么：按实际数据判断，而不是假设"评完这一轮就一定打卡了"。
+ * dueCount 是此刻今天还到期的数量。
+ */
+export function reviewOutcome(dueCount: number, checkIns: readonly LocalDate[], today: LocalDate): ReviewOutcome {
+  if (dueCount > 0) return { kind: 'more-due', count: dueCount };
+  return { kind: 'done', checkedIn: hasCheckedIn(checkIns, today) };
 }

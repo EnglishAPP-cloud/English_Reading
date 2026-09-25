@@ -9,8 +9,15 @@ import { Notice } from '@/components/Notice';
 import { Screen } from '@/components/Screen';
 import { useToday } from '@/hooks/useToday';
 import { blankOut, meaningHint, type Favorite } from '@/logic/favorites';
-import { GRADE_LABELS, MASTERED_LEVEL, REVIEW_INTERVALS, dueItems, gradeHint, type ReviewGrade } from '@/logic/review';
-import { hasCheckedIn } from '@/logic/streak';
+import {
+  GRADE_LABELS,
+  MASTERED_LEVEL,
+  REVIEW_INTERVALS,
+  dueItems,
+  gradeHint,
+  reviewOutcome,
+  type ReviewGrade,
+} from '@/logic/review';
 import { useDueFavorites, useStreak } from '@/store/hooks';
 import { useUserStore } from '@/store/userStore';
 import { borderWidth, colors, opacity, radius, space } from '@/theme';
@@ -109,14 +116,14 @@ export default function ReviewScreen() {
   const fav = currentId ? favorites[currentId] : undefined;
 
   if (index >= queue.length || !fav) {
-    // 按实际数据说话：还有没有到期的卡、今天有没有打卡（跨零点等情况下这一轮可能没覆盖全部）
-    if (dueNow.length > 0) {
+    const outcome = reviewOutcome(dueNow.length, checkIns, today);
+    if (outcome.kind === 'more-due') {
       return (
         <Screen>
           <Notice>
             <AppText variant="heading">这一轮评完了</AppText>
             <AppText variant="small" tone="textSubtle">
-              今天还有 {dueNow.length} 个到期没复习，全部评完才算今天复习打卡。
+              今天还有 {outcome.count} 个到期没复习，全部评完才算今天复习打卡。
             </AppText>
           </Notice>
           <Button title="继续复习" onPress={() => router.replace('/review')} />
@@ -130,7 +137,7 @@ export default function ReviewScreen() {
             ✓ 今天的复习完成了
           </AppText>
           <AppText variant="small" tone="textSubtle">
-            {hasCheckedIn(checkIns, today) ? `今天已打卡，连续 ${streak} 天。` : '明天见。'}
+            {outcome.checkedIn ? `今天已打卡，连续 ${streak} 天。` : '明天见。'}
           </AppText>
         </Notice>
         <Button title="返回" onPress={() => router.back()} />

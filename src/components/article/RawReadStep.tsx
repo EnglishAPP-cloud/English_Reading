@@ -4,6 +4,7 @@ import type { Article } from '@/content/types';
 import { formatDuration } from '@/logic/format';
 import { isReviewingRawRead, rawReadRemaining, STEP_LABELS, type ArticleProgress } from '@/logic/flow';
 import type { useParagraphPositions } from '@/hooks/useParagraphPositions';
+import { usePendingSeconds, type RawReadTimer } from '@/hooks/useRawReadTimer';
 import { useUserStore } from '@/store/userStore';
 import { colors, radius, space } from '@/theme';
 
@@ -19,13 +20,14 @@ type Positions = ReturnType<typeof useParagraphPositions>;
 export function RawReadTimerBar({
   article,
   progress,
-  pendingSec,
+  timer,
 }: {
   article: Article;
   progress: ArticleProgress;
-  /** 已经计时、还没写进进度的秒数 */
-  pendingSec: number;
+  timer: RawReadTimer;
 }) {
+  // 只有这个倒计时条每秒刷新，文章正文不跟着重渲染
+  const pendingSec = usePendingSeconds(timer);
   const remaining = rawReadRemaining(progress, article.rawReadSeconds) - pendingSec;
   const over = remaining <= 0;
   return (

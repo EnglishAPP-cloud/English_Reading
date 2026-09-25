@@ -9,6 +9,7 @@ import {
   MASTERED_LEVEL,
   newSchedule,
   REVIEW_INTERVALS,
+  reviewOutcome,
   type ReviewSchedule,
 } from '@/logic/review';
 
@@ -95,5 +96,19 @@ describe('复习调度', () => {
     expect(gradeHint(at(5), 'remember', TODAY)).toBe('已掌握');
     expect(gradeHint(at(3), 'fuzzy', TODAY)).toBe('明天再来');
     expect(gradeHint(at(3), 'forgot', TODAY)).toBe('明天再来');
+  });
+});
+
+describe('一轮复习过完之后', () => {
+  it('今天还有到期的卡：提示继续', () => {
+    expect(reviewOutcome(2, ['2026-09-25'], TODAY)).toEqual({ kind: 'more-due', count: 2 });
+  });
+
+  it('都评完且今天已打卡', () => {
+    expect(reviewOutcome(0, ['2026-09-24', '2026-09-25'], TODAY)).toEqual({ kind: 'done', checkedIn: true });
+  });
+
+  it('都评完但今天没有打卡记录（比如这一轮本来就是空的）', () => {
+    expect(reviewOutcome(0, ['2026-09-24'], TODAY)).toEqual({ kind: 'done', checkedIn: false });
   });
 });

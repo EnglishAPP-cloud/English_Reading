@@ -1,9 +1,9 @@
 import { useIsFocused } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import type { Article } from '@/content/types';
-import { createProgress, isReviewingRawRead } from '@/logic/flow';
+import { createProgress, isReviewingRawRead, progressOnOpen } from '@/logic/flow';
 import { useParagraphPositions } from '@/hooks/useParagraphPositions';
 import { useRawReadTimer } from '@/hooks/useRawReadTimer';
 import { useArticleProgress } from '@/store/hooks';
@@ -28,16 +28,20 @@ const EMPTY_PROGRESS = createProgress();
  * 所以退出 APP 再进来会停在原来的步骤。
  */
 export function ArticleFlow({ article }: { article: Article }) {
-  const progress = useArticleProgress(article.id) ?? EMPTY_PROGRESS;
+  const stored = useArticleProgress(article.id) ?? EMPTY_PROGRESS;
+  // 打开时：已完成的文章回到练习步骤。第一帧就按打开后的样子显示（不先闪一下旧步骤），
+  // 同时在 effect 里把它写进 store；之后用户在页面里回看前面的步骤，就照存储的来
+  const opened = useRef(false);
+  const progress = opened.current ? stored : progressOnOpen(stored);
   const goToStep = useUserStore((s) => s.goToStep);
   const openArticle = useUserStore((s) => s.openArticle);
   const finishRawRead = useUserStore((s) => s.finishRawRead);
   const positions = useParagraphPositions();
   const focused = useIsFocused();
 
-  // 打开文章时：已完成的文章回到练习步骤（回看过前面的步骤也一样）
   useEffect(() => {
     openArticle(article.id);
+    opened.current = true;
   }, [article.id, openArticle]);
 
   const rawReading = progress.step === 'raw' && !isReviewingRawRead(progress);
@@ -56,7 +60,7 @@ export function ArticleFlow({ article }: { article: Article }) {
 
   return (
     <View style={styles.root}>
-      {rawReading ? <RawReadTimerBar article={article} progress={progress} pendingSec={timer.pendingSec} /> : null}
+      {rawReading ? <RawReadTimerBar article={article} progress={progress} timer={timer} /> : null}
       <Screen scrollRef={scrollRef}>
         <ArticleHeader article={article} completed={!!progress.completedAt} />
         <StepBar progress={progress} onGo={(step) => goToStep(article.id, step)} />

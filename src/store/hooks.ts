@@ -57,3 +57,8 @@ export function useStoreHydrated(): boolean {
 export function usePreviewUnpublished(): boolean {
   return useUserStore((s) => effectivePreview(s.settings));
 }
+
+/** 这次启动读取本地数据失败了（已用空数据继续），页面据此给个提示 */
+export function useHydrationFailed(): boolean {
+  return useUserStore((s) => s.hydrationFailed);
+}

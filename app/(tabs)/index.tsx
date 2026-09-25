@@ -5,6 +5,7 @@ import { AppText } from '@/components/AppText';
 import { ArticleCard } from '@/components/ArticleCard';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
+import { Notice } from '@/components/Notice';
 import { Row } from '@/components/Row';
 import { Screen } from '@/components/Screen';
 import { Section } from '@/components/Section';
@@ -14,8 +15,9 @@ import { useToday } from '@/hooks/useToday';
 import { formatMonthDay } from '@/logic/date';
 import { articleStatus } from '@/logic/flow';
 import { pickTodayArticle } from '@/logic/today';
-import { useDueFavorites, usePreviewUnpublished, useStreak } from '@/store/hooks';
+import { useDueFavorites, useHydrationFailed, usePreviewUnpublished, useStreak } from '@/store/hooks';
 import { useUserStore } from '@/store/userStore';
+import { colors } from '@/theme';
 
 /** 今日：今天该读的一篇（全部读完则引导去复习），连续打卡天数，今天待复习数 */
 export default function TodayScreen() {
@@ -26,6 +28,7 @@ export default function TodayScreen() {
   const series = useAllSeries();
   const streak = useStreak(today);
   const due = useDueFavorites(today);
+  const hydrationFailed = useHydrationFailed();
 
   const todayArticle = useMemo(
     () => (articles.data ? pickTodayArticle(articles.data, progress) : undefined),
@@ -41,6 +44,14 @@ export default function TodayScreen() {
         {formatMonthDay(today)}
         {preview ? ' · 预览模式：显示未发布内容' : ''}
       </AppText>
+
+      {hydrationFailed ? (
+        <Notice color={colors.danger} softColor={colors.dangerSoft}>
+          <AppText variant="small" tone="danger">
+            这台手机上的学习记录读取失败（数据可能损坏），原数据已另存备份，这次先从空白开始。
+          </AppText>
+        </Notice>
+      ) : null}
 
       <Row gap="md">
         <StatCard label="连续打卡" value={streak} unit="天" />

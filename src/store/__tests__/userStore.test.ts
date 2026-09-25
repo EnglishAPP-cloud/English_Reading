@@ -163,4 +163,24 @@ describe('读取本地数据失败', () => {
     expect(backups).toHaveLength(1);
     expect(await AsyncStorage.getItem(backups[0]!)).toBe('{这不是合法的 JSON');
   });
+
+  it('备份失败时绝不覆盖原数据：之后的写入改到另一个键', async () => {
+    jest.useRealTimers();
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const AsyncStorage = require('@react-native-async-storage/async-storage') as {
+      setItem: jest.Mock;
+      getItem(k: string): Promise<string | null>;
+    };
+    useUserStore.setState({ hydrationFailed: false });
+    await AsyncStorage.setItem(STORAGE_KEY, '{又坏了');
+    AsyncStorage.setItem.mockImplementationOnce(() => Promise.reject(new Error('存储空间满了')));
+    await useUserStore.persist.rehydrate();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(store().hydrationFailed).toBe(true);
+    expect(useUserStore.persist.getOptions().name).toBe(`${STORAGE_KEY}/unsaved`);
+    store().toggleWordFavorite(article, article.vocab[0]!); // 触发一次写入
+    await new Promise((r) => setTimeout(r, 20));
+    expect(await AsyncStorage.getItem(STORAGE_KEY)).toBe('{又坏了');
+    useUserStore.persist.setOptions({ name: STORAGE_KEY });
+  });
 });

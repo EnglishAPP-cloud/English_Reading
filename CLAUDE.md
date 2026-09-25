@@ -140,7 +140,7 @@ glossary[{en, zh, note, issue}], sourceNote, mindmap{root, rootZh, branches[{iss
 schema；文件名 = id；id 不重复；段落 id 不重复；seriesId / seriesIndex 同写同不写；vocab.word 在对应段落里；
 sentences.text、questions.answer 是对应段落的原样子串；check.answer、headings 下标不越界；headings 覆盖每一段；
 文章的 seriesId 存在；系列里写了的 articleId 存在、那篇文章的 seriesId / seriesIndex 和这一期对得上；
-status 为 ready 必须有 articleId；期号不重复且不超过 total；文章的 seriesIndex 不超过系列 total，且系列里那一期的 articleId 正好指向这篇。
+status 为 ready 必须有 articleId；期号不重复且不超过 total；文章的 seriesIndex 不超过系列 total，且系列里有一期的 articleId 指向这篇（同一个错只报一次）。
 
 ## 怎么加一篇新文章
 
@@ -243,9 +243,12 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 - 根布局等字体加载完、本地数据读回来（`useStoreHydrated`）才渲染页面，避免先显示空进度。
 - 检测答案按题目下标存（`checkPicks`）。已发布文章的题目顺序别改，否则老用户的检测记录会错位。
 - store 有一个组合测试（`src/store/__tests__`），用 AsyncStorage 官方 mock 和 jest 假时钟，确认 action 串对了打卡和埋点。
-- 本地数据读取失败（数据损坏、迁移出错）：原始数据另存为 `english-reading/user/backup-<时间戳>`，然后用空数据继续（`hydrationFailed`），不会卡在空白页。
-- 裸读计时先记在页面本地，每 10 秒、切到后台、离开页面时才写进 store（每秒写会频繁读写存储、让其他页面跟着重渲染）；点"读完了"前先 `flush()`。
-- 打开文章页时调用 store 的 `openArticle`：已完成的文章回到练习步骤。
+- 本地数据读取失败（数据损坏、迁移出错）：原始数据另存为 `english-reading/user/backup-<时间戳>`，然后用空数据继续（`hydrationFailed`），不会卡在空白页，今日页顶部会提示。
+  备份失败时，之后的写入改到 `english-reading/user/unsaved`，绝不覆盖原数据。
+- 裸读计时先记在页面本地，每 10 秒、切到后台、离开页面时才写进 store（每秒写会频繁读写存储、让其他页面跟着重渲染）；点"读完了"前先 `flush()`（含不到 1 秒的零头）。
+  未写入的秒数用一个小的订阅（`usePendingSeconds`）只推给倒计时条，文章正文不会每秒重渲染；写入时先清零再写 store，倒计时不会跳。
+- 打开文章页时调用 store 的 `openArticle`：已完成的文章回到练习步骤；第一帧就用 `progressOnOpen` 显示，不会先闪一下旧步骤。
+- 复习页一轮过完显示什么由 `logic/review.ts` 的 `reviewOutcome` 决定（还有到期的就提示继续；今天真的打卡了才说已打卡）。
 - 复习间隔、掌握次数的文案从 `REVIEW_INTERVALS` / `MASTERED_LEVEL` 生成，改规则只改 `logic/review.ts`。
 - 文章页：`ArticleFlow` 按 `progress.step` 渲染对应步骤组件。步骤组件都返回 Fragment，让段落列表直接挂在滚动内容下，
   `useParagraphPositions` 才能算出"第几段在哪"。裸读倒计时条放在滚动区外面，固定在顶部。
@@ -272,7 +275,7 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 | 收藏词和句子，日期往后调一天，复习页能看到，评分后下次日期正确 | ✓（用浏览器时钟把"系统日期"改到第二天：待复习 2 个；记得 → 9月28日，忘了 → 9月27日；评完一轮打卡） |
 | 读完一篇后今日页连续天数 +1 | ✓（0 → 1；第二天复习完一轮后 → 2） |
 | `publishAt` 改成明天：今日和知识库消失；打开"预览未发布内容"后出现 | ✓（系列目录里第 1 期同时变成"即将上线"） |
-| `src/logic/` 单元测试全部通过 | ✓（全部测试 17 个文件、161 个用例通过） |
+| `src/logic/` 单元测试全部通过 | ✓（全部测试 17 个文件、165 个用例通过） |
 
 真机上还需要人工看一眼的：朗读（系统语音）、iOS 键盘不挡输入框、安卓上虚线下划线显示为实线（安卓不支持虚线，属正常）。
 
@@ -284,4 +287,7 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 - 干净目录重新 clone 后 `npm ci` / `npm install` / 测试 / 类型检查 / 内容校验都通过，package-lock 不变。
 - 浏览器补测通过：裸读计时（刷新后秒数保留、用时含零头）、挑战选小标题并检查（5/6、参考答案、刷新保留、重新选）、
   精读补上的两个开关、已完成文章回看后重开回到练习、句子收藏详情页 / 跳原文 / 取消收藏、系列页和思维导图跳文章、栏目筛选。
+- 第二轮审查（针对上面的修改）又修了：备份失败时不覆盖原数据、读取失败给提示、倒计时写存储时不跳、
+  "读完了"算上零头、倒计时只重渲染自己、已完成文章重开不闪旧步骤、期号错误不重复报、复习完成判断移到 logic。
+- 浏览器验收 39/39、补测 28/28 通过；连续 25 秒采样倒计时，经过两次写存储无跳动。
 

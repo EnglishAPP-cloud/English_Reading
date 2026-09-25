@@ -263,16 +263,30 @@ export const useUserStore = create<UserStore>()(
         const p = (persisted ?? {}) as Partial<UserData>;
         return { ...current, ...p, settings: { ...DEFAULT_SETTINGS, ...p.settings } };
       },
-      // 读取失败（数据损坏、迁移出错）时：先把原始数据另存一份备份，再用空数据继续，
-      // 否则页面会一直停在空白的加载状态
+      // 读取失败（数据损坏、迁移出错）时用空数据继续，否则页面会一直停在空白的加载状态。
+      // 之后的任何写入都会覆盖原来那份数据，所以先备份：
+      // - 备份成功（或原来本就没数据）：照常写回原位置
+      // - 备份失败：改写到另一个键，绝不覆盖原数据，留给以后排查 / 恢复
       onRehydrateStorage: () => (_state, error) => {
         if (!error) return;
-        console.warn('[store] 读取本地数据失败，已备份原数据并用空数据继续', error);
-        void AsyncStorage.getItem(STORAGE_KEY)
-          .then((raw) => (raw ? AsyncStorage.setItem(`${STORAGE_KEY}/backup-${Date.now()}`, raw) : undefined))
-          .catch(() => undefined)
-          .finally(() => useUserStore.setState({ hydrationFailed: true }));
+        console.warn('[store] 读取本地数据失败，用空数据继续', error);
+        void backupRawData().then((safe) => {
+          if (!safe) useUserStore.persist.setOptions({ name: `${STORAGE_KEY}/unsaved` });
+          useUserStore.setState({ hydrationFailed: true });
+        });
       },
     },
   ),
 );
+
+/** 把本地原始数据另存一份。返回 true = 可以放心覆盖原数据（备份成功，或者原来就没数据） */
+async function backupRawData(): Promise<boolean> {
+  try {
+    const raw = await AsyncStorage.getItem(STORAGE_KEY);
+    if (raw === null) return true;
+    await AsyncStorage.setItem(`${STORAGE_KEY}/backup-${Date.now()}`, raw);
+    return true;
+  } catch {
+    return false;
+  }
+}
