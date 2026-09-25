@@ -11,7 +11,7 @@
 
 - [x] 阶段 0：计划、目录、类型草稿；产品问题已确认（全部按默认，见"已拍板的产品决定"）
 - [x] 阶段 1：Expo 项目、路由骨架、theme tokens、本文件
-- [ ] 阶段 2：内容层
+- [x] 阶段 2：内容层（schema、交叉校验、ContentRepository、`npm run content`）
 - [ ] 阶段 3：store + `src/logic/` 纯函数 + 单元测试
 - [ ] 阶段 4：页面串联
 - [ ] 阶段 5：自测 + README
@@ -25,7 +25,8 @@ expo-speech · @expo-google-fonts/lora · jest-expo（只测纯逻辑）。没�
 ## 常用命令
 
 ```bash
-npm start            # 启动开发服务器，手机 Expo Go 扫码
+npm start            # 先自动跑 npm run content，再启动开发服务器，手机 Expo Go 扫码
+npm run content      # 校验 content/ 下的 JSON 并生成 content/index.ts
 npm test             # 跑单元测试
 npm run typecheck    # TypeScript 类型检查
 ```
@@ -48,16 +49,24 @@ app/                      只放路由和页面拼装，不写业务逻辑
 content/
   articles/*.json         文章（一个文件一篇，文件名 = id）
   series/*.json           系列
-  index.ts                脚本自动生成，别手改（阶段 2）
+  index.ts                脚本自动生成，别手改；会提交进仓库
 src/
-  content/                类型、zod schema、交叉校验、ContentRepository（阶段 2）
+  content/
+    schema.ts             zod schema：内容格式的唯一标准
+    types.ts              从 schema 推出的 TS 类型 + 栏目 / 难度的中文名
+    validate.ts           交叉校验（纯函数，脚本和测试共用）
+    repository.ts         ContentRepository 接口
+    localRepository.ts    LocalContentRepository：读 content/index.ts
+    index.ts              导出当前用的 contentRepository（换云端只改这里）
   store/                  zustand store：用户数据（阶段 3）
   logic/                  纯函数：学习流程、分流、复习调度、今日选文、连续天数、日期工具（阶段 3）
   components/             可复用组件（AppText、Button、Card、Screen……）
   hooks/                  React hooks（useToday 等，阶段 3–4）
   analytics/track.ts      埋点 track(event, props)，现在只 console.log
   theme/                  颜色、字号、间距 tokens
-scripts/                  内容校验 + 生成 content/index.ts（阶段 2）
+scripts/
+  content.ts              npm run content：扫描 → 校验 → 生成 content/index.ts
+  renderIndex.ts          生成 index.ts 的文本
 docs/                     原型等参考资料
 ```
 
@@ -71,6 +80,48 @@ docs/                     原型等参考资料
 4. **样式全部走 `src/theme/` tokens**：组件里不许写死颜色、字号、间距。文字统一用 `<AppText variant tone>`。只做浅色主题。
 5. **埋点**：开始读、读完、检测得分、切换练法、收藏、复习评分都调用 `track()`，事件名见 `src/analytics/track.ts`。
 6. 界面文字用中文；关键逻辑写中文注释。
+
+## 内容 JSON 格式
+
+权威定义是 `src/content/schema.ts`（字段后面有中文注释）；样例见 `content/articles/hkp-01.json`
+和 `content/series/how-to-know-a-person.json`。多写、少写、拼错字段都会报错。
+
+**文章** `content/articles/<id>.json`（文件名 = id，id 只用小写字母、数字、连字符）：
+
+| 字段 | 说明 |
+|---|---|
+| id, column, level | column：`thought` / `news` / `pro`；level：`cet4` / `cet6` |
+| seriesId, seriesIndex | 可选，属于系列时两个都写 |
+| titleEn, titleZh, wordCount, minutes, sourceNote | 基本信息 |
+| publishAt | `YYYY-MM-DD`，晚于今天不显示 |
+| intro | 可选，暂不使用 |
+| orientation { background, question } | 定向 |
+| rawReadSeconds | 裸读倒计时秒数 |
+| paragraphs[] { id, en, zh } | 段落，id 如 p1，文内不重复 |
+| vocab[] { word, lemma, phonetic, meaning, level, paragraphId } | word 要作为完整单词原样出现在该段（区分大小写） |
+| sentences[] { paragraphId, text, analysis[], translation } | 长难句；text 是该段英文的原样片段 |
+| questions[] { prompt, answer, paragraphId, explanation } | 读准题；answer 是该段英文的原样片段 |
+| check[] { type, prompt, options[], answer, explanation } | 检测题，至少 1 题；answer 是选项下标（从 0 开始） |
+| headings { options[], answers{段落id: 下标}, note? } | 挑战；每一段都要有答案 |
+| output { template, example }, action | 一句话输出、本周小练习 |
+
+**系列** `content/series/<id>.json`：id, titleEn, titleZh, author, year, total（计划期数）, oneLiner,
+scenarios[], insights[{claim, detail}], issues[{index, articleId?, titleEn, titleZh, chapters, level, status: ready|soon}],
+glossary[{en, zh, note, issue}], sourceNote, mindmap{root, rootZh, branches[{issue, title, leaves[]}]}。
+
+**校验规则**（`npm run content`，全部问题一次列出，带文件和字段路径，比如 `vocab[2].word`）：
+schema；文件名 = id；id 不重复；段落 id 不重复；seriesId / seriesIndex 同写同不写；vocab.word 在对应段落里；
+sentences.text、questions.answer 是对应段落的原样子串；check.answer、headings 下标不越界；headings 覆盖每一段；
+文章的 seriesId 存在；系列里写了的 articleId 存在、那篇文章的 seriesId / seriesIndex 和这一期对得上；
+status 为 ready 必须有 articleId；期号不重复且不超过 total。
+
+## 怎么加一篇新文章
+
+1. 复制 `content/articles/hkp-01.json`，改名为新 id（比如 `hkp-02.json`），把 `id` 改成一样的。
+2. 填内容。`publishAt` 写发布日期（本地时区）。
+3. 属于系列的：文章里写 `seriesId`、`seriesIndex`；在系列 JSON 对应那一期写上 `articleId`，`status` 改成 `ready`。
+4. 运行 `npm run content`，按报错改到通过（`npm start` 也会自动先跑它）。
+5. 提交时连同重新生成的 `content/index.ts` 一起提交。
 
 ## 业务规则摘要（PROMPT.md 第 6–8 节 + 已拍板的决定）
 
@@ -148,4 +199,10 @@ docs/                     原型等参考资料
 - tsconfig 开了 `noUncheckedIndexedAccess`：数组 / 对象按下标取值会被当成可能是 undefined，逼着处理内容缺失的情况。
 - 标签栏图标暂时用单个汉字（今 / 库 / 词），没有引入图标库；等设计稿来了再换。
 - 底部卡片、下拉框用 React Native 自带的 `Modal` 实现，不引入 UI 库。
+- 内容脚本用 `tsx` 运行（`scripts/content.ts`），和 APP 共用 `src/content/schema.ts` / `validate.ts`，规则只有一份。
+- zod 4：报错用中文（`z.locales.zhCN()`），并开了 `jitless`（不用 `new Function`，避免手机 JS 引擎不支持）。
+- `LocalContentRepository` 在 APP 启动时再用 zod 解析一遍内容：正常情况下脚本已拦住错误；万一有人跳过脚本，会直接报错。
+- 文章 schema 校验失败时不做交叉检查（结构都不对，没法查对应关系），报错末尾会提示"改好后重跑会继续查"。
+- 找单词（`findWholeWord`）是"完整单词、区分大小写"；为兼容手机 JS 引擎，没有用正则后行断言。校验和页面高亮用同一个函数。
+- `content/index.ts` 提交进仓库，这样新拉代码不跑脚本也能通过类型检查；内容改了记得一起提交。
 - Lora 字体在 `app/_layout.tsx` 加载完才渲染页面；Lora 的粗细靠字体名区分（安卓不认 fontWeight）。
