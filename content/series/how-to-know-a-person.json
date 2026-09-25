@@ -1,0 +1,189 @@
+{
+  "id": "how-to-know-a-person",
+  "titleEn": "How to Know a Person",
+  "titleZh": "如何真正认识一个人（暂译）",
+  "author": "David Brooks",
+  "year": 2023,
+  "total": 5,
+  "oneLiner": "被看见，是人最深的需要；看见别人，是一门可以练的手艺。",
+  "scenarios": [
+    "和室友住了一年，还是觉得隔着一层",
+    "聊天时总在想\"我下一句该说什么\"",
+    "朋友难过时，你只会说\"别想太多\"",
+    "放假回家，爸妈还把你当高中生看",
+    "想交能聊深的朋友，却总停在寒暄"
+  ],
+  "insights": [
+    {
+      "claim": "被看见是刚需，和吃饭喝水差不多。",
+      "detail": "对一个人最狠的不是讨厌他，而是完全不在意他。"
+    },
+    {
+      "claim": "你没有自己以为的那么懂别人。",
+      "detail": "心理学研究发现，陌生人初次交谈只有约 20% 的时候猜对对方在想什么，亲密的朋友家人也只有约 35%。"
+    },
+    {
+      "claim": "人群里有两种人：照亮者和削弱者。",
+      "detail": "前者让你觉得自己更大，后者让你觉得自己很小。"
+    },
+    {
+      "claim": "你怎么看一个人，会召唤出他的某一面。",
+      "detail": "带着好奇和尊重去看人，对方会在你面前展现出更好的样子。"
+    },
+    {
+      "claim": "看见别人是手艺，不是天赋。",
+      "detail": "复述对方的话、问大问题、不抢话，都是具体可练的动作。"
+    }
+  ],
+  "issues": [
+    {
+      "index": 1,
+      "articleId": "hkp-01",
+      "titleEn": "Some People Make You Feel Bigger",
+      "titleZh": "照亮者与削弱者",
+      "chapters": "第 1、3 章",
+      "level": "六级",
+      "status": "ready"
+    },
+    {
+      "index": 2,
+      "titleEn": "Why We Fail to See People",
+      "titleZh": "我们为什么看不见别人",
+      "chapters": "第 2 章",
+      "level": "六级 / 托雅",
+      "status": "soon"
+    },
+    {
+      "index": 3,
+      "titleEn": "Better Talks, Bigger Questions",
+      "titleZh": "好好聊天，问大问题",
+      "chapters": "第 6、7 章",
+      "level": "四级 / 六级",
+      "status": "soon"
+    },
+    {
+      "index": 4,
+      "titleEn": "When a Talk Gets Hard",
+      "titleZh": "难聊的话怎么聊",
+      "chapters": "第 6、9 章",
+      "level": "六级",
+      "status": "soon"
+    },
+    {
+      "index": 5,
+      "titleEn": "Everyone Is a Story",
+      "titleZh": "每个人都是一个故事",
+      "chapters": "第 15 章",
+      "level": "四级 / 六级",
+      "status": "soon"
+    }
+  ],
+  "glossary": [
+    {
+      "en": "Illuminator",
+      "zh": "照亮者",
+      "note": "对别人保持好奇，让对方觉得被看见、被尊重的人。",
+      "issue": 1
+    },
+    {
+      "en": "Diminisher",
+      "zh": "削弱者",
+      "note": "只顾自己、快速给人贴标签，让别人觉得自己很小的人。",
+      "issue": 1
+    },
+    {
+      "en": "Empathic accuracy",
+      "zh": "共情准确度",
+      "note": "猜对别人真实想法的比例。多数人远没有自己以为的准。",
+      "issue": 1
+    },
+    {
+      "en": "Naïve realism",
+      "zh": "朴素实在论",
+      "note": "以为自己看到的就是客观事实，所以别人也该看到一样的东西。",
+      "issue": 2
+    },
+    {
+      "en": "The lesser-minds problem",
+      "zh": "\"别人没我复杂\"的错觉",
+      "note": "我们只听得到别人说出口的一小部分，于是觉得别人的内心比自己简单。",
+      "issue": 2
+    },
+    {
+      "en": "Static mindset",
+      "zh": "固定印象",
+      "note": "对一个人的印象停在过去，对方变了也不更新。",
+      "issue": 2
+    },
+    {
+      "en": "Looping",
+      "zh": "复述确认",
+      "note": "用自己的话把对方的意思说回去，确认自己听懂了。",
+      "issue": 3
+    },
+    {
+      "en": "Big questions",
+      "zh": "大问题",
+      "note": "让人停下来回看自己人生的问题，比如\"你现在站在什么十字路口？\"",
+      "issue": 3
+    },
+    {
+      "en": "The disagreement under the disagreement",
+      "zh": "分歧底下的分歧",
+      "note": "争吵时去找表面分歧背后真正不同的价值观。",
+      "issue": 4
+    }
+  ],
+  "sourceNote": "系列内容基于 David Brooks《How to Know a Person》（Random House, 2023）的观点撰写，英文正文为原创改写，非原书原文。",
+  "mindmap": {
+    "root": "How to Know a Person",
+    "rootZh": "看见一个人，也被人看见",
+    "branches": [
+      {
+        "issue": 1,
+        "title": "照亮者与削弱者",
+        "leaves": [
+          "被看见是刚需",
+          "照亮者让人变大，削弱者让人变小",
+          "我们猜对别人想法的比例只有约 20%–35%",
+          "看见别人是手艺，可以练"
+        ]
+      },
+      {
+        "issue": 2,
+        "title": "我们为什么看不见别人",
+        "leaves": [
+          "自我中心、焦虑",
+          "朴素实在论：以为自己看到的就是事实",
+          "\"别人没我复杂\"的错觉",
+          "固定印象：对方变了，我们没更新"
+        ]
+      },
+      {
+        "issue": 3,
+        "title": "好好聊天，问大问题",
+        "leaves": [
+          "复述确认（Looping）",
+          "问大问题：你现在站在什么十字路口？",
+          "别抢话，也别怕沉默"
+        ]
+      },
+      {
+        "issue": 4,
+        "title": "难聊的话怎么聊",
+        "leaves": [
+          "先营造安全感，再谈正事",
+          "找到分歧底下的分歧"
+        ]
+      },
+      {
+        "issue": 5,
+        "title": "每个人都是一个故事",
+        "leaves": [
+          "我们低估了别人想聊天的意愿",
+          "问高光、低谷和转折点"
+        ]
+      }
+    ]
+  }
+}
