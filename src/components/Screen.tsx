@@ -20,6 +20,8 @@ export function Screen({ children, scroll = true, scrollRef, onScroll }: Props) 
       style={styles.fill}
       contentContainerStyle={styles.content}
       keyboardShouldPersistTaps="handled"
+      // iOS：弹出键盘时自动留出空间，底部的输入框不会被挡住
+      automaticallyAdjustKeyboardInsets
       onScroll={onScroll}
       scrollEventThrottle={100}
     >

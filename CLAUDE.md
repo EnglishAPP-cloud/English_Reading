@@ -13,7 +13,7 @@
 - [x] 阶段 1：Expo 项目、路由骨架、theme tokens、本文件
 - [x] 阶段 2：内容层（schema、交叉校验、ContentRepository、`npm run content`）
 - [x] 阶段 3：store + `src/logic/` 纯函数 + 单元测试
-- [ ] 阶段 4：页面串联
+- [x] 阶段 4：页面串联（全部页面可用，界面只做到"能用、清爽"，等设计稿再细化）
 - [ ] 阶段 5：自测 + README
 
 ## 技术栈（已定，不要替换）
@@ -35,7 +35,7 @@ npm run typecheck    # TypeScript 类型检查
 
 ```
 app/                      只放路由和页面拼装，不写业务逻辑
-  _layout.tsx             根布局：加载 Lora 字体、Stack 导航
+  _layout.tsx             根布局：加载 Lora 字体、等本地数据读回、Stack 导航
   (tabs)/_layout.tsx      底部三个标签：今日 / 知识库 / 单词；右上角"设置"
   (tabs)/index.tsx        今日
   (tabs)/library.tsx      知识库
@@ -74,10 +74,23 @@ src/
     today.ts              今日选文
     library.ts            栏目筛选、系列已读数、某一期能不能读
     annotate.ts           段落打标记（重点词 / 长难句 / 读准答案）并切片，页面按片渲染高亮
-  components/             可复用组件（AppText、Button、Card、Screen……）
-  hooks/useToday.ts       页面用的"今天"：回到前台、跨零点自动刷新
+    format.ts             秒数 → m:ss 等显示格式
+  components/             可复用组件，只管显示，不含业务规则
+    AppText Button Card Chip Row Section Notice Screen Loading StatCard
+    BottomSheet Select    底部弹出卡片、下拉选择（都用 RN 自带 Modal）
+    ConfirmButton         二次确认按钮（重置、清空、取消收藏）
+    ArticleCard SeriesCard FavoriteRow   列表项
+    article/              文章页：ArticleFlow（四步总控）、ArticleHeader、StepBar、
+                          OrientStep、RawReadStep（含倒计时条）、CheckStep、PracticeStep、
+                          DeepMode / AccurateMode / ChallengeMode（三种练法）、CommonPractice（共同部分）、
+                          ParagraphView（按标记切片渲染一段）、WordSheet（点词弹出的卡片）、modeCopy（练法说明文案）
+  hooks/
+    useToday.ts           页面用的"今天"：回到前台、跨零点自动刷新
+    useRawReadTimer.ts    裸读计时：只算停在裸读页且 APP 在前台的时间
+    useSpeech.ts          按段朗读（expo-speech）、读单词
+    useParagraphPositions.ts  记录段落位置，用来"滚到第几段"
   analytics/track.ts      埋点 track(event, props)，现在只 console.log
-  theme/                  颜色、字号、间距 tokens
+  theme/                  颜色、字号、间距、圆角、不透明度 tokens
 scripts/
   content.ts              npm run content：扫描 → 校验 → 生成 content/index.ts
   renderIndex.ts          生成 index.ts 的文本
@@ -228,4 +241,13 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total。
 - 根布局等字体加载完、本地数据读回来（`useStoreHydrated`）才渲染页面，避免先显示空进度。
 - 检测答案按题目下标存（`checkPicks`）。已发布文章的题目顺序别改，否则老用户的检测记录会错位。
 - store 有一个组合测试（`src/store/__tests__`），用 AsyncStorage 官方 mock 和 jest 假时钟，确认 action 串对了打卡和埋点。
+- 文章页：`ArticleFlow` 按 `progress.step` 渲染对应步骤组件。步骤组件都返回 Fragment，让段落列表直接挂在滚动内容下，
+  `useParagraphPositions` 才能算出"第几段在哪"。裸读倒计时条放在滚动区外面，固定在顶部。
+- 段落高亮：`logic/annotate.ts` 算出标记并切片，`ParagraphView` 每片一个嵌套 `<Text>`；点击优先级：词 > 长难句。
+- 朗读用系统语音 `en-US`、语速 0.92（和原型一致）；离开页面自动停。安卓 / iOS 没装英文语音包时可能没声音。
+- 需要确认的操作（重置、清空、取消收藏）用 `ConfirmButton` 点两次，没用系统弹窗（各平台表现一致，也方便测试）。
+- 标签栏高度 = 内容区（`space` 组合出的常量）+ 手机底部安全区；标签文字用导航库默认字号（改大会被截）。
+- 键盘：`Screen` 的 ScrollView 开了 `automaticallyAdjustKeyboardInsets`（iOS），底部输入框不会被键盘挡住。
+- 在电脑浏览器里预览（可选，不是正式支持的平台）：`npm i --no-save react-native-web@~0.21.0` 后 `npx expo start --web`。
+  `--no-save` 不改 package.json；AsyncStorage 在网页上用 localStorage。
 - Lora 字体在 `app/_layout.tsx` 加载完才渲染页面；Lora 的粗细靠字体名区分（安卓不认 fontWeight）。

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
-import { borderWidth, colors, radius, space } from '@/theme';
+import { borderWidth, colors, opacity, radius, space } from '@/theme';
 
 type Props = {
   children: ReactNode;
@@ -33,5 +33,5 @@ const styles = StyleSheet.create({
     padding: space.lg,
     gap: space.sm,
   },
-  pressed: { opacity: 0.8 },
+  pressed: { opacity: opacity.pressed },
 });

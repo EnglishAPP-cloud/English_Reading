@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native';
 
-import { borderWidth, colors, radius, space } from '@/theme';
+import { borderWidth, colors, opacity, radius, space } from '@/theme';
 
 import { AppText } from './AppText';
 
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
   secondary: { backgroundColor: colors.surfaceMuted, borderWidth: borderWidth.hairline, borderColor: colors.border },
   ghost: { backgroundColor: 'transparent', borderWidth: borderWidth.hairline, borderColor: colors.borderStrong },
   block: { alignSelf: 'stretch' },
-  disabled: { opacity: 0.4 },
-  pressed: { opacity: 0.75 },
+  disabled: { opacity: opacity.disabled },
+  pressed: { opacity: opacity.pressed },
 });
