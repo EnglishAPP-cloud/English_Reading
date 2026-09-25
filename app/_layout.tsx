@@ -9,10 +9,11 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
+import { useStoreHydrated } from '@/store/hooks';
 import { colors, textVariants } from '@/theme';
 
 /**
- * 根布局：先加载英文字体，再渲染页面。
+ * 根布局：先加载英文字体、读回本地保存的用户数据，再渲染页面。
  * 所有非标签页（系列、文章、复习、设置……）都挂在这个 Stack 上。
  */
 export default function RootLayout() {
@@ -22,9 +23,10 @@ export default function RootLayout() {
     Lora_500Medium,
     Lora_600SemiBold,
   });
+  const hydrated = useStoreHydrated();
 
-  // 字体没加载完前先显示空白背景，避免英文先用系统字体闪一下
-  if (!fontsLoaded) return <View style={{ flex: 1, backgroundColor: colors.background }} />;
+  // 没准备好前先显示空白背景：避免英文先用系统字体闪一下，也避免先显示空进度
+  if (!fontsLoaded || !hydrated) return <View style={{ flex: 1, backgroundColor: colors.background }} />;
 
   return (
     <>

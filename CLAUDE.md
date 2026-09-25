@@ -12,7 +12,7 @@
 - [x] 阶段 0：计划、目录、类型草稿；产品问题已确认（全部按默认，见"已拍板的产品决定"）
 - [x] 阶段 1：Expo 项目、路由骨架、theme tokens、本文件
 - [x] 阶段 2：内容层（schema、交叉校验、ContentRepository、`npm run content`）
-- [ ] 阶段 3：store + `src/logic/` 纯函数 + 单元测试
+- [x] 阶段 3：store + `src/logic/` 纯函数 + 单元测试
 - [ ] 阶段 4：页面串联
 - [ ] 阶段 5：自测 + README
 
@@ -58,10 +58,24 @@ src/
     repository.ts         ContentRepository 接口
     localRepository.ts    LocalContentRepository：读 content/index.ts
     index.ts              导出当前用的 contentRepository（换云端只改这里）
-  store/                  zustand store：用户数据（阶段 3）
-  logic/                  纯函数：学习流程、分流、复习调度、今日选文、连续天数、日期工具（阶段 3）
+    hooks.ts              页面取内容的 hooks（useArticle / usePublishedArticles / useSeries…）
+  store/
+    userStore.ts          zustand + persist：进度、收藏、打卡、设置；action 调 logic + track
+    hooks.ts              派生数据 hooks（今天待复习、连续天数、学习中/已掌握、是否已读回本地数据）
+    clock.ts              store 用的"现在"（含开发用日期偏移）
+  logic/                  纯函数，每个文件都有 __tests__
+    date.ts               本地日期 YYYY-MM-DD 工具
+    text.ts               找完整单词、切句子、找词所在句子
+    publish.ts            发布过滤、按新旧排序
+    flow.ts               学习流程：步骤、裸读计时、检测判分、分流、练习、回看、文章状态
+    review.ts             间隔复习：间隔表、评分、到期、排序
+    favorites.ts          收藏：生成收藏项、上次遇到、挖空、提示、学习中/已掌握、评分 + 是否复习完一轮
+    streak.ts             打卡、连续天数
+    today.ts              今日选文
+    library.ts            栏目筛选、系列已读数、某一期能不能读
+    annotate.ts           段落打标记（重点词 / 长难句 / 读准答案）并切片，页面按片渲染高亮
   components/             可复用组件（AppText、Button、Card、Screen……）
-  hooks/                  React hooks（useToday 等，阶段 3–4）
+  hooks/useToday.ts       页面用的"今天"：回到前台、跨零点自动刷新
   analytics/track.ts      埋点 track(event, props)，现在只 console.log
   theme/                  颜色、字号、间距 tokens
 scripts/
@@ -205,4 +219,13 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total。
 - 文章 schema 校验失败时不做交叉检查（结构都不对，没法查对应关系），报错末尾会提示"改好后重跑会继续查"。
 - 找单词（`findWholeWord`）是"完整单词、区分大小写"；为兼容手机 JS 引擎，没有用正则后行断言。校验和页面高亮用同一个函数。
 - `content/index.ts` 提交进仓库，这样新拉代码不跑脚本也能通过类型检查；内容改了记得一起提交。
+- **用户数据**：一个 zustand store，AsyncStorage 键 `english-reading/user`，版本号 `STORAGE_VERSION`。
+  改 `UserData` 结构时：升版本号，在 `persist` 的 `migrate` 里把旧数据转成新结构；新增设置项靠 `merge` 自动补默认值。
+- logic 的"操作无效就原样返回旧对象"约定：store 据此判断有没有变化（没变化不写存储、不埋点、不凭空建进度）。
+- 文章进度在第一次有效操作（点"开始裸读"）时才创建；没有进度 = 未读。
+- zustand v5 的 selector 不能返回新数组 / 新对象（会无限重渲染），派生数据写在 `src/store/hooks.ts` 里用 `useMemo` 算。
+- "今天"：logic 函数全部把 today 当参数；store 里用 `clockNow()`，页面用 `useToday()`，两者都含开发用日期偏移。
+- 根布局等字体加载完、本地数据读回来（`useStoreHydrated`）才渲染页面，避免先显示空进度。
+- 检测答案按题目下标存（`checkPicks`）。已发布文章的题目顺序别改，否则老用户的检测记录会错位。
+- store 有一个组合测试（`src/store/__tests__`），用 AsyncStorage 官方 mock 和 jest 假时钟，确认 action 串对了打卡和埋点。
 - Lora 字体在 `app/_layout.tsx` 加载完才渲染页面；Lora 的粗细靠字体名区分（安卓不认 fontWeight）。
