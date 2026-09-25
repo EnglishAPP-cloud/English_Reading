@@ -86,7 +86,7 @@ src/
                           ParagraphView（按标记切片渲染一段）、WordSheet（点词弹出的卡片）、modeCopy（练法说明文案）
   hooks/
     useToday.ts           页面用的"今天"：回到前台、跨零点自动刷新
-    useRawReadTimer.ts    裸读计时：只算停在裸读页且 APP 在前台的时间
+    useRawReadTimer.ts    裸读计时：只算停在裸读页且 APP 在前台的时间；每 10 秒 / 切后台 / 离开时写进度
     useSpeech.ts          按段朗读（expo-speech）、读单词
     useParagraphPositions.ts  记录段落位置，用来"滚到第几段"
   analytics/track.ts      埋点 track(event, props)，现在只 console.log
@@ -140,7 +140,7 @@ glossary[{en, zh, note, issue}], sourceNote, mindmap{root, rootZh, branches[{iss
 schema；文件名 = id；id 不重复；段落 id 不重复；seriesId / seriesIndex 同写同不写；vocab.word 在对应段落里；
 sentences.text、questions.answer 是对应段落的原样子串；check.answer、headings 下标不越界；headings 覆盖每一段；
 文章的 seriesId 存在；系列里写了的 articleId 存在、那篇文章的 seriesId / seriesIndex 和这一期对得上；
-status 为 ready 必须有 articleId；期号不重复且不超过 total。
+status 为 ready 必须有 articleId；期号不重复且不超过 total；文章的 seriesIndex 不超过系列 total，且系列里那一期的 articleId 正好指向这篇。
 
 ## 怎么加一篇新文章
 
@@ -169,7 +169,7 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total。
 7. 每篇都重新检测、重新分流，不存用户"固定水平"。
 8. 每篇进度都保存（当前步骤、到过的最远步骤、裸读用时、检测选项和结果、当前练法、小标题选择、已显示的答案、一句话输出、反馈），退出再进接着来。
 - **回看**：检测提交前只能往前走（不能回裸读，防止翻原文答题）；提交后，步骤条上到过的步骤都能点回去看（回看裸读不计时、不改用时）。
-- **已完成的文章**再打开停在练习步骤、保留当时状态，顶部显示"已完成"。
+- **已完成的文章**再打开停在练习步骤（回看过前面的步骤再离开也一样，见 `logic/flow.ts` 的 `progressOnOpen`）、保留当时状态，顶部显示"已完成"。
 - **重置某一篇**（设置页）：清空这篇的全部进度（含完成时间，知识库回到"未读"）；不删收藏，不删打卡记录。
 
 ### 收藏与复习
@@ -196,7 +196,9 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total。
 - 发布：`publishAt`（YYYY-MM-DD，本地时区）晚于今天的文章不显示。设置页开发环境下有"预览未发布内容"开关。
 - 所有日期按本地时区 YYYY-MM-DD 处理，用 `src/logic/date.ts`，不引入日期库。
 
-### 开发专用（只在 `__DEV__` 下显示）
+### 开发专用（只在 `__DEV__` 下显示和生效）
+
+正式版里即使存储里留有这些设置值，也一律按关闭处理（`src/store/devSettings.ts`）。
 
 设置页：预览未发布内容、模拟日期 +1 天 / 恢复（验收复习和连续天数用）、清空全部本地数据。
 
@@ -241,6 +243,10 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total。
 - 根布局等字体加载完、本地数据读回来（`useStoreHydrated`）才渲染页面，避免先显示空进度。
 - 检测答案按题目下标存（`checkPicks`）。已发布文章的题目顺序别改，否则老用户的检测记录会错位。
 - store 有一个组合测试（`src/store/__tests__`），用 AsyncStorage 官方 mock 和 jest 假时钟，确认 action 串对了打卡和埋点。
+- 本地数据读取失败（数据损坏、迁移出错）：原始数据另存为 `english-reading/user/backup-<时间戳>`，然后用空数据继续（`hydrationFailed`），不会卡在空白页。
+- 裸读计时先记在页面本地，每 10 秒、切到后台、离开页面时才写进 store（每秒写会频繁读写存储、让其他页面跟着重渲染）；点"读完了"前先 `flush()`。
+- 打开文章页时调用 store 的 `openArticle`：已完成的文章回到练习步骤。
+- 复习间隔、掌握次数的文案从 `REVIEW_INTERVALS` / `MASTERED_LEVEL` 生成，改规则只改 `logic/review.ts`。
 - 文章页：`ArticleFlow` 按 `progress.step` 渲染对应步骤组件。步骤组件都返回 Fragment，让段落列表直接挂在滚动内容下，
   `useParagraphPositions` 才能算出"第几段在哪"。裸读倒计时条放在滚动区外面，固定在顶部。
 - 段落高亮：`logic/annotate.ts` 算出标记并切片，`ParagraphView` 每片一个嵌套 `<Text>`；点击优先级：词 > 长难句。
@@ -266,6 +272,16 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total。
 | 收藏词和句子，日期往后调一天，复习页能看到，评分后下次日期正确 | ✓（用浏览器时钟把"系统日期"改到第二天：待复习 2 个；记得 → 9月28日，忘了 → 9月27日；评完一轮打卡） |
 | 读完一篇后今日页连续天数 +1 | ✓（0 → 1；第二天复习完一轮后 → 2） |
 | `publishAt` 改成明天：今日和知识库消失；打开"预览未发布内容"后出现 | ✓（系列目录里第 1 期同时变成"即将上线"） |
-| `src/logic/` 单元测试全部通过 | ✓（全部测试 16 个文件、150 个用例通过） |
+| `src/logic/` 单元测试全部通过 | ✓（全部测试 17 个文件、161 个用例通过） |
 
 真机上还需要人工看一眼的：朗读（系统语音）、iOS 键盘不挡输入框、安卓上虚线下划线显示为实线（安卓不支持虚线，属正常）。
+
+### 夜间补充（2026-09-25 晚）
+
+- 代码审查修了 10 处：本地数据损坏时白屏、已完成文章重新打开不在练习步骤、裸读计时每秒写存储、复习完成页"已打卡"写死、
+  文章期号没和系列目录核对、`resetHeadings` 没遵守"无效操作返回原对象"、开发设置在正式版也生效、复习间隔文案写死两份、
+  删掉没用的 `diffDays`、`'transparent'` 改成颜色 token。
+- 干净目录重新 clone 后 `npm ci` / `npm install` / 测试 / 类型检查 / 内容校验都通过，package-lock 不变。
+- 浏览器补测通过：裸读计时（刷新后秒数保留、用时含零头）、挑战选小标题并检查（5/6、参考答案、刷新保留、重新选）、
+  精读补上的两个开关、已完成文章回看后重开回到练习、句子收藏详情页 / 跳原文 / 取消收藏、系列页和思维导图跳文章、栏目筛选。
+

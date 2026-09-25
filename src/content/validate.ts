@@ -203,8 +203,26 @@ export function validateContent(files: readonly ContentFile[]): ValidationResult
 
   for (const { file, article } of articles) {
     if (article.seriesId === undefined || failedSeriesIds.has(article.seriesId)) continue;
-    if (!seriesById.has(article.seriesId)) {
+    const s = seriesById.get(article.seriesId);
+    if (!s) {
       add(file, [{ path: 'seriesId', message: `找不到系列 "${article.seriesId}"（content/series 下没有这个 id）` }]);
+      continue;
+    }
+    // 期号要和系列目录对得上，否则系列页不会链接到这篇、"已读 x 期"也不会算它
+    const index = article.seriesIndex;
+    if (index === undefined) continue; // 只写了 seriesId 的情况上面已经报过
+    const issue = s.issues.find((x) => x.index === index);
+    if (index > s.total) {
+      add(file, [{ path: 'seriesIndex', message: `第 ${index} 期超过了系列 "${s.id}" 的 total（共 ${s.total} 期）` }]);
+    } else if (!issue) {
+      add(file, [{ path: 'seriesIndex', message: `系列 "${s.id}" 的 issues 里没有第 ${index} 期` }]);
+    } else if (issue.articleId !== article.id) {
+      add(file, [
+        {
+          path: 'seriesIndex',
+          message: `系列 "${s.id}" 第 ${index} 期的 articleId 是 "${issue.articleId ?? '（没写）'}"，没有指向这篇；请在系列 JSON 里把它改成 "${article.id}"`,
+        },
+      ]);
     }
   }
 

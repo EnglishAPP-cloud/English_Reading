@@ -11,6 +11,7 @@ import { useAllSeries, usePublishedArticles } from '@/content/hooks';
 import { COLUMN_LABELS, type Column } from '@/content/types';
 import { useToday } from '@/hooks/useToday';
 import { filterByColumn, filterSeriesByColumn, seriesReadCount, type ColumnFilter } from '@/logic/library';
+import { usePreviewUnpublished } from '@/store/hooks';
 import { useUserStore } from '@/store/userStore';
 
 const FILTERS: { key: ColumnFilter; label: string }[] = [
@@ -21,7 +22,7 @@ const FILTERS: { key: ColumnFilter; label: string }[] = [
 /** 知识库：上面系列卡片，下面单篇列表；可按栏目筛选 */
 export default function LibraryScreen() {
   const today = useToday();
-  const preview = useUserStore((s) => s.settings.previewUnpublished);
+  const preview = usePreviewUnpublished();
   const progress = useUserStore((s) => s.progress);
   const articles = usePublishedArticles(today, preview);
   const series = useAllSeries();

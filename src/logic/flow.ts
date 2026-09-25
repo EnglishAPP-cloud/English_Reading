@@ -191,8 +191,9 @@ export function checkHeadings(p: ArticleProgress, paragraphIds: readonly string[
   return canCheckHeadings(p, paragraphIds) ? { ...p, headingsChecked: true } : p;
 }
 
-/** 挑战：重新选（清空选择和检查结果） */
+/** 挑战：重新选（清空选择和检查结果）。本来就是空的就原样返回 */
 export function resetHeadings(p: ArticleProgress): ArticleProgress {
+  if (!p.headingsChecked && Object.keys(p.headingPicks).length === 0) return p;
   return { ...p, headingPicks: {}, headingsChecked: false };
 }
 
@@ -239,6 +240,14 @@ export function canGoToStep(p: ArticleProgress, step: StepId): boolean {
 
 export function goToStep(p: ArticleProgress, step: StepId): ArticleProgress {
   return canGoToStep(p, step) && step !== p.step ? { ...p, step } : p;
+}
+
+/**
+ * 重新打开一篇文章时的进度：已完成的文章统一停在练习步骤
+ * （回看过定向 / 裸读后离开，再进来也回到练习）；没完成的保持离开时的步骤。
+ */
+export function progressOnOpen(p: ArticleProgress): ArticleProgress {
+  return p.completedAt && p.step !== 'practice' ? { ...p, step: 'practice' } : p;
 }
 
 /** 当前是在"回看"裸读（裸读已结束，不再计时） */

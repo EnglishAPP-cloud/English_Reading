@@ -30,12 +30,23 @@ const EMPTY_PROGRESS = createProgress();
 export function ArticleFlow({ article }: { article: Article }) {
   const progress = useArticleProgress(article.id) ?? EMPTY_PROGRESS;
   const goToStep = useUserStore((s) => s.goToStep);
+  const openArticle = useUserStore((s) => s.openArticle);
+  const finishRawRead = useUserStore((s) => s.finishRawRead);
   const positions = useParagraphPositions();
   const focused = useIsFocused();
 
+  // 打开文章时：已完成的文章回到练习步骤（回看过前面的步骤也一样）
+  useEffect(() => {
+    openArticle(article.id);
+  }, [article.id, openArticle]);
+
   const rawReading = progress.step === 'raw' && !isReviewingRawRead(progress);
   // 只在"停在裸读页、页面在前台"时计时
-  useRawReadTimer(article.id, rawReading && focused);
+  const timer = useRawReadTimer(article.id, rawReading && focused);
+  const onFinishRawRead = () => {
+    timer.flush(); // 先把还没写进进度的秒数写进去，再记用时
+    finishRawRead(article.id);
+  };
 
   // 换步骤时回到顶部
   const { scrollRef } = positions;
@@ -45,12 +56,14 @@ export function ArticleFlow({ article }: { article: Article }) {
 
   return (
     <View style={styles.root}>
-      {rawReading ? <RawReadTimerBar article={article} progress={progress} /> : null}
+      {rawReading ? <RawReadTimerBar article={article} progress={progress} pendingSec={timer.pendingSec} /> : null}
       <Screen scrollRef={scrollRef}>
         <ArticleHeader article={article} completed={!!progress.completedAt} />
         <StepBar progress={progress} onGo={(step) => goToStep(article.id, step)} />
         {progress.step === 'orient' ? <OrientStep article={article} progress={progress} /> : null}
-        {progress.step === 'raw' ? <RawReadStep article={article} progress={progress} positions={positions} /> : null}
+        {progress.step === 'raw' ? (
+          <RawReadStep article={article} progress={progress} positions={positions} onFinish={onFinishRawRead} />
+        ) : null}
         {progress.step === 'check' ? <CheckStep article={article} progress={progress} /> : null}
         {progress.step === 'practice' ? (
           <PracticeStep article={article} progress={progress} positions={positions} />

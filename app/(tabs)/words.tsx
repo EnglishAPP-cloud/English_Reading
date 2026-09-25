@@ -7,6 +7,7 @@ import { FavoriteRow } from '@/components/FavoriteRow';
 import { Screen } from '@/components/Screen';
 import { Section } from '@/components/Section';
 import { useToday } from '@/hooks/useToday';
+import { MASTERED_LEVEL, REVIEW_INTERVALS } from '@/logic/review';
 import { useDueFavorites, useFavoritesByMastery } from '@/store/hooks';
 
 /** 单词：今天要复习几个 + 开始复习；下面分"学习中 / 已掌握"列出全部收藏 */
@@ -21,7 +22,7 @@ export default function WordsScreen() {
       <Card>
         <AppText variant="heading">今天要复习 {due.length} 个</AppText>
         <AppText variant="small" tone="textMuted">
-          收藏的词和句子会在第二天推回来，按 1 / 2 / 4 / 7 / 15 / 30 天的间隔复习。
+          收藏的词和句子会在第二天推回来，按 {REVIEW_INTERVALS.join(' / ')} 天的间隔复习。
         </AppText>
         <Button title="开始复习" disabled={due.length === 0} onPress={() => router.push('/review')} />
       </Card>
@@ -40,7 +41,7 @@ export default function WordsScreen() {
           <Section title="已掌握" hint={`${mastered.length} 个`}>
             {mastered.length === 0 ? (
               <AppText variant="small" tone="textMuted">
-                连续记得 6 次就算掌握。
+                连续记得 {MASTERED_LEVEL} 次就算掌握。
               </AppText>
             ) : (
               mastered.map((f) => <FavoriteRow key={f.id} favorite={f} />)

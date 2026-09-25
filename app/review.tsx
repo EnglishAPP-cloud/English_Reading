@@ -9,8 +9,9 @@ import { Notice } from '@/components/Notice';
 import { Screen } from '@/components/Screen';
 import { useToday } from '@/hooks/useToday';
 import { blankOut, meaningHint, type Favorite } from '@/logic/favorites';
-import { GRADE_LABELS, dueItems, gradeHint, type ReviewGrade } from '@/logic/review';
-import { useStreak } from '@/store/hooks';
+import { GRADE_LABELS, MASTERED_LEVEL, REVIEW_INTERVALS, dueItems, gradeHint, type ReviewGrade } from '@/logic/review';
+import { hasCheckedIn } from '@/logic/streak';
+import { useDueFavorites, useStreak } from '@/store/hooks';
 import { useUserStore } from '@/store/userStore';
 import { borderWidth, colors, opacity, radius, space } from '@/theme';
 
@@ -81,7 +82,9 @@ export default function ReviewScreen() {
   const today = useToday();
   const favorites = useUserStore((s) => s.favorites);
   const gradeFavorite = useUserStore((s) => s.gradeFavorite);
+  const checkIns = useUserStore((s) => s.checkIns);
   const streak = useStreak(today);
+  const dueNow = useDueFavorites(today);
 
   // 进页面时定下这一轮要复习的卡（评过的会变成"明天以后"，不会再出现在今天）
   const [queue] = useState(() => dueItems(Object.values(useUserStore.getState().favorites), today).map((f) => f.id));
@@ -106,14 +109,28 @@ export default function ReviewScreen() {
   const fav = currentId ? favorites[currentId] : undefined;
 
   if (index >= queue.length || !fav) {
+    // 按实际数据说话：还有没有到期的卡、今天有没有打卡（跨零点等情况下这一轮可能没覆盖全部）
+    if (dueNow.length > 0) {
+      return (
+        <Screen>
+          <Notice>
+            <AppText variant="heading">这一轮评完了</AppText>
+            <AppText variant="small" tone="textSubtle">
+              今天还有 {dueNow.length} 个到期没复习，全部评完才算今天复习打卡。
+            </AppText>
+          </Notice>
+          <Button title="继续复习" onPress={() => router.replace('/review')} />
+        </Screen>
+      );
+    }
     return (
       <Screen>
         <Notice color={colors.success} softColor={colors.successSoft}>
           <AppText variant="heading" tone="success">
-            ✓ 这一轮复习完了
+            ✓ 今天的复习完成了
           </AppText>
           <AppText variant="small" tone="textSubtle">
-            今天已打卡，连续 {streak} 天。
+            {hasCheckedIn(checkIns, today) ? `今天已打卡，连续 ${streak} 天。` : '明天见。'}
           </AppText>
         </Notice>
         <Button title="返回" onPress={() => router.back()} />
@@ -161,7 +178,7 @@ export default function ReviewScreen() {
         ))}
       </View>
       <AppText variant="caption" tone="textMuted">
-        复习间隔：1 / 2 / 4 / 7 / 15 / 30 天。记得升一级，模糊明天再来，忘了回到第 1 天。
+        复习间隔：{REVIEW_INTERVALS.join(' / ')} 天。记得升一级（连续记得 {MASTERED_LEVEL} 次算掌握），模糊明天再来，忘了从头开始、明天再来。
       </AppText>
     </Screen>
   );

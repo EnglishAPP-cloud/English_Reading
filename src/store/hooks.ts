@@ -12,6 +12,7 @@ import type { ArticleProgress } from '@/logic/flow';
 import { dueItems } from '@/logic/review';
 import { currentStreak } from '@/logic/streak';
 
+import { effectivePreview } from './devSettings';
 import { useUserStore } from './userStore';
 
 /** 某篇文章的进度（没开始过返回 undefined） */
@@ -37,13 +38,22 @@ export function useStreak(today: LocalDate): number {
   return useMemo(() => currentStreak(checkIns, today), [checkIns, today]);
 }
 
-/** 本地存储里的数据读回来了没有。没读回来之前不要渲染页面，否则会先显示空进度 */
+/**
+ * 本地存储里的数据读回来了没有。没读回来之前不要渲染页面，否则会先显示空进度。
+ * 读取失败（数据损坏）也算"好了"，用空数据继续，不能让页面一直空白。
+ */
 export function useStoreHydrated(): boolean {
   const [hydrated, setHydrated] = useState(() => useUserStore.persist.hasHydrated());
+  const failed = useUserStore((s) => s.hydrationFailed);
   useEffect(() => {
     const unsub = useUserStore.persist.onFinishHydration(() => setHydrated(true));
     setHydrated(useUserStore.persist.hasHydrated());
     return unsub;
   }, []);
-  return hydrated;
+  return hydrated || failed;
+}
+
+/** 实际是否显示未发布内容（开发环境才可能为 true） */
+export function usePreviewUnpublished(): boolean {
+  return useUserStore((s) => effectivePreview(s.settings));
 }

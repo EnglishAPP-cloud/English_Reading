@@ -13,6 +13,7 @@ import { usePublishedArticles, useSeries } from '@/content/hooks';
 import { useToday } from '@/hooks/useToday';
 import { articleStatus, articleStatusLabel } from '@/logic/flow';
 import { readableArticleId } from '@/logic/library';
+import { usePreviewUnpublished } from '@/store/hooks';
 import { useUserStore } from '@/store/userStore';
 import { borderWidth, colors, opacity, radius, space } from '@/theme';
 
@@ -22,7 +23,7 @@ const openArticle = (id: string) => router.push({ pathname: '/article/[id]', par
 export default function SeriesScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const today = useToday();
-  const preview = useUserStore((s) => s.settings.previewUnpublished);
+  const preview = usePreviewUnpublished();
   const progress = useUserStore((s) => s.progress);
   const { data: series, loading } = useSeries(id);
   const articles = usePublishedArticles(today, preview);

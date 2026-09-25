@@ -14,13 +14,13 @@ import { useToday } from '@/hooks/useToday';
 import { formatMonthDay } from '@/logic/date';
 import { articleStatus } from '@/logic/flow';
 import { pickTodayArticle } from '@/logic/today';
-import { useDueFavorites, useStreak } from '@/store/hooks';
+import { useDueFavorites, usePreviewUnpublished, useStreak } from '@/store/hooks';
 import { useUserStore } from '@/store/userStore';
 
 /** 今日：今天该读的一篇（全部读完则引导去复习），连续打卡天数，今天待复习数 */
 export default function TodayScreen() {
   const today = useToday();
-  const preview = useUserStore((s) => s.settings.previewUnpublished);
+  const preview = usePreviewUnpublished();
   const progress = useUserStore((s) => s.progress);
   const articles = usePublishedArticles(today, preview);
   const series = useAllSeries();

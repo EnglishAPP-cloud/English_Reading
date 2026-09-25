@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.sm,
     // 左边框一直占位（透明），高亮时只换颜色，文字不会跳动
     borderLeftWidth: borderWidth.thick,
-    borderLeftColor: 'transparent',
+    borderLeftColor: colors.transparent,
   },
   highlighted: { backgroundColor: colors.surfaceMuted, borderLeftColor: colors.primary },
   number: { width: space.xl + space.xs, paddingTop: space.xxs, textAlign: 'right' },

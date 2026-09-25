@@ -30,6 +30,7 @@ import type { ReviewGrade } from '@/logic/review';
 import { addCheckIn } from '@/logic/streak';
 
 import { clockNow } from './clock';
+import { effectiveDateOffset } from './devSettings';
 
 export interface Settings {
   /** 开发用：显示未发布的文章 */
@@ -48,6 +49,8 @@ export interface UserData {
 
 export interface UserActions {
   // —— 学习流程 ——
+  /** 打开文章页时调用：已完成的文章回到练习步骤 */
+  openArticle(articleId: string): void;
   startRawRead(articleId: string): void;
   addRawReadTime(articleId: string, seconds: number): void;
   finishRawRead(articleId: string): void;
@@ -77,7 +80,11 @@ export interface UserActions {
   clearAllData(): void;
 }
 
-export type UserStore = UserData & UserActions;
+export type UserStore = UserData &
+  UserActions & {
+    /** 读取本地数据失败（数据损坏等）。不存储，只在本次运行里用来放行页面渲染 */
+    hydrationFailed: boolean;
+  };
 
 export const DEFAULT_SETTINGS: Settings = { previewUnpublished: false, devDateOffsetDays: 0 };
 
@@ -92,7 +99,8 @@ export const STORAGE_VERSION = 1;
 export const useUserStore = create<UserStore>()(
   persist(
     (set, get) => {
-      const clock = () => clockNow(get().settings.devDateOffsetDays);
+      // 开发用的日期偏移只在开发环境生效（见 devSettings.ts）
+      const clock = () => clockNow(effectiveDateOffset(get().settings));
 
       /** 更新某篇文章的进度；logic 返回原对象（操作无效）时不写入 */
       const updateProgress = (articleId: string, fn: (p: ArticleProgress) => ArticleProgress) => {
@@ -118,7 +126,11 @@ export const useUserStore = create<UserStore>()(
 
       return {
         ...initialUserData(),
+        hydrationFailed: false,
 
+        openArticle(articleId) {
+          updateProgress(articleId, flow.progressOnOpen);
+        },
         startRawRead(articleId) {
           const { changed } = updateProgress(articleId, (p) => flow.startRawRead(p, clock().nowIso));
           if (changed) track('read_start', { articleId });
@@ -250,6 +262,16 @@ export const useUserStore = create<UserStore>()(
       merge: (persisted, current) => {
         const p = (persisted ?? {}) as Partial<UserData>;
         return { ...current, ...p, settings: { ...DEFAULT_SETTINGS, ...p.settings } };
+      },
+      // 读取失败（数据损坏、迁移出错）时：先把原始数据另存一份备份，再用空数据继续，
+      // 否则页面会一直停在空白的加载状态
+      onRehydrateStorage: () => (_state, error) => {
+        if (!error) return;
+        console.warn('[store] 读取本地数据失败，已备份原数据并用空数据继续', error);
+        void AsyncStorage.getItem(STORAGE_KEY)
+          .then((raw) => (raw ? AsyncStorage.setItem(`${STORAGE_KEY}/backup-${Date.now()}`, raw) : undefined))
+          .catch(() => undefined)
+          .finally(() => useUserStore.setState({ hydrationFailed: true }));
       },
     },
   ),

@@ -156,10 +156,28 @@ describe('内容校验', () => {
       expect(paths(run(undefined, s))).toEqual([`${SERIES_FILE} issues[1].articleId`]);
     });
 
-    it('引用的文章期号要和 index 对上', () => {
+    it('引用的文章期号要和 index 对上（两边都报）', () => {
       const a = sampleArticle();
       a.seriesIndex = 2;
-      expect(paths(run(a))).toEqual([`${SERIES_FILE} issues[0].articleId`]);
+      expect(paths(run(a))).toEqual([`${ARTICLE_FILE} seriesIndex`, `${SERIES_FILE} issues[0].articleId`]);
+    });
+
+    it('新文章写了期号，但系列目录那一期忘了写 articleId', () => {
+      const a2 = { ...sampleArticle(), id: 'hkp-02', seriesIndex: 2 };
+      const r = run(undefined, undefined, [{ file: 'content/articles/hkp-02.json', kind: 'article', data: a2 }]);
+      expect(paths(r)).toEqual(['content/articles/hkp-02.json seriesIndex']);
+      expect(r.issues[0]!.message).toContain('请在系列 JSON 里把它改成 "hkp-02"');
+    });
+
+    it('文章期号超过系列 total、或系列里没有这一期', () => {
+      const a = sampleArticle();
+      a.seriesIndex = 9;
+      expect(paths(run(a))).toContain(`${ARTICLE_FILE} seriesIndex`);
+      const s = sampleSeries();
+      s.issues = s.issues.filter((x) => x.index !== 3);
+      const a3 = { ...sampleArticle(), id: 'hkp-03', seriesIndex: 3 };
+      const r = run(undefined, s, [{ file: 'content/articles/hkp-03.json', kind: 'article', data: a3 }]);
+      expect(r.issues.find((i) => i.file === 'content/articles/hkp-03.json')?.message).toContain('没有第 3 期');
     });
 
     it('期号不能重复、不能超过 total', () => {

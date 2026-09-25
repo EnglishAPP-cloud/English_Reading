@@ -14,6 +14,7 @@ import {
   isReviewingRawRead,
   pickCheckAnswer,
   pickHeading,
+  progressOnOpen,
   rawReadRemaining,
   recommendMode,
   resetHeadings,
@@ -290,6 +291,41 @@ describe('回看', () => {
   it('开始裸读只在第一次有效', () => {
     const p = goToStep(startPractice(submitted([2, 0])), 'orient');
     expect(startRawRead(p, LATER)).toBe(p);
+  });
+});
+
+describe('重新打开文章', () => {
+  it('已完成的文章：回看过裸读再离开，重新打开回到练习', () => {
+    let p = completeArticle(startPractice(submitted([2, 0])), NOW);
+    p = goToStep(p, 'raw');
+    expect(p.step).toBe('raw');
+    expect(progressOnOpen(p).step).toBe('practice');
+  });
+
+  it('没完成的文章：停在离开时的步骤，原样返回', () => {
+    const p = goToStep(startPractice(submitted([2, 0])), 'raw');
+    expect(progressOnOpen(p)).toBe(p);
+    const check = atCheck();
+    expect(progressOnOpen(check)).toBe(check);
+  });
+
+  it('已完成且就在练习步骤：原样返回', () => {
+    const p = completeArticle(startPractice(submitted([2, 0])), NOW);
+    expect(progressOnOpen(p)).toBe(p);
+  });
+});
+
+describe('操作无效时原样返回', () => {
+  it('小标题本来就是空的，"重新选"不产生新对象', () => {
+    const p = startPractice(submitted([2, 0]));
+    expect(resetHeadings(p)).toBe(p);
+    const empty = createProgress();
+    expect(resetHeadings(empty)).toBe(empty);
+  });
+
+  it('输出文字没变不产生新对象', () => {
+    const p = setOutputText(createProgress(), 'x');
+    expect(setOutputText(p, 'x')).toBe(p);
   });
 });
 

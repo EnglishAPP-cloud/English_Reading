@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   small: { paddingVertical: space.xs + space.xxs, paddingHorizontal: space.md },
   primary: { backgroundColor: colors.primary },
   secondary: { backgroundColor: colors.surfaceMuted, borderWidth: borderWidth.hairline, borderColor: colors.border },
-  ghost: { backgroundColor: 'transparent', borderWidth: borderWidth.hairline, borderColor: colors.borderStrong },
+  ghost: { backgroundColor: colors.transparent, borderWidth: borderWidth.hairline, borderColor: colors.borderStrong },
   block: { alignSelf: 'stretch' },
   disabled: { opacity: opacity.disabled },
   pressed: { opacity: opacity.pressed },

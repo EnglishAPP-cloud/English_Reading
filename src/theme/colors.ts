@@ -23,6 +23,7 @@ export const colors = {
   dangerSoft: 'rgba(176,69,47,0.10)',
   warning: '#A95E33', // 裸读超时
   scrim: 'rgba(10,12,16,0.28)', // 底部卡片后面的遮罩
+  transparent: 'transparent', // 占位用的透明边框 / 底色
 } as const;
 
 /** 三种练法各自的颜色：main 用于文字和边框，soft 用于浅色底 */

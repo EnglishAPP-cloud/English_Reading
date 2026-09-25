@@ -1,7 +1,6 @@
 import {
   addDays,
   compareDates,
-  diffDays,
   formatMonthDay,
   isValidLocalDate,
   toLocalDate,
@@ -43,14 +42,6 @@ describe('日期工具', () => {
 
   it('addDays 遇到非法日期直接报错', () => {
     expect(() => addDays('2026-02-30', 1)).toThrow();
-  });
-
-  it('diffDays 计算相差天数', () => {
-    expect(diffDays('2026-09-25', '2026-09-26')).toBe(1);
-    expect(diffDays('2026-09-26', '2026-09-25')).toBe(-1);
-    expect(diffDays('2026-12-31', '2027-01-01')).toBe(1);
-    expect(diffDays('2026-01-01', '2027-01-01')).toBe(365);
-    expect(diffDays('2026-03-28', '2026-03-30')).toBe(2); // 夏令时附近也按整天算
   });
 
   it('compareDates 按日期先后比较', () => {

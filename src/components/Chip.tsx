@@ -28,7 +28,7 @@ export function Chip({ label, selected, onPress, color, softColor, disabled }: P
         styles.chip,
         selected && {
           backgroundColor: softColor ?? color ?? colors.primary,
-          borderColor: softColor ? (color ?? colors.primary) : 'transparent',
+          borderColor: softColor ? (color ?? colors.primary) : colors.transparent,
         },
         disabled && styles.disabled,
         pressed && styles.pressed,

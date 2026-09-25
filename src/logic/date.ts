@@ -52,14 +52,6 @@ export function addDays(date: LocalDate, n: number): LocalDate {
   return toLocalDate(new Date(y, m - 1, d + n, 12));
 }
 
-/** 从 a 到 b 相差几天（b 在 a 之后为正数） */
-export function diffDays(a: LocalDate, b: LocalDate): number {
-  const [ay, am, ad] = mustParts(a);
-  const [by, bm, bd] = mustParts(b);
-  // 用 UTC 计算只是为了避开夏令时导致的 23/25 小时，结果仍然是本地日期的差
-  return Math.round((Date.UTC(by, bm - 1, bd) - Date.UTC(ay, am - 1, ad)) / 86_400_000);
-}
-
 /** 比较两个日期：a 早于 b 返回负数，相同返回 0，晚于返回正数 */
 export function compareDates(a: LocalDate, b: LocalDate): number {
   return a < b ? -1 : a > b ? 1 : 0;

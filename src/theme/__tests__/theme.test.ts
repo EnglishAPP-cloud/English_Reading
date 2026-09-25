@@ -1,10 +1,10 @@
 import { colors, modeColors, radius, space, textVariants } from '@/theme';
 
 // 防止改 tokens 时手滑写出无效的色值或字号
-const COLOR = /^(#[0-9A-Fa-f]{6}|rgba\(\d{1,3},\d{1,3},\d{1,3},(0|1|0?\.\d+)\))$/;
+const COLOR = /^(#[0-9A-Fa-f]{6}|rgba\(\d{1,3},\d{1,3},\d{1,3},(0|1|0?\.\d+)\)|transparent)$/;
 
 describe('theme tokens', () => {
-  it('所有颜色都是合法的 #RRGGBB 或 rgba()', () => {
+  it('所有颜色都是合法的 #RRGGBB、rgba() 或 transparent', () => {
     const all = [
       ...Object.values(colors),
       ...Object.values(modeColors).flatMap((m) => [m.main, m.soft]),

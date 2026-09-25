@@ -16,8 +16,17 @@ import { ParagraphView } from './ParagraphView';
 type Positions = ReturnType<typeof useParagraphPositions>;
 
 /** 裸读倒计时条（固定在页面顶部，不随正文滚动）。时间到了只提示，不跳转 */
-export function RawReadTimerBar({ article, progress }: { article: Article; progress: ArticleProgress }) {
-  const remaining = rawReadRemaining(progress, article.rawReadSeconds);
+export function RawReadTimerBar({
+  article,
+  progress,
+  pendingSec,
+}: {
+  article: Article;
+  progress: ArticleProgress;
+  /** 已经计时、还没写进进度的秒数 */
+  pendingSec: number;
+}) {
+  const remaining = rawReadRemaining(progress, article.rawReadSeconds) - pendingSec;
   const over = remaining <= 0;
   return (
     <View style={[styles.timer, over && styles.timerOver]}>
@@ -36,12 +45,14 @@ export function RawReadStep({
   article,
   progress,
   positions,
+  onFinish,
 }: {
   article: Article;
   progress: ArticleProgress;
   positions: Positions;
+  /** 点"读完了"（由 ArticleFlow 先把计时写进进度再记用时） */
+  onFinish: () => void;
 }) {
-  const finishRawRead = useUserStore((s) => s.finishRawRead);
   const goToStep = useUserStore((s) => s.goToStep);
   const reviewing = isReviewingRawRead(progress);
 
@@ -71,7 +82,7 @@ export function RawReadStep({
           onPress={() => goToStep(article.id, progress.reachedStep)}
         />
       ) : (
-        <Button title="读完了，去检测" onPress={() => finishRawRead(article.id)} />
+        <Button title="读完了，去检测" onPress={onFinish} />
       )}
     </>
   );

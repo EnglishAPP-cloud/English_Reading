@@ -3,7 +3,7 @@
  * 规则本身的细节在 src/logic/__tests__ 里测。
  */
 import { sampleArticle } from '@/content/__tests__/fixtures';
-import { useUserStore, initialUserData } from '@/store/userStore';
+import { STORAGE_KEY, useUserStore, initialUserData } from '@/store/userStore';
 
 jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
@@ -126,5 +126,41 @@ describe('userStore', () => {
     store().gradeFavorite(Object.keys(store().favorites)[0]!, 'remember');
     const events = log.mock.calls.filter((c) => c[0] === '[track]').map((c) => c[1]);
     expect(events).toEqual(['read_start', 'check_submit', 'mode_switch', 'favorite_add', 'read_complete', 'review_grade']);
+  });
+});
+
+describe('打开文章', () => {
+  it('已完成的文章回看过裸读后离开，再打开回到练习', () => {
+    readTo([2, 0]);
+    store().completeArticle(article.id);
+    store().goToStep(article.id, 'raw');
+    expect(store().progress[article.id]!.step).toBe('raw');
+    store().openArticle(article.id);
+    expect(store().progress[article.id]!.step).toBe('practice');
+  });
+
+  it('没读过的文章，打开不会凭空建进度', () => {
+    store().openArticle(article.id);
+    expect(store().progress).toEqual({});
+  });
+});
+
+describe('读取本地数据失败', () => {
+  it('数据损坏时不卡在空白页：标记 hydrationFailed，并把原数据另存备份', async () => {
+    jest.useRealTimers();
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const AsyncStorage = require('@react-native-async-storage/async-storage') as {
+      setItem(k: string, v: string): Promise<void>;
+      getItem(k: string): Promise<string | null>;
+      getAllKeys(): Promise<string[]>;
+    };
+    await AsyncStorage.setItem(STORAGE_KEY, '{这不是合法的 JSON');
+    expect(store().hydrationFailed).toBe(false);
+    await useUserStore.persist.rehydrate();
+    await new Promise((r) => setTimeout(r, 20)); // 等备份写完
+    expect(store().hydrationFailed).toBe(true);
+    const backups = (await AsyncStorage.getAllKeys()).filter((k) => k.startsWith(`${STORAGE_KEY}/backup-`));
+    expect(backups).toHaveLength(1);
+    expect(await AsyncStorage.getItem(backups[0]!)).toBe('{这不是合法的 JSON');
   });
 });
