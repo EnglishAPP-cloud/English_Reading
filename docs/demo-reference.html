@@ -1,0 +1,618 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}</style></head><body><title>How to Know a Person 精读</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EFE9DE; --surface:#FFFDF8; --surface-2:#F6F1E8; --ink:#1B2130; --ink-2:#3A3E49; --muted:#72737B;
+  --line:rgba(27,33,48,.10); --line-2:rgba(27,33,48,.22); --accent:#24345E; --accent-ink:#FFFFFF;
+  --sage:#3F7A5A; --sage-bg:rgba(63,122,90,.10);
+  --blue:#3A67A0; --blue-bg:rgba(58,103,160,.09);
+  --amber:#9A5B12; --amber-bg:rgba(214,146,52,.14);
+  --violet:#4F45A6; --violet-bg:rgba(99,88,200,.11);
+  --terra:#A95E33; --terra-bg:rgba(169,94,51,.10);
+  --hl:#F3DDB0; --hl-line:rgba(190,130,50,.45);
+  --ok:#2F7A4E; --bad:#B0452F;
+  --shadow:0 30px 60px -30px rgba(27,33,48,.35),0 10px 24px -14px rgba(27,33,48,.20);
+  --en:"Lora","Georgia","Times New Roman",serif;
+  --ui:-apple-system,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:24px 48px}
+button,select{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:default}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{max-width:460px;margin:0 auto;background:var(--surface);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+@media (max-width:500px){ body{padding-inline:0;padding-block:0} .app{border-radius:0;box-shadow:none;max-width:none} }
+h1,h2,h3{text-wrap:balance;margin:0}
+.en{font-family:var(--en)}
+.hint{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+.eyebrow{font-size:11.5px;letter-spacing:.14em;color:var(--muted)}
+.btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:9px 18px;font-size:13.5px}
+.btn:disabled{opacity:.4}
+.btn.ghost{background:transparent;color:var(--ink-2);border:1px solid var(--line-2)}
+.src{margin-top:24px;font-size:12px;color:var(--muted);line-height:1.6}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 18px 10px}
+.bar-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--en);font-style:italic;font-size:15px;color:var(--muted)}
+.wb{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:4px 11px;font-size:12.5px;color:var(--ink-2)}
+.wb b{font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600}
+.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:10px;background:var(--surface-2);border-radius:12px;padding:3px}
+.tabs button{border:0;background:transparent;border-radius:9px;padding:7px 0;font-size:13.5px;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.view{padding:18px 20px 28px}
+
+/* ---------- series ---------- */
+.hero{padding:6px 0 18px;border-bottom:1px solid var(--line)}
+.hero h1{font-family:var(--en);font-weight:600;font-size:30px;line-height:1.12;margin-top:8px}
+.hero .zh{font-size:14px;color:var(--muted);margin-top:4px}
+.hero .one{margin:14px 0 0;font-size:16px;line-height:1.55;color:var(--ink-2)}
+.sec{margin-top:26px}
+.sec h2{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec h2 small{font-weight:400;color:var(--muted);font-size:12px}
+.scen{display:flex;flex-wrap:wrap;gap:8px}
+.scen span{font-size:13px;background:var(--surface-2);border:1px solid var(--line);padding:6px 11px;border-radius:999px;color:var(--ink-2)}
+.ins{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.ins li{display:grid;grid-template-columns:22px 1fr;gap:4px}
+.ins .n{font-family:var(--en);font-style:italic;color:var(--accent);font-size:15px}
+.ins b{display:block;font-weight:600;font-size:14.5px}
+.ins p{margin:2px 0 0;color:var(--muted);font-size:13.5px}
+
+/* mind map */
+.mm-root{display:inline-flex;flex-direction:column;background:var(--accent);color:var(--accent-ink);border-radius:14px;padding:10px 16px}
+.mm-root b{font-family:var(--en);font-weight:600;font-size:17px}
+.mm-root small{font-size:12px;opacity:.8}
+.mm-br{margin-left:18px;padding-left:20px;border-left:2px solid var(--line-2)}
+.mm-b{position:relative;padding-top:14px}
+.mm-b::before{content:"";position:absolute;left:-20px;top:28px;width:16px;height:2px;background:var(--line-2)}
+.mm-b:last-child::after{content:"";position:absolute;left:-22px;top:29px;bottom:0;width:4px;background:var(--surface)}
+.mm-h{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:6px 12px 6px 8px;font-weight:600;font-size:14px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);text-align:left}
+.mm-h .i{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--c);color:var(--surface);font-family:var(--en);font-size:12px}
+.mm-h .st{font-weight:400;font-size:11.5px;opacity:.8}
+.mm-l{list-style:none;margin:6px 0 0 18px;padding:0 0 0 14px;border-left:1.5px solid color-mix(in srgb,var(--c) 35%,transparent)}
+.mm-l li{position:relative;font-size:13px;color:var(--ink-2);padding:3px 0}
+.mm-l li::before{content:"";position:absolute;left:-14px;top:14px;width:9px;height:1.5px;background:color-mix(in srgb,var(--c) 35%,transparent)}
+
+/* learning flow */
+.flow{display:grid;gap:0;justify-items:stretch}
+.fs{border:1px solid var(--line-2);border-radius:14px;padding:11px 14px;background:var(--surface)}
+.fs b{font-size:14.5px}
+.fs .t{font-size:12px;color:var(--muted);margin-left:6px}
+.fs p{margin:3px 0 0;font-size:13px;color:var(--ink-2)}
+.fs.chk{background:var(--violet-bg);border-color:color-mix(in srgb,var(--violet) 45%,transparent);text-align:center}
+.fs.chk b{color:var(--violet)}
+.farr{height:22px;display:grid;place-items:center;color:var(--muted)}
+.farr::before{content:"";width:1.5px;height:12px;background:var(--line-2)}
+.fbr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fb3{border-radius:14px;padding:10px 10px 12px;border:1px solid}
+.fb3 .pill{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;margin-bottom:6px}
+.fb3 b{display:block;font-size:14px}
+.fb3 p{margin:3px 0 0;font-size:12px;line-height:1.5;color:var(--ink-2)}
+.fb3.deep{background:var(--amber-bg);border-color:color-mix(in srgb,var(--amber) 40%,transparent)} .fb3.deep b,.fb3.deep .pill{color:var(--amber)} .fb3.deep .pill{background:color-mix(in srgb,var(--amber) 16%,transparent)}
+.fb3.acc{background:var(--sage-bg);border-color:color-mix(in srgb,var(--sage) 40%,transparent)} .fb3.acc b,.fb3.acc .pill{color:var(--sage)} .fb3.acc .pill{background:color-mix(in srgb,var(--sage) 16%,transparent)}
+.fb3.ch{background:var(--violet-bg);border-color:color-mix(in srgb,var(--violet) 40%,transparent)} .fb3.ch b,.fb3.ch .pill{color:var(--violet)} .fb3.ch .pill{background:color-mix(in srgb,var(--violet) 16%,transparent)}
+.fnote{text-align:center;font-size:12px;color:var(--muted);margin:10px 0 0}
+@media (max-width:360px){ .fbr{grid-template-columns:1fr} }
+
+.issues{display:grid;gap:8px}
+.issue{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-align:left;width:100%}
+.issue .i{font-family:var(--en);font-size:22px;color:var(--muted);text-align:center}
+.issue .t{font-family:var(--en);font-size:15px;line-height:1.25;display:block}
+.issue .s{font-size:12px;color:var(--muted);margin-top:2px;display:block}
+.issue .go{font-size:12px;color:var(--accent-ink);background:var(--accent);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.issue.soon{opacity:.62}
+.issue.soon .go{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.issue.ready{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.gl{border-top:1px solid var(--line)}
+.gl div{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.gl .e{font-family:var(--en);font-size:15px}
+.gl .z{font-size:13px;color:var(--ink-2)}
+.gl .p{grid-column:1/-1;font-size:12.5px;color:var(--muted)}
+.gl .tag{font-size:11px;color:var(--muted);align-self:center}
+
+/* ---------- reader ---------- */
+.meta{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.art-title{font-family:var(--en);font-weight:600;font-size:26px;line-height:1.18;margin-top:6px}
+.art-zh{color:var(--muted);font-size:14px;margin-top:4px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:16px}
+.steps button{border:0;background:transparent;padding:0;text-align:center;font-size:11.5px;color:var(--muted)}
+.steps button::before{content:"";display:block;height:4px;border-radius:4px;background:var(--line);margin-bottom:6px}
+.steps button.done{color:var(--ink-2)}
+.steps button.done::before{background:color-mix(in srgb,var(--accent) 45%,transparent)}
+.steps button[aria-current="step"]{color:var(--accent);font-weight:600}
+.steps button[aria-current="step"]::before{background:var(--accent)}
+.stage{margin-top:18px}
+.lab{font-size:12px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+.panel{padding:16px;border-radius:16px;background:var(--surface-2)}
+.panel p{margin:0}
+.ask{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px dashed var(--line-2)}
+.ask span{font-size:12px;color:var(--muted)}
+.ask p{margin:4px 0 0;font-weight:600}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px}
+.timer{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px);z-index:3;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;border-radius:12px;background:var(--accent);color:var(--accent-ink)}
+.timer b{font-variant-numeric:tabular-nums;font-size:18px;font-family:var(--en)}
+.timer span{font-size:12.5px;opacity:.85}
+.timer.over{background:var(--terra)}
+.body{margin-top:8px}
+.para{position:relative;padding-left:22px;margin-top:16px}
+.para .pn{position:absolute;left:0;top:3px;font-family:var(--en);font-size:12px;color:var(--muted)}
+.para .txt{font-family:var(--en);font-size:17px;line-height:1.72;color:var(--ink)}
+.para.speaking{box-shadow:-8px 0 0 -5px var(--accent)}
+.gloss{margin-top:8px;padding:8px 12px;border-left:2px solid var(--sage);background:var(--sage-bg);border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-2);line-height:1.65}
+.w{cursor:pointer;border-bottom:1.5px dotted var(--blue)}
+.w.saved{background:var(--hl);border-radius:3px;box-shadow:0 0 0 1px var(--hl-line);border-bottom-color:transparent}
+.ls{background:var(--blue-bg);border-radius:3px;cursor:pointer}
+.ans.show{background:var(--sage-bg);box-shadow:0 0 0 1px color-mix(in srgb,var(--sage) 45%,transparent);border-radius:3px}
+.anal{margin-top:10px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--blue) 30%,var(--line));border-radius:12px;font-size:13.5px;background:var(--surface)}
+.anal ul{margin:0 0 6px;padding-left:18px}.anal li{margin:3px 0}
+.anal .tr{color:var(--ink-2)}
+.anal .lab{color:var(--blue);margin-bottom:6px}
+.anal button{margin-top:8px;border:1px solid var(--line-2);background:transparent;border-radius:999px;padding:4px 12px;font-size:12.5px}
+.hsel{margin-bottom:6px}
+.hsel select{width:100%;font-size:13.5px;padding:6px 8px;border-radius:10px;border:1px solid color-mix(in srgb,var(--violet) 40%,var(--line));background:var(--violet-bg);color:var(--ink)}
+.hsel.ok select{border-color:var(--ok)} .hsel.bad select{border-color:var(--bad)}
+.hsel .fb{font-size:12px;margin-top:3px}
+.hsel.ok .fb{color:var(--ok)} .hsel.bad .fb{color:var(--bad)}
+
+.mc{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:14px}
+.mc .ty{font-size:11px;padding:1px 8px;border-radius:999px;background:var(--violet-bg);color:var(--violet)}
+.mc .pr{font-family:var(--en);font-size:16px;margin-top:8px;line-height:1.45}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opt{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 12px;font-family:var(--en);font-size:14.5px;line-height:1.45}
+.opt .k{font-family:var(--ui);font-size:12px;color:var(--muted);padding-top:2px}
+.opt[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.opt.right{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
+.opt.wrong{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.mc .ex{margin-top:10px;font-size:13px;color:var(--ink-2)}
+.result{padding:14px 16px;border-radius:14px;border:1px solid}
+.result.deep{background:var(--amber-bg);border-color:color-mix(in srgb,var(--amber) 40%,transparent)}
+.result.acc{background:var(--sage-bg);border-color:color-mix(in srgb,var(--sage) 40%,transparent)}
+.result.ch{background:var(--violet-bg);border-color:color-mix(in srgb,var(--violet) 40%,transparent)}
+.result b{font-size:16px}
+.result.deep b{color:var(--amber)} .result.acc b{color:var(--sage)} .result.ch b{color:var(--violet)}
+.result p{margin:4px 0 0;font-size:13px;color:var(--ink-2)}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.modes span{font-size:12px;color:var(--muted)}
+.modes button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:4px 11px;font-size:12.5px;color:var(--muted)}
+.modes button[aria-pressed="true"]{color:var(--ink);border-color:var(--line-2);background:var(--surface-2);font-weight:600}
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.layer{border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--muted)}
+.layer[aria-pressed="true"][data-l="basic"]{background:var(--sage-bg);color:var(--sage);border-color:transparent}
+.layer[aria-pressed="true"][data-l="adv"]{background:var(--blue-bg);color:var(--blue);border-color:transparent}
+.play{display:inline-flex;align-items:center;gap:7px;border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:6px 13px 6px 10px;font-size:12.5px}
+.play i{width:0;height:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.play.on i{width:9px;height:9px;border:0;background:currentColor;border-radius:1px}
+.block{margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.block h3{font-size:15px;font-weight:600}
+.q{margin-top:12px;padding:14px;border:1px solid var(--line);border-radius:14px}
+.q .pr{font-family:var(--en);font-size:15.5px;line-height:1.5}
+.q button{margin-top:10px;border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:5px 12px;font-size:12.5px}
+.q .ex{margin-top:10px;font-size:13px;color:var(--ink-2)}
+.q .ex .a{font-family:var(--en);font-size:14.5px;color:var(--ink);display:block;margin-bottom:4px}
+.out input{width:100%;margin-top:10px;font:inherit;font-family:var(--en);font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink)}
+.out .ex{font-size:12.5px;color:var(--muted);margin-top:6px}
+.share{margin-top:14px;padding:22px 20px;border-radius:18px;background:linear-gradient(160deg,#F5EFE3,#EAE1D1);color:#1B2130}
+.share .q1{font-family:var(--en);font-size:18px;line-height:1.5}
+.share .ft{margin-top:14px;font-size:11.5px;color:#6E6F77;display:flex;justify-content:space-between}
+.act{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--surface-2);font-size:13.5px}
+.fbk{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fbk button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--ink-2)}
+.fbk button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+
+/* review + cards */
+.card{min-height:220px;border-radius:22px;padding:24px 22px;background:var(--surface-2);color:var(--ink);border:1px solid var(--line-2);display:flex;flex-direction:column;justify-content:space-between;gap:14px;cursor:pointer;user-select:none}
+.card .no{font-family:var(--en);font-style:italic;opacity:.7;font-size:14px}
+.card .big{font-family:var(--en);font-size:23px;line-height:1.35}
+.card .mid{font-family:var(--en);font-size:17px;line-height:1.55}
+.card .zh{font-size:15px;opacity:.9}
+.card .sm{font-size:12px;opacity:.7}
+.card .blank{display:inline-block;min-width:72px;border-bottom:2px solid var(--accent)}
+.card .no{color:var(--accent)}
+.card.light{background:var(--surface-2);color:var(--ink);border:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px}
+.nav button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 16px;font-size:13px}
+.nav span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.grade{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.grade button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 0;font-size:13.5px}
+.grade button small{display:block;font-size:11px;color:var(--muted)}
+.howto{margin-top:18px;padding:14px 16px;border-radius:14px;background:var(--surface-2);font-size:13.5px;color:var(--ink-2)}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(10,12,16,.28);z-index:20}
+.sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(460px,100%);z-index:21;background:var(--surface);border-radius:22px 22px 0 0;padding:20px 22px calc(22px + env(safe-area-inset-bottom,0px));box-shadow:0 -20px 40px -20px rgba(0,0,0,.35);max-height:85vh;overflow:auto}
+.sheet .grab{width:38px;height:4px;border-radius:4px;background:var(--line-2);margin:-8px auto 14px}
+.sheet .wd{font-family:var(--en);font-size:30px;font-weight:500}
+.sheet .ph{color:var(--muted);font-size:13px;margin-left:8px}
+.sheet .mn{margin-top:6px;font-size:15px}
+.sheet .lv{display:inline-block;margin-top:8px;font-size:11.5px;padding:2px 8px;border-radius:999px;background:var(--sage-bg);color:var(--sage)}
+.sheet .ctx{margin-top:12px;font-family:var(--en);font-size:14.5px;color:var(--ink-2);padding:10px 12px;background:var(--surface-2);border-radius:10px;line-height:1.6}
+.sheet .last{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.sheet .last q{font-family:var(--en);color:var(--ink-2)}
+.sheet .rowb{display:flex;gap:8px;margin-top:14px}
+.sheet .rowb button{flex:1;border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:10px 0;font-size:14px}
+.sheet .rowb button.pri{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.wl{margin:0;padding:0;list-style:none}
+.wl li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+.wl .e{font-family:var(--en);font-size:15px}
+.wl .m{font-size:13px;color:var(--muted);text-align:right}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:8px 16px;border-radius:999px;font-size:13px;z-index:30;max-width:90vw;text-align:center}
+@media (prefers-reduced-motion:no-preference){ .sheet{animation:up .22s ease-out} @keyframes up{from{transform:translate(-50%,24px);opacity:.4}} }
+</style>
+
+<div class="app" id="app">
+  <header class="bar">
+    <div class="bar-top">
+      <span class="brand">Close Reading · Demo</span>
+      <button class="wb" id="wbBtn" type="button" aria-label="打开收藏">收藏 <b id="wbCount">0</b></button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="t-series" aria-selected="false" data-v="series" type="button">系列首页</button>
+      <button role="tab" id="t-read" aria-selected="true" data-v="read" type="button">第 1 期</button>
+    </div>
+  </header>
+  <main>
+    <section class="view" id="v-series" hidden></section>
+    <section class="view" id="v-read"></section>
+  </main>
+</div>
+<div id="layer"></div>
+
+<script type="application/json" id="series-data">{"id": "how-to-know-a-person", "titleEn": "How to Know a Person", "titleZh": "如何真正认识一个人（暂译）", "author": "David Brooks", "year": 2023, "total": 5, "oneLiner": "被看见，是人最深的需要；看见别人，是一门可以练的手艺。", "scenarios": ["和室友住了一年，还是觉得隔着一层", "聊天时总在想\"我下一句该说什么\"", "朋友难过时，你只会说\"别想太多\"", "放假回家，爸妈还把你当高中生看", "想交能聊深的朋友，却总停在寒暄"], "insights": [{"claim": "被看见是刚需，和吃饭喝水差不多。", "detail": "对一个人最狠的不是讨厌他，而是完全不在意他。"}, {"claim": "你没有自己以为的那么懂别人。", "detail": "心理学研究发现，陌生人初次交谈只有约 20% 的时候猜对对方在想什么，亲密的朋友家人也只有约 35%。"}, {"claim": "人群里有两种人：照亮者和削弱者。", "detail": "前者让你觉得自己更大，后者让你觉得自己很小。"}, {"claim": "你怎么看一个人，会召唤出他的某一面。", "detail": "带着好奇和尊重去看人，对方会在你面前展现出更好的样子。"}, {"claim": "看见别人是手艺，不是天赋。", "detail": "复述对方的话、问大问题、不抢话，都是具体可练的动作。"}], "issues": [{"index": 1, "articleId": "hkp-01", "titleEn": "Some People Make You Feel Bigger", "titleZh": "照亮者与削弱者", "chapters": "第 1、3 章", "level": "六级", "status": "ready"}, {"index": 2, "titleEn": "Why We Fail to See People", "titleZh": "我们为什么看不见别人", "chapters": "第 2 章", "level": "六级 / 托雅", "status": "soon"}, {"index": 3, "titleEn": "Better Talks, Bigger Questions", "titleZh": "好好聊天，问大问题", "chapters": "第 6、7 章", "level": "四级 / 六级", "status": "soon"}, {"index": 4, "titleEn": "When a Talk Gets Hard", "titleZh": "难聊的话怎么聊", "chapters": "第 6、9 章", "level": "六级", "status": "soon"}, {"index": 5, "titleEn": "Everyone Is a Story", "titleZh": "每个人都是一个故事", "chapters": "第 15 章", "level": "四级 / 六级", "status": "soon"}], "glossary": [{"en": "Illuminator", "zh": "照亮者", "note": "对别人保持好奇，让对方觉得被看见、被尊重的人。", "issue": 1}, {"en": "Diminisher", "zh": "削弱者", "note": "只顾自己、快速给人贴标签，让别人觉得自己很小的人。", "issue": 1}, {"en": "Empathic accuracy", "zh": "共情准确度", "note": "猜对别人真实想法的比例。多数人远没有自己以为的准。", "issue": 1}, {"en": "Naïve realism", "zh": "朴素实在论", "note": "以为自己看到的就是客观事实，所以别人也该看到一样的东西。", "issue": 2}, {"en": "The lesser-minds problem", "zh": "\"别人没我复杂\"的错觉", "note": "我们只听得到别人说出口的一小部分，于是觉得别人的内心比自己简单。", "issue": 2}, {"en": "Static mindset", "zh": "固定印象", "note": "对一个人的印象停在过去，对方变了也不更新。", "issue": 2}, {"en": "Looping", "zh": "复述确认", "note": "用自己的话把对方的意思说回去，确认自己听懂了。", "issue": 3}, {"en": "Big questions", "zh": "大问题", "note": "让人停下来回看自己人生的问题，比如\"你现在站在什么十字路口？\"", "issue": 3}, {"en": "The disagreement under the disagreement", "zh": "分歧底下的分歧", "note": "争吵时去找表面分歧背后真正不同的价值观。", "issue": 4}], "sourceNote": "系列内容基于 David Brooks《How to Know a Person》（Random House, 2023）的观点撰写，英文正文为原创改写，非原书原文。", "mindmap": {"root": "How to Know a Person", "rootZh": "看见一个人，也被人看见", "branches": [{"issue": 1, "title": "照亮者与削弱者", "leaves": ["被看见是刚需", "照亮者让人变大，削弱者让人变小", "我们猜对别人想法的比例只有约 20%–35%", "看见别人是手艺，可以练"]}, {"issue": 2, "title": "我们为什么看不见别人", "leaves": ["自我中心、焦虑", "朴素实在论：以为自己看到的就是事实", "\"别人没我复杂\"的错觉", "固定印象：对方变了，我们没更新"]}, {"issue": 3, "title": "好好聊天，问大问题", "leaves": ["复述确认（Looping）", "问大问题：你现在站在什么十字路口？", "别抢话，也别怕沉默"]}, {"issue": 4, "title": "难聊的话怎么聊", "leaves": ["先营造安全感，再谈正事", "找到分歧底下的分歧"]}, {"issue": 5, "title": "每个人都是一个故事", "leaves": ["我们低估了别人想聊天的意愿", "问高光、低谷和转折点"]}]}}</script>
+<script type="application/json" id="article-data">{"id": "hkp-01", "column": "thought", "seriesId": "how-to-know-a-person", "seriesIndex": 1, "titleEn": "Some People Make You Feel Bigger", "titleZh": "有些人，会让你变得更好", "level": "cet6", "wordCount": 364, "minutes": 12, "publishAt": "2026-10-05", "sourceNote": "原创英文稿，基于 David Brooks《How to Know a Person》（2023）第 1、3 章的观点撰写，非原书原文。", "intro": "你一定遇到过这样的人：和他聊完天，你觉得自己比平时更聪明、更有意思，好像终于被看见了。你也一定遇到过相反的人：话说到一半就被打断，聊完只觉得自己很小。\n\n美国作家 David Brooks 把前一种人叫作 Illuminators（照亮者），后一种叫作 Diminishers（削弱者）。他自己年轻时就是个不太会跟人亲近的人，花了很多年才学会\"看见\"别人。\n\n这一期只讲一件事：看见别人不是天赋，是一门可以练的手艺。读完想一想，你身边谁是照亮者，而你自己又是哪一种。", "paragraphs": [{"id": "p1", "en": "Think of two people you have talked to this month. After a conversation with the first, you walked away feeling sharper and more interesting than usual. After a conversation with the second, you felt a little smaller, as if you had been talking to a wall that sometimes talked back.", "zh": "想一想这个月和你聊过天的两个人。和第一个人聊完，你觉得自己比平时更敏锐、更有意思；和第二个人聊完，你觉得自己变小了一点，好像一直在对着一堵偶尔会回话的墙说话。"}, {"id": "p2", "en": "The writer David Brooks has names for these two types. He calls the first kind Illuminators and the second kind Diminishers. Diminishers are so busy with themselves that other people barely register. They put a label on you quickly and move on. Illuminators do the opposite. They are curious about you, they ask questions that matter, and their attention makes you feel respected.", "zh": "作家 David Brooks 给这两类人起了名字：前一种叫\"照亮者\"，后一种叫\"削弱者\"。削弱者太忙于自己，几乎注意不到别人的存在，他们很快给你贴个标签就走开了。照亮者正好相反：他们对你好奇，问真正重要的问题，他们的关注让你感到被尊重。"}, {"id": "p3", "en": "An old story shows the difference. A young woman in Victorian England had dinner with two famous politicians on two different evenings. After the first dinner, she was certain that he was the smartest man in the country. After the second, she was certain that she was the smartest person in the country. Both men were brilliant, but only one of them made her feel brilliant.", "zh": "有个老故事能说明区别。维多利亚时代的英国，一位年轻女士在两个晚上分别和两位著名政治家共进晚餐。第一顿饭后，她确信对方是全英国最聪明的人；第二顿饭后，她确信自己是全英国最聪明的人。两位都才华横溢，但只有一位让她觉得自己也才华横溢。"}, {"id": "p4", "en": "Most of us assume that we are good at reading people. The research is less kind. The psychologist William Ickes found that strangers in a first conversation guess each other's thoughts correctly only about 20 percent of the time. Even close friends and relatives do only a little better, at about 35 percent. Worse, those who read others worst usually rate themselves as highly as the people who read others best.", "zh": "我们大多数人都以为自己很会看人，研究结果却没那么客气。心理学家 William Ickes 发现，初次交谈的陌生人只有大约 20% 的时候能猜对对方在想什么；就连亲密的朋友和亲人也只好一点，约 35%。更糟的是，最不会看人的人，给自己打的分往往和最会看人的人一样高。"}, {"id": "p5", "en": "This matters because being seen is not a luxury. Recognition is a basic human need, close to hunger or thirst. When someone notices a strength we could not see in ourselves, we often begin to grow into it. When no one notices us at all, we slowly shrink.", "zh": "这件事很重要，因为被看见不是奢侈品。被认可是人的基本需要，几乎和饿了要吃、渴了要喝一样。当有人发现了我们自己都没看到的长处，我们往往会慢慢长成那个样子；而当没有任何人注意到我们，我们就会一点点缩小。"}, {"id": "p6", "en": "The good news is that illuminating others is a skill, not a gift you are born with. Brooks admits that for much of his life he was reserved and awkward, the kind of person who looked for the exit when a conversation turned emotional. He changed by practicing. So here is the question for this week: in most of your conversations, are you an Illuminator or a Diminisher?", "zh": "好消息是，照亮别人是一门手艺，而不是天生的本事。Brooks 承认，他人生的很长一段时间都很内敛、很笨拙，一聊到情绪话题就想找借口溜走。他是靠练习改变的。所以这周的问题是：在大多数对话里，你是照亮者，还是削弱者？"}], "vocab": [{"word": "register", "lemma": "register", "phonetic": "/ˈredʒɪstə(r)/", "meaning": "v. 被注意到，引起注意（常见义\"登记\"）", "level": "四级 · 熟词僻义", "paragraphId": "p2"}, {"word": "Illuminators", "lemma": "illuminator", "phonetic": "/ɪˈluːmɪneɪtə(r)/", "meaning": "n. 照亮者；本书指让别人感到被看见的人", "level": "六级（illuminate）", "paragraphId": "p2"}, {"word": "Diminishers", "lemma": "diminisher", "phonetic": "/dɪˈmɪnɪʃə(r)/", "meaning": "n. 削弱者；本书指让别人觉得自己渺小的人", "level": "六级（diminish）", "paragraphId": "p2"}, {"word": "brilliant", "lemma": "brilliant", "phonetic": "/ˈbrɪliənt/", "meaning": "adj. 才华横溢的，聪明绝顶的", "level": "四级", "paragraphId": "p3"}, {"word": "assume", "lemma": "assume", "phonetic": "/əˈsjuːm/", "meaning": "v. 以为，想当然地认为", "level": "四级", "paragraphId": "p4"}, {"word": "Recognition", "lemma": "recognition", "phonetic": "/ˌrekəɡˈnɪʃn/", "meaning": "n. 认可，赏识（常见义\"认出\"）", "level": "四级", "paragraphId": "p5"}, {"word": "reserved", "lemma": "reserved", "phonetic": "/rɪˈzɜːvd/", "meaning": "adj. 内敛的，矜持的（reserve 常见义\"预订\"）", "level": "六级 · 熟词僻义", "paragraphId": "p6"}], "sentences": [{"paragraphId": "p4", "text": "Worse, those who read others worst usually rate themselves as highly as the people who read others best.", "analysis": ["主干：those … rate themselves as highly as the people …（那些人给自己的评分和另一些人一样高）", "两个 who 从句对称：who read others worst / who read others best，一个修饰主语，一个修饰比较对象", "as highly as：同级比较，比的是\"评分高低\"，不是\"看人准不准\""], "translation": "更糟的是，最不会看人的人，给自己打的分往往和最会看人的人一样高。"}, {"paragraphId": "p5", "text": "When someone notices a strength we could not see in ourselves, we often begin to grow into it.", "analysis": ["When 引导时间状语从句，主句是 we often begin to grow into it", "a strength (that) we could not see in ourselves：省略了 that 的定语从句，修饰 strength", "grow into：词组，\"逐渐长成、逐渐适应\"，it 指前面的 strength"], "translation": "当有人发现了我们自己都没看到的长处，我们往往会慢慢长成那个样子。"}], "questions": [{"prompt": "Some people are so focused on themselves that they hardly notice anyone else.", "answer": "Diminishers are so busy with themselves that other people barely register.", "paragraphId": "p2", "explanation": "focused on themselves ↔ busy with themselves；hardly notice anyone else ↔ other people barely register。注意 register 在这里是\"被注意到\"，主语换成了\"别人\"。"}, {"prompt": "Being noticed and valued is almost as necessary as food and water.", "answer": "Recognition is a basic human need, close to hunger or thirst.", "paragraphId": "p5", "explanation": "being noticed and valued ↔ recognition；almost as necessary as ↔ a basic human need, close to；food and water ↔ hunger or thirst（用\"饿、渴\"代替\"食物、水\"）。"}, {"prompt": "Making others feel seen is an ability that can be learned.", "answer": "The good news is that illuminating others is a skill, not a gift you are born with.", "paragraphId": "p6", "explanation": "making others feel seen ↔ illuminating others；can be learned ↔ a skill, not a gift you are born with。原文用\"不是天赋\"从反面说明\"可以学\"。"}], "output": {"template": "The Illuminator in my life is ___, because ___.", "example": "The Illuminator in my life is my high school English teacher, because she noticed that I loved writing before I did."}, "action": "这周留意一次：和别人聊完天，你让对方觉得自己更大，还是更小？", "orientation": {"background": "美国作家 David Brooks 年轻时是个很难跟人亲近的人，后来花了好几年，专门学习怎么真正\"看见\"别人。这一篇讲他的第一个发现：人群里有两种人。", "question": "作者认为，让别人觉得被看见，是天生的本事，还是可以练出来的？"}, "rawReadSeconds": 240, "check": [{"type": "主旨", "prompt": "Which sentence best sums up the passage?", "options": ["Politicians in Victorian England were unusually good at conversation.", "Most people read other people's thoughts more accurately than they expect.", "Making people feel seen matters, and it is a skill that can be practiced.", "Reserved people should stay away from emotional conversations."], "answer": 2, "explanation": "全文从两种人讲起，¶5 说被看见很重要，¶6 说这是能练的手艺。A 只是 ¶3 的例子；B 和 ¶4 的研究结论相反；D 和 ¶6 相反，作者正是靠练习改变的。"}, {"type": "推断", "prompt": "What can we infer from paragraph 4?", "options": ["Feeling confident about reading people does not mean you are good at it.", "Friends and family almost always know what we are thinking.", "Strangers understand each other better than close friends do.", "Psychologists have no way to measure how well people read others."], "answer": 0, "explanation": "¶4 最后一句说，最不会看人的人给自己打的分和最会看人的人一样高，所以\"自信\"不等于\"准确\"。B 错在 35% 并不高；C 和数据相反；D 和 Ickes 做过的研究矛盾。"}], "headings": {"options": ["Good news: it can be learned", "A feeling you have probably had", "How famous people win elections", "We are worse at this than we think", "Two names for two kinds of people", "Why being seen matters", "A story from Victorian England", "Why we should talk less to strangers"], "answers": {"p1": 1, "p2": 4, "p3": 6, "p4": 3, "p5": 5, "p6": 0}, "note": "8 个小标题里有 2 个是干扰项。"}}</script>
+<script>
+(function(){
+const S = JSON.parse(document.getElementById('series-data').textContent);
+const A = JSON.parse(document.getElementById('article-data').textContent);
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const STEPS = ['orient','raw','check','branch','review'];
+const STEP_LABEL = {orient:'定向', raw:'裸读', check:'检测', branch:'练习', review:'复习'};
+const MODES = {
+  deep:{name:'精读补上', need:'答对 0 道', cls:'deep', tip:'打开进阶：点虚线单词看释义，点蓝底句子看长难句拆解。基础层是每段的中文大意。'},
+  acc:{name:'读准', need:'答对 1 道', cls:'acc', tip:'下面每句话都换了说法，在原文里找出它对应的原句。'},
+  ch:{name:'挑战', need:'答对 2 道', cls:'ch', tip:'给每一段选一个小标题，看你能不能抓住全文结构。'}
+};
+const INTERVALS = [1,2,4,7,15,30];
+const state = {
+  step:'orient', reached:0,
+  rawStart:null, rawUsed:null, tick:null,
+  picks:{}, checked:false, score:null, mode:null,
+  layers:{basic:true, adv:true},
+  words: store.get('hkp.words', {}), sents: store.get('hkp.sents', {}),
+  openSentences:new Set(), shownAnswers:new Set(),
+  heads:{}, headsChecked:false,
+  rv:{i:0, flipped:false},
+  speaking:false, fb:new Set()
+};
+
+function toast(msg){ const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; t.setAttribute('role','status'); document.body.appendChild(t); setTimeout(() => t.remove(), 2000); }
+function updateCount(){ $('#wbCount').textContent = Object.keys(state.words).length + Object.keys(state.sents).length; }
+function fmt(sec){ sec = Math.max(0, Math.round(sec)); return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0'); }
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => show(b.dataset.v)));
+function show(v){
+  document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === v)));
+  ['series','read'].forEach(k => { $('#v-' + k).hidden = (k !== v); });
+  window.scrollTo({top:0});
+}
+
+/* ---------- series ---------- */
+const BRANCH_COLORS = ['var(--accent)','var(--sage)','var(--blue)','var(--terra)','var(--violet)'];
+function flowHTML(){
+  return `<div class="flow">
+    <div class="fs"><b>① 定向</b><span class="t">30 秒</span><p>两句中文背景 + 一个带着去读的问题</p></div><div class="farr"></div>
+    <div class="fs"><b>② 裸读</b><span class="t">4 分钟</span><p>计时通读，不查词、不看中文</p></div><div class="farr"></div>
+    <div class="fs chk"><b>③ 检测</b><span class="t">1 分钟</span><p>2 道主旨 / 推断题，按答对几道分流</p></div><div class="farr"></div>
+    <div class="fbr">
+      <div class="fb3 deep"><span class="pill">答对 0 道</span><b>④ 精读补上</b><p>点词、点长难句：看释义，也看上次在哪句话里遇到它</p></div>
+      <div class="fb3 acc"><span class="pill">答对 1 道</span><b>④ 读准</b><p>换了说法的句子，回原文找出原句</p></div>
+      <div class="fb3 ch"><span class="pill">答对 2 道</span><b>④ 挑战</b><p>给每段选小标题，看能不能抓住全文结构</p></div>
+    </div><div class="farr"></div>
+    <div class="fs"><b>⑤ 复习</b><span class="t">第二天</span><p>收藏的词和句，带着原来的句子推回来</p></div>
+    <p class="fnote">每篇重新检测、重新分流，不给读者贴固定等级</p></div>`;
+}
+function renderSeries(){
+  const el = $('#v-series'), M = S.mindmap;
+  el.innerHTML = `
+    <div class="hero">
+      <div class="eyebrow">拆书系列 · 共 ${S.total} 期</div>
+      <h1>${esc(S.titleEn)}</h1>
+      <div class="zh">${esc(S.titleZh)} · ${esc(S.author)} · ${S.year}</div>
+      <p class="one">${esc(S.oneLiner)}</p>
+    </div>
+    <div class="sec"><h2>什么时候适合读</h2><div class="scen">${S.scenarios.map(s => `<span>${esc(s)}</span>`).join('')}</div></div>
+    <div class="sec"><h2>关键洞察</h2><ol class="ins">${S.insights.map((x,i) => `<li><span class="n">${i+1}</span><div><b>${esc(x.claim)}</b><p>${esc(x.detail)}</p></div></li>`).join('')}</ol></div>
+    <div class="sec"><h2>全书思维导图 <small>一图看懂 5 期讲什么</small></h2>
+      <div class="mm">
+        <div class="mm-root"><b>${esc(M.root)}</b><small>${esc(M.rootZh)}</small></div>
+        <div class="mm-br">${M.branches.map((b, i) => `
+          <div class="mm-b" style="--c:${BRANCH_COLORS[i % 5]}">
+            <button class="mm-h" type="button" ${b.issue === 1 ? 'data-go="read"' : 'disabled'}><span class="i">${b.issue}</span>${esc(b.title)}${b.issue === 1 ? '<span class="st">· 去读</span>' : ''}</button>
+            <ul class="mm-l">${b.leaves.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
+          </div>`).join('')}</div>
+      </div></div>
+    <div class="sec"><h2>5 期目录 <small>每期讲透一个观点</small></h2>
+      <div class="issues">${S.issues.map(x => `
+        <button class="issue ${x.status}" type="button" ${x.status === 'ready' ? 'data-go="read"' : 'disabled'}>
+          <span class="i">${x.index}</span>
+          <span><span class="t en">${esc(x.titleEn)}</span><span class="s">${esc(x.titleZh)} · ${esc(x.chapters)} · ${esc(x.level)}</span></span>
+          <span class="go">${x.status === 'ready' ? '开始读' : '即将上线'}</span>
+        </button>`).join('')}</div></div>
+    <div class="sec"><h2>一篇文章怎么学 <small>约 10 分钟 · 读完先检测，再按掌握情况分流</small></h2>${flowHTML()}</div>
+    <div class="sec"><h2>名词卡 <small>随期解锁，这里一次列全</small></h2>
+      <div class="gl">${S.glossary.map(g => `<div><span class="e">${esc(g.en)}</span><span class="tag">第 ${g.issue} 期</span><span class="z">${esc(g.zh)}</span><span class="p">${esc(g.note)}</span></div>`).join('')}</div></div>
+    <p class="src">${esc(S.sourceNote)}</p>`;
+  el.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => show('read')));
+}
+
+/* ---------- text rendering ---------- */
+function vocabWrap(seg, pid, used){
+  let html = esc(seg);
+  A.vocab.forEach((v, i) => {
+    if (v.paragraphId !== pid || used.has(i)) return;
+    const re = new RegExp('\\b(' + v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\\b');
+    if (!re.test(html)) return; used.add(i);
+    html = html.replace(re, `<span class="w${state.words[v.lemma] ? ' saved' : ''}" data-v="${i}" tabindex="0" role="button">$1</span>`);
+  });
+  return html;
+}
+function paraHTML(p, mode){
+  const t = p.en;
+  if (mode === 'raw' || mode === 'ch') return esc(t);
+  const ranges = [];
+  if (mode === 'deep' && state.layers.adv) A.sentences.forEach((s, i) => { if (s.paragraphId === p.id){ const k = t.indexOf(s.text); if (k >= 0) ranges.push({a:k, b:k + s.text.length, cls:'ls', attr:`data-s="${i}" tabindex="0" role="button"`}); }});
+  if (mode === 'acc') A.questions.forEach((q, i) => { if (q.paragraphId === p.id){ const k = t.indexOf(q.answer); if (k >= 0) ranges.push({a:k, b:k + q.answer.length, cls:'ans' + (state.shownAnswers.has(i) ? ' show' : ''), attr:`data-a="${i}"`}); }});
+  ranges.sort((x, y) => x.a - y.a);
+  const wrap = (seg, used) => (mode === 'deep' && state.layers.adv) ? vocabWrap(seg, p.id, used) : esc(seg);
+  let out = '', pos = 0; const used = new Set();
+  ranges.forEach(r => { out += wrap(t.slice(pos, r.a), used); out += `<span class="${r.cls}" ${r.attr}>${wrap(t.slice(r.a, r.b), used)}</span>`; pos = r.b; });
+  return out + wrap(t.slice(pos), used);
+}
+function textHTML(mode){
+  return `<div class="body">${A.paragraphs.map((p, n) => `
+    <div class="para" id="para-${p.id}">
+      <span class="pn">¶${n+1}</span>
+      ${mode === 'ch' ? headSelect(p) : ''}
+      <div class="txt">${paraHTML(p, mode)}</div>
+      ${mode === 'deep' && state.layers.basic ? `<div class="gloss">${esc(p.zh)}</div>` : ''}
+      ${mode === 'deep' && state.layers.adv ? A.sentences.map((s, i) => (s.paragraphId === p.id && state.openSentences.has(i)) ? `
+        <div class="anal"><div class="lab">长难句拆解</div><ul>${s.analysis.map(a => `<li>${esc(a)}</li>`).join('')}</ul><div class="tr">译文：${esc(s.translation)}</div>
+        <button type="button" data-save-s="${i}">${state.sents['s' + i] ? '已收藏这句' : '＋ 收藏这句'}</button></div>` : '').join('') : ''}
+    </div>`).join('')}</div>`;
+}
+function headSelect(p){
+  const H = A.headings, pick = state.heads[p.id], right = H.answers[p.id];
+  const cls = state.headsChecked ? (pick === right ? ' ok' : ' bad') : '';
+  return `<div class="hsel${cls}">
+    <select id="h-${p.id}" data-h="${p.id}" aria-label="第 ${p.id.slice(1)} 段的小标题"><option value="">选一个小标题…</option>${H.options.map((o, i) => `<option value="${i}"${pick === i ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>
+    ${state.headsChecked ? `<div class="fb">${pick === right ? '对了' : '参考答案：' + esc(H.options[right])}</div>` : ''}</div>`;
+}
+
+/* ---------- reader ---------- */
+function goStep(s){
+  if (state.step === 'raw' && s !== 'raw') stopTimer();
+  state.step = s; state.reached = Math.max(state.reached, STEPS.indexOf(s));
+  if (s === 'branch' && !state.mode) state.mode = 'deep';
+  renderRead(); const top = $('#v-read'); if (top) window.scrollTo({top:0});
+}
+function renderRead(){
+  const el = $('#v-read'), cur = STEPS.indexOf(state.step);
+  el.innerHTML = `
+    <div class="meta">思想 · 拆书 ${A.seriesIndex}/${S.total} · ${A.wordCount} 词 · 约 ${A.minutes} 分钟</div>
+    <h1 class="art-title">${esc(A.titleEn)}</h1>
+    <div class="art-zh">${esc(A.titleZh)}</div>
+    <nav class="steps" aria-label="学习步骤">${STEPS.map((s, i) => `<button type="button" data-step="${s}" class="${i < cur || i <= state.reached ? 'done' : ''}" ${s === state.step ? 'aria-current="step"' : ''}>${'①②③④⑤'[i]} ${STEP_LABEL[s]}</button>`).join('')}</nav>
+    <div class="stage">${stageHTML()}</div>
+    <p class="src">${esc(A.sourceNote)}</p>`;
+  bindRead(el);
+}
+function stageHTML(){
+  const O = A.orientation;
+  if (state.step === 'orient') return `
+    <div class="lab">① 定向 · 30 秒</div>
+    <div class="panel"><p>${esc(O.background)}</p>
+      <div class="ask"><span>带着这个问题读</span><p>${esc(O.question)}</p></div></div>
+    <div class="row"><button class="btn" type="button" data-go-step="raw">开始裸读 · 4 分钟</button></div>
+    <p class="hint">裸读时不查词、不看中文，读不懂的地方先跳过。读完用 2 道题检测，再决定这篇怎么练。</p>`;
+  if (state.step === 'raw') return `
+    <div class="timer" id="timerBar"><b id="timerTxt">${fmt(A.rawReadSeconds)}</b><span>裸读中 · 不查词、不看中文</span></div>
+    <div class="ask" style="margin-top:12px"><span>带着这个问题读</span><p>${esc(O.question)}</p></div>
+    ${textHTML('raw')}
+    <div class="row"><button class="btn" type="button" id="doneRaw">读完了，去检测</button></div>`;
+  if (state.step === 'check') {
+    const all = A.check.every((_, i) => state.picks[i] !== undefined);
+    return `
+    <div class="lab">③ 检测 · 1 分钟</div>
+    <p class="hint" style="margin-top:0">${state.rawUsed != null ? '裸读用时 ' + fmt(state.rawUsed) + '。' : ''}2 道题，按答对几道决定接下来怎么练。不能回看原文。</p>
+    ${A.check.map((q, i) => `<div class="mc"><span class="ty">${esc(q.type)}</span><div class="pr">${i+1}. ${esc(q.prompt)}</div>
+      <div class="opts">${q.options.map((o, j) => {
+        let cls = '';
+        if (state.checked){ if (j === q.answer) cls = ' right'; else if (state.picks[i] === j) cls = ' wrong'; }
+        return `<button type="button" class="opt${cls}" data-mc="${i}" data-o="${j}" aria-pressed="${state.picks[i] === j}" ${state.checked ? 'disabled' : ''}><span class="k">${'ABCD'[j]}</span><span>${esc(o)}</span></button>`; }).join('')}</div>
+      ${state.checked ? `<div class="ex">${esc(q.explanation)}</div>` : ''}</div>`).join('')}
+    ${state.checked ? resultHTML(true) : `<div class="row"><button class="btn" type="button" id="submitCheck" ${all ? '' : 'disabled'}>提交</button></div>`}`;
+  }
+  if (state.step === 'branch') return branchHTML();
+  return reviewHTML();
+}
+function resultHTML(withBtn){
+  const m = MODES[state.mode], rec = ['deep','acc','ch'][state.score], r = MODES[rec];
+  return `<div class="result ${m.cls}" style="margin-top:16px"><b>答对 ${state.score} 道 → ④ ${r.name}</b>${state.mode !== rec ? `<p>你换成了「${m.name}」练法。</p>` : ''}<p>${esc(m.tip)}</p>
+    ${withBtn ? `<div class="row" style="margin-top:12px"><button class="btn" type="button" data-go-step="branch">开始练习</button></div>` : ''}</div>`;
+}
+function branchHTML(){
+  const m = MODES[state.mode];
+  const head = state.checked ? resultHTML(false) : `<div class="result ${m.cls}"><b>④ ${m.name}</b><p>还没做检测，先按「${m.name}」展示。${esc(m.tip)}</p></div>`;
+  const switcher = `<div class="modes"><span>换一种练法</span>${Object.keys(MODES).map(k => `<button type="button" data-mode="${k}" aria-pressed="${state.mode === k}">${MODES[k].name}</button>`).join('')}</div>`;
+  let tools = '', extra = '';
+  if (state.mode === 'deep') tools = `<div class="tools">
+      <button class="layer" data-l="basic" aria-pressed="${state.layers.basic}" type="button">基础 · 中文大意</button>
+      <button class="layer" data-l="adv" aria-pressed="${state.layers.adv}" type="button">进阶 · 词和长难句</button>
+      <button class="play${state.speaking ? ' on' : ''}" id="playBtn" type="button"><i></i>${state.speaking ? '停止' : '朗读'}</button></div>`;
+  if (state.mode === 'acc') extra = `<div class="block"><h3>回原文找原句</h3>
+      ${A.questions.map((q, i) => `<div class="q"><div class="pr">${i+1}. ${esc(q.prompt)}</div>
+        ${state.shownAnswers.has(i) ? `<div class="ex"><span class="a">${esc(q.answer)}</span>${esc(q.explanation)}</div>` : `<button type="button" data-q="${i}">在原文中标出答案</button>`}</div>`).join('')}</div>`;
+  if (state.mode === 'ch') {
+    const done = A.paragraphs.every(p => state.heads[p.id] !== undefined);
+    const right = A.paragraphs.filter(p => state.heads[p.id] === A.headings.answers[p.id]).length;
+    extra = `<div class="row">${state.headsChecked ? `<span class="hint" style="margin:0">选对 ${right} / ${A.paragraphs.length} 段</span><button class="btn ghost" type="button" id="resetHeads">重新选</button>` : `<button class="btn" type="button" id="checkHeads" ${done ? '' : 'disabled'}>检查小标题</button><span class="hint" style="margin:0">${esc(A.headings.note)}</span>`}</div>`;
+  }
+  return `${head}${switcher}${tools}${state.mode === 'ch' ? '' : ''}${textHTML(state.mode)}${extra}
+    <div class="block out"><h3>一句话输出</h3>
+      <input id="outIn" type="text" placeholder="${esc(A.output.template)}" autocomplete="off">
+      <div class="ex">范例：${esc(A.output.example)}</div>
+      <button class="btn" id="mkCard" type="button" style="margin-top:10px">生成分享卡</button>
+      <div id="shareSlot"></div></div>
+    <div class="block"><h3>本周小练习</h3><div class="act">${esc(A.action)}</div>
+      <div class="fbk" role="group" aria-label="读后反馈">${['读完了','时间刚好','有点长','有点难','想看下一期'].map(x => `<button type="button" aria-pressed="${state.fb.has(x)}" data-fb="${x}">${x}</button>`).join('')}</div></div>
+    <div class="row"><button class="btn" type="button" data-go-step="review">⑤ 去复习</button></div>`;
+}
+function reviewItems(){
+  const items = [];
+  Object.values(state.words).forEach(w => items.push({kind:'word', ...w}));
+  Object.entries(state.sents).forEach(([k, s]) => items.push({kind:'sent', ...s}));
+  if (items.length) return {items, sample:false};
+  return {sample:true, items: A.vocab.slice(0, 3).map(v => ({kind:'word', lemma:v.lemma, word:v.word, meaning:v.meaning, phonetic:v.phonetic, sentence:sentenceOf(A.paragraphs.find(p => p.id === v.paragraphId).en, v.word)}))};
+}
+function reviewHTML(){
+  const {items, sample} = reviewItems(); const i = state.rv.i % items.length, it = items[i], f = state.rv.flipped;
+  let face;
+  if (it.kind === 'word'){
+    const word = it.word || it.lemma;
+    const blanked = esc(it.sentence).replace(new RegExp('\\b' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b'), '<span class="blank">&nbsp;</span>');
+    face = f ? `<span class="no">单词 · ${i+1}/${items.length}</span><span class="big">${esc(it.lemma)} <span class="sm">${esc(it.phonetic || '')}</span></span><span class="mid">${esc(it.sentence)}</span><span class="zh">${esc(it.meaning)}</span>`
+             : `<span class="no">单词 · ${i+1}/${items.length}</span><span class="mid">${blanked}</span><span class="zh">提示：${esc(it.meaning.split('（')[0])}</span><span class="sm">想出空格里的词，再点卡片核对</span>`;
+  } else {
+    face = f ? `<span class="no">句子 · ${i+1}/${items.length}</span><span class="mid">${esc(it.text)}</span><span class="zh">${esc(it.translation)}</span>`
+             : `<span class="no">句子 · ${i+1}/${items.length}</span><span class="zh" style="font-size:17px;line-height:1.6">${esc(it.translation)}</span><span class="sm">先试着用英文说出原句，再点卡片核对</span>`;
+  }
+  return `<div class="lab">⑤ 复习 · 第二天</div>
+    <p class="hint" style="margin-top:0">收藏的词和句，第二天带着原来的句子推回来。demo 里可以直接预览。${sample ? '<br>你还没收藏，下面先用本期的词做示例。' : ''}</p>
+    <div class="card" id="rvCard" tabindex="0" role="button" aria-label="翻转卡片" style="margin-top:12px">${face}</div>
+    <div class="grade">
+      <button type="button" data-grade="0">忘了<small>明天再来</small></button>
+      <button type="button" data-grade="1">模糊<small>明天再来</small></button>
+      <button type="button" data-grade="2">记得<small>升一级</small></button>
+    </div>
+    <p class="hint">复习间隔：1 / 2 / 4 / 7 / 15 / 30 天，记得就升一级，忘了回到第 1 天。</p>`;
+}
+function bindRead(el){
+  el.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => goStep(b.dataset.step)));
+  el.querySelectorAll('[data-go-step]').forEach(b => b.addEventListener('click', () => goStep(b.dataset.goStep)));
+  if (state.step === 'raw') startTimer();
+  const dr = $('#doneRaw'); if (dr) dr.addEventListener('click', () => { state.rawUsed = (Date.now() - state.rawStart) / 1000; goStep('check'); });
+  el.querySelectorAll('[data-mc]').forEach(b => b.addEventListener('click', () => { state.picks[+b.dataset.mc] = +b.dataset.o; renderRead(); }));
+  const sc = $('#submitCheck'); if (sc) sc.addEventListener('click', () => {
+    state.score = A.check.filter((q, i) => state.picks[i] === q.answer).length;
+    state.mode = ['deep','acc','ch'][state.score]; state.checked = true; renderRead();
+    const r = el.querySelector('.result'); if (r) r.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  el.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { state.mode = b.dataset.mode; renderRead(); }));
+  el.querySelectorAll('.layer').forEach(b => b.addEventListener('click', () => { const k = b.dataset.l; state.layers[k] = !state.layers[k]; renderRead(); }));
+  el.querySelectorAll('.w').forEach(w => { const open = () => wordSheet(+w.dataset.v); w.addEventListener('click', e => { e.stopPropagation(); open(); }); w.addEventListener('keydown', e => { if (e.key === 'Enter') open(); }); });
+  el.querySelectorAll('.ls').forEach(s => { const tog = () => { const i = +s.dataset.s; state.openSentences.has(i) ? state.openSentences.delete(i) : state.openSentences.add(i); renderRead(); }; s.addEventListener('click', e => { if (e.target.closest('.w')) return; tog(); }); s.addEventListener('keydown', e => { if (e.key === 'Enter') tog(); }); });
+  el.querySelectorAll('[data-save-s]').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.saveS, s = A.sentences[i], k = 's' + i;
+    if (state.sents[k]) { delete state.sents[k]; toast('已取消收藏'); } else { state.sents[k] = {text:s.text, translation:s.translation, articleId:A.id, addedAt:new Date().toISOString().slice(0,10), stage:0}; toast('已收藏，明天会用中文提示你把它推回来'); }
+    store.set('hkp.sents', state.sents); updateCount(); renderRead();
+  }));
+  el.querySelectorAll('[data-q]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.q; state.shownAnswers.add(i); renderRead(); const t = document.querySelector(`[data-a="${i}"]`); if (t) t.scrollIntoView({behavior:'smooth', block:'center'}); }));
+  el.querySelectorAll('[data-h]').forEach(s => s.addEventListener('change', () => { const v = s.value; if (v === '') delete state.heads[s.dataset.h]; else state.heads[s.dataset.h] = +v; state.headsChecked = false; renderRead(); const n = document.getElementById('h-' + s.dataset.h); if (n) n.focus(); }));
+  const ch = $('#checkHeads'); if (ch) ch.addEventListener('click', () => { state.headsChecked = true; renderRead(); });
+  const rh = $('#resetHeads'); if (rh) rh.addEventListener('click', () => { state.heads = {}; state.headsChecked = false; renderRead(); });
+  el.querySelectorAll('[data-fb]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.fb; state.fb.has(k) ? state.fb.delete(k) : state.fb.add(k); b.setAttribute('aria-pressed', String(state.fb.has(k))); }));
+  const pb = $('#playBtn'); if (pb) pb.addEventListener('click', toggleSpeak);
+  const mk = $('#mkCard'); if (mk) mk.addEventListener('click', () => {
+    const v = ($('#outIn').value || '').trim() || A.output.example;
+    $('#shareSlot').innerHTML = `<div class="share"><div class="q1">${esc(v)}</div><div class="ft"><span>How to Know a Person · 第 1 期</span><span>Close Reading</span></div></div>`;
+  });
+  const rc = $('#rvCard'); if (rc){ const flip = () => { state.rv.flipped = !state.rv.flipped; renderRead(); }; rc.addEventListener('click', flip); rc.addEventListener('keydown', e => { if (e.key === 'Enter') flip(); }); }
+  el.querySelectorAll('[data-grade]').forEach(b => b.addEventListener('click', () => {
+    const g = +b.dataset.grade, {items, sample} = reviewItems(), it = items[state.rv.i % items.length];
+    let stage = it.stage || 0; stage = g === 2 ? Math.min(stage + 1, 6) : (g === 0 ? 0 : stage);
+    if (!sample){ const bag = it.kind === 'word' ? state.words : state.sents; const key = it.kind === 'word' ? it.lemma : Object.keys(state.sents).find(k => state.sents[k].text === it.text); if (bag[key]) bag[key].stage = stage; store.set('hkp.words', state.words); store.set('hkp.sents', state.sents); }
+    toast(stage >= 6 ? '已掌握' : '下次复习：' + INTERVALS[stage] + ' 天后');
+    state.rv.i = (state.rv.i + 1) % items.length; state.rv.flipped = false; renderRead();
+  }));
+}
+
+/* ---------- timer ---------- */
+function startTimer(){
+  if (!state.rawStart) state.rawStart = Date.now();
+  stopTimer();
+  const upd = () => { const left = A.rawReadSeconds - (Date.now() - state.rawStart) / 1000; const t = $('#timerTxt'), bar = $('#timerBar'); if (!t) return; t.textContent = left > 0 ? fmt(left) : '时间到'; if (left <= 0 && bar){ bar.classList.add('over'); bar.querySelector('span').textContent = '读到哪算哪，直接去检测'; } };
+  upd(); state.tick = setInterval(upd, 1000);
+}
+function stopTimer(){ if (state.tick){ clearInterval(state.tick); state.tick = null; } }
+
+/* ---------- speech ---------- */
+function toggleSpeak(){
+  const syn = window.speechSynthesis;
+  if (!syn || typeof SpeechSynthesisUtterance === 'undefined'){ toast('这个浏览器不支持朗读'); return; }
+  if (state.speaking){ syn.cancel(); state.speaking = false; clearSpeaking(); renderPlay(); return; }
+  state.speaking = true; renderPlay();
+  const voices = syn.getVoices(); const voice = voices.find(v => /en[-_]US/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang));
+  A.paragraphs.forEach((p, i) => {
+    const u = new SpeechSynthesisUtterance(p.en); u.lang = 'en-US'; u.rate = 0.92; if (voice) u.voice = voice;
+    u.onstart = () => { clearSpeaking(); const el = document.getElementById('para-' + p.id); if (el){ el.classList.add('speaking'); el.scrollIntoView({behavior:'smooth', block:'center'}); } };
+    if (i === A.paragraphs.length - 1) u.onend = () => { state.speaking = false; clearSpeaking(); renderPlay(); };
+    syn.speak(u);
+  });
+}
+function clearSpeaking(){ document.querySelectorAll('.para.speaking').forEach(e => e.classList.remove('speaking')); }
+function renderPlay(){ const b = $('#playBtn'); if (!b) return; b.classList.toggle('on', state.speaking); b.innerHTML = `<i></i>${state.speaking ? '停止' : '朗读'}`; }
+function speakWord(w){ try{ const u = new SpeechSynthesisUtterance(w); u.lang = 'en-US'; u.rate = .85; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){ toast('这个浏览器不支持朗读'); } }
+
+/* ---------- sheets ---------- */
+function closeLayer(){ $('#layer').innerHTML = ''; }
+function openLayer(inner){
+  $('#layer').innerHTML = `<div class="scrim" data-close></div><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${inner}</div>`;
+  $('#layer [data-close]').addEventListener('click', closeLayer);
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLayer(); });
+function sentenceOf(text, word){
+  const parts = text.match(/[^.!?]+[.!?]+/g) || [text];
+  return (parts.find(s => new RegExp('\\b' + word + '\\b').test(s)) || text).trim();
+}
+function wordSheet(i){
+  const v = A.vocab[i], p = A.paragraphs.find(x => x.id === v.paragraphId), prev = state.words[v.lemma];
+  openLayer(`
+    <div><span class="wd">${esc(v.lemma)}</span><span class="ph">${esc(v.phonetic)}</span></div>
+    <div class="mn">${esc(v.meaning)}</div>
+    <span class="lv">${esc(v.level)}</span>
+    <div class="ctx">${esc(sentenceOf(p.en, v.word))}</div>
+    <div class="last">${prev ? `上次遇到（${esc(prev.addedAt)} 收藏）：<q>${esc(prev.sentence)}</q>` : '第一次遇到这个词。收藏后，下次在别的文章里再碰到它，这里会显示上次那句话。'}</div>
+    <div class="rowb">
+      <button type="button" id="sayW">发音</button>
+      <button type="button" class="pri" id="saveW">${prev ? '已收藏 · 移除' : '＋ 收藏这个词'}</button>
+    </div>`);
+  $('#sayW').addEventListener('click', () => speakWord(v.lemma));
+  $('#saveW').addEventListener('click', () => {
+    if (state.words[v.lemma]) { delete state.words[v.lemma]; toast('已移除'); }
+    else { state.words[v.lemma] = {lemma:v.lemma, word:v.word, meaning:v.meaning, phonetic:v.phonetic, sentence:sentenceOf(p.en, v.word), articleId:A.id, addedAt:new Date().toISOString().slice(0,10), stage:0}; toast('已收藏，明天带着原句复习'); }
+    store.set('hkp.words', state.words); updateCount(); closeLayer(); renderRead();
+  });
+}
+$('#wbBtn').addEventListener('click', () => {
+  const ws = Object.values(state.words), ss = Object.values(state.sents);
+  openLayer(`<div class="wd" style="font-size:22px">收藏</div>
+    ${ws.length + ss.length ? `<ul class="wl">${ws.map(w => `<li><span class="e">${esc(w.lemma)}</span><span class="m">${esc(w.meaning.split('（')[0])}</span></li>`).join('')}${ss.map(s => `<li><span class="e" style="font-size:14px">${esc(s.text)}</span></li>`).join('')}</ul>`
+      : `<p class="hint">还没有收藏。练习里选「精读补上」，点虚线单词或蓝底句子就能收藏。</p>`}
+    <p class="hint">demo 的收藏只存在这台设备的浏览器里。</p>
+    <div class="rowb"><button type="button" data-close2>关闭</button><button type="button" class="pri" data-rv>去复习</button></div>`);
+  $('#layer [data-close2]').addEventListener('click', closeLayer);
+  $('#layer [data-rv]').addEventListener('click', () => { closeLayer(); show('read'); goStep('review'); });
+});
+
+renderSeries(); renderRead(); updateCount();
+})();
+</script>
+</body></html>
