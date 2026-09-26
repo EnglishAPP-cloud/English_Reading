@@ -21,6 +21,8 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "output": "single",
+      "lang": "zh-CN",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [

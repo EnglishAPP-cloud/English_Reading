@@ -29,14 +29,20 @@ npm start            # 先自动跑 npm run content，再启动开发服务器�
 npm run content      # 校验 content/ 下的 JSON 并生成 content/index.ts
 npm test             # 跑单元测试
 npm run typecheck    # TypeScript 类型检查
+npm run web          # 在电脑浏览器里打开网页版（开发模式）
+npm run build:web    # 打包网页版到 dist/（发布由 GitHub 自动做，一般不用手动跑）
 ```
 
-推到 GitHub 后，`.github/workflows/ci.yml` 会自动跑同样的检查（外加"新增的 JSON 有没有连同 `content/index.ts` 一起提交"），结果显示在 PR 上。
+推到 GitHub 后，`.github/workflows/ci.yml` 会自动跑同样的检查（外加"新增的 JSON 有没有连同 `content/index.ts` 一起提交"），结果显示在 PR 上；
+`.github/workflows/deploy-web.yml` 会自动打包网页版发布到 https://englishapp-cloud.github.io/English_Reading/ 。
 
 ## 目录结构
 
 ```
 .github/workflows/ci.yml  GitHub 自动检查（内容校验、index.ts 已提交、单元测试、类型检查）
+.github/workflows/deploy-web.yml  打包网页版并发布到 GitHub Pages（gh-pages 分支）
+app.config.js             打包网页版时补上网址前缀 baseUrl（读环境变量 WEB_BASE_URL），平时原样用 app.json
+public/index.html         网页版的页面模板（背景色、电脑上居中显示手机宽度一栏）
 app/                      只放路由和页面拼装，不写业务逻辑
   _layout.tsx             根布局：加载 Lora 字体、等本地数据读回、Stack 导航
   (tabs)/_layout.tsx      底部三个标签：今日 / 知识库 / 单词；右上角"设置"
@@ -223,6 +229,7 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 14. 允许装配套包（2026-09-26 确认）：expo-router 需要的 `react-dom`、`react-native-reanimated`、`react-native-worklets`、
     `react-native-gesture-handler`；jest-expo 需要的 `jest`、`@types/jest`、`@react-native/jest-preset`；`@types/node`。原因见"技术选择记录"。
 15. 加 GitHub Actions 自动检查（2026-09-26 确认）。
+16. 做网页版给别人看：加 `react-native-web`，发布到 GitHub Pages（2026-09-26 确认）。
 
 ## 技术选择记录
 
@@ -265,8 +272,15 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 - 需要确认的操作（重置、清空、取消收藏）用 `ConfirmButton` 点两次，没用系统弹窗（各平台表现一致，也方便测试）。
 - 标签栏高度 = 内容区（`space` 组合出的常量）+ 手机底部安全区；标签文字用导航库默认字号（改大会被截）。
 - 键盘：`Screen` 的 ScrollView 开了 `automaticallyAdjustKeyboardInsets`（iOS），底部输入框不会被键盘挡住。
-- 在电脑浏览器里预览（可选，不是正式支持的平台）：`npm i --no-save react-native-web@~0.21.0` 后 `npx expo start --web`。
-  `--no-save` 不改 package.json；AsyncStorage 在网页上用 localStorage。
+- **网页版**（用来给别人看，主要平台仍是手机 APP）：`react-native-web` 把同一套代码跑在浏览器里，AsyncStorage 在网页上用 localStorage、
+  朗读用浏览器自带语音。`web.output` 是 `single`（只有一个 index.html，页面由 APP 按网址自己显示）。
+  - 发布：`deploy-web.yml` 在 main 和当前开发分支有推送时运行：`npm ci` → `WEB_BASE_URL=/<仓库名> npm run build:web`
+    → 复制 `index.html` 为 `404.html`（直接打开 `/article/xxx` 这类网址时 GitHub Pages 返回它，APP 再按网址显示）
+    → 加 `.nojekyll`（否则 `_expo`、`node_modules` 目录被 Jekyll 忽略）→ 整个覆盖推到 `gh-pages` 分支。
+    仓库 Settings → Pages 选 "Deploy from a branch / gh-pages / (root)"（只需设一次）。
+  - baseUrl 只在打包网页时通过 `app.config.js` 加上：写进 app.json 会连带改掉开发服务器给手机的地址。
+  - 网页版是正式包（`__DEV__` 为 false）：设置页的开发工具（模拟日期、预览未发布、清空数据）不显示。
+  - 电脑宽屏上由 `public/index.html` 的 CSS 把 APP 限制在居中 480px 一栏；底部弹出卡片（Modal）仍是整屏宽。
 - Lora 字体在 `app/_layout.tsx` 加载完才渲染页面；Lora 的粗细靠字体名区分（安卓不认 fontWeight）。
 
 ## 验收自测记录（阶段 5，2026-09-25）
@@ -298,4 +312,11 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 - 第二轮审查（针对上面的修改）又修了：备份失败时不覆盖原数据、读取失败给提示、倒计时写存储时不跳、
   "读完了"算上零头、倒计时只重渲染自己、已完成文章重开不闪旧步骤、期号错误不重复报、复习完成判断移到 logic。
 - 浏览器验收 39/39、补测 28/28 通过；连续 25 秒采样倒计时，经过两次写存储无跳动。
+
+### 网页版（2026-09-26）
+
+- 用正式包（`npm run build:web`，带 `/English_Reading` 前缀）加一个模拟 GitHub Pages 的本地服务器（子路径 + 404.html 兜底）重跑上面两套浏览器验收：
+  功能项全部通过；控制台只有"直接打开深层网址时 404.html 兜底"产生的 404 记录（页面本身正常显示），没有其他资源缺失。
+- 电脑宽屏居中一栏、手机宽度显示正常；站内跳转的网址都带前缀；干净 clone 后 `npm ci` + 打包结果和本地一致。
+- 不设 `WEB_BASE_URL` 时 `expo config` 没有 baseUrl；iOS / 安卓包照常打包。
 
