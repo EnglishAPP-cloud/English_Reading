@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+  网页版的页面模板（只有网页版用，手机 APP 不用）。在 Expo 默认模板上加了两处：
+  1. 背景色和 APP 一致（#EFE9DE = src/theme/colors.ts 的背景色）
+  2. 电脑宽屏上把 APP 限制在居中的手机宽度一栏，不铺满整个屏幕
+-->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>英语精读</title>
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+        margin: 0;
+        background-color: #efe9de;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+      /* 电脑上：居中显示一栏手机宽度 */
+      @media (min-width: 600px) {
+        #root {
+          max-width: 480px;
+          margin: 0 auto;
+          box-shadow: 0 0 0 1px rgba(27, 33, 48, 0.1);
+        }
+      }
+    </style>
+  <link rel="icon" href="/English_Reading/favicon.ico"/></head>
+
+  <body>
+    <noscript>需要打开浏览器的 JavaScript 才能使用。</noscript>
+    <div id="root"></div>
+  <script src="/English_Reading/_expo/static/js/web/entry-195850fc6f18a059818f1e4c2b50f804.js" defer></script>
+</body>
+</html>
