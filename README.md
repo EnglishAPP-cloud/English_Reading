@@ -49,6 +49,9 @@ npm start
 | `npm test` | 跑单元测试（业务逻辑、内容校验、store） |
 | `npm run typecheck` | TypeScript 类型检查 |
 
+推到 GitHub 后会自动跑同样的检查，另外还会看新加了 JSON 文件后有没有把 `content/index.ts` 一起提交。
+结果显示在 PR 页面：绿勾 = 通过；红叉 = 点进去看哪一步没过，报错和本地运行时一样。
+
 ## 四、怎么加一篇新文章
 
 1. 复制 `content/articles/hkp-01.json`，改名为新的 id，比如 `hkp-02.json`。

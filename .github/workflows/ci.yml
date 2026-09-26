@@ -1,0 +1,48 @@
+# 自动检查：每次提 PR / 往 PR 推代码、以及合进 main 时运行。
+# 和本地的 npm run content / npm test / npm run typecheck 是同一套检查。
+name: 检查
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 同一个分支连续推送时，只保留最新一次的检查
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: 内容校验 · 单元测试 · 类型检查
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 内容校验
+        run: npm run content
+
+      # 新增 / 删除了 JSON 文件却忘了提交重新生成的 content/index.ts，APP 里就不会有这篇
+      - name: content/index.ts 已提交
+        run: |
+          if ! git diff --quiet -- content/index.ts; then
+            echo "::error file=content/index.ts::content/index.ts 和 content/ 里的 JSON 对不上：请在本地跑 npm run content，把生成的 content/index.ts 一起提交"
+            git diff --stat -- content/index.ts
+            exit 1
+          fi
+
+      - name: 单元测试
+        run: npm test -- --ci
+
+      - name: 类型检查
+        run: npm run typecheck

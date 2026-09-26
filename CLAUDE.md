@@ -31,9 +31,12 @@ npm test             # 跑单元测试
 npm run typecheck    # TypeScript 类型检查
 ```
 
+推到 GitHub 后，`.github/workflows/ci.yml` 会自动跑同样的检查（外加"新增的 JSON 有没有连同 `content/index.ts` 一起提交"），结果显示在 PR 上。
+
 ## 目录结构
 
 ```
+.github/workflows/ci.yml  GitHub 自动检查（内容校验、index.ts 已提交、单元测试、类型检查）
 app/                      只放路由和页面拼装，不写业务逻辑
   _layout.tsx             根布局：加载 Lora 字体、等本地数据读回、Stack 导航
   (tabs)/_layout.tsx      底部三个标签：今日 / 知识库 / 单词；右上角"设置"
@@ -217,6 +220,9 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 11. 重置清空该篇全部进度（含完成），不动收藏和打卡。
 12. 开发工具：模拟日期、清空数据。
 13. 允许开发依赖 `tsx`（跑 TypeScript 写的内容脚本）。
+14. 允许装配套包（2026-09-26 确认）：expo-router 需要的 `react-dom`、`react-native-reanimated`、`react-native-worklets`、
+    `react-native-gesture-handler`；jest-expo 需要的 `jest`、`@types/jest`、`@react-native/jest-preset`；`@types/node`。原因见"技术选择记录"。
+15. 加 GitHub Actions 自动检查（2026-09-26 确认）。
 
 ## 技术选择记录
 
@@ -229,6 +235,8 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 - 标签栏图标暂时用单个汉字（今 / 库 / 词），没有引入图标库；等设计稿来了再换。
 - 底部卡片、下拉框用 React Native 自带的 `Modal` 实现，不引入 UI 库。
 - 内容脚本用 `tsx` 运行（`scripts/content.ts`），和 APP 共用 `src/content/schema.ts` / `validate.ts`，规则只有一份。
+- GitHub 自动检查（`.github/workflows/ci.yml`）：Node 22、`npm ci`，依次跑内容校验、确认 `content/index.ts` 重新生成后没有变化
+  （变了说明新增 / 删除了 JSON 文件却忘了提交它）、单元测试、类型检查。PR 和合进 main 时运行；同一分支连续推送只保留最新一次。
 - zod 4：报错用中文（`z.locales.zhCN()`），并开了 `jitless`（不用 `new Function`，避免手机 JS 引擎不支持）。
 - `LocalContentRepository` 在 APP 启动时再用 zod 解析一遍内容：正常情况下脚本已拦住错误；万一有人跳过脚本，会直接报错。
 - 文章 schema 校验失败时不做交叉检查（结构都不对，没法查对应关系），报错末尾会提示"改好后重跑会继续查"。
@@ -268,7 +276,7 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 
 | 验收项 | 结果 |
 |---|---|
-| `npm start` 后 Expo Go 扫码能打开，三个标签能切换 | `npm start` 会先跑内容校验再启动 Metro ✓；iOS / 安卓包打包成功 ✓；浏览器里三个标签切换正常 ✓；**真机扫码需要人工确认** |
+| `npm start` 后 Expo Go 扫码能打开，三个标签能切换 | `npm start` 会先跑内容校验再启动 Metro ✓；iOS / 安卓包打包成功 ✓；浏览器里三个标签切换正常 ✓；2026-09-26 iPhone 用 Expo Go 扫码打开，今日页显示正常 ✓ |
 | 字段写错的 JSON，`npm run content` 报出文件和字段 | ✓（缺字段、拼错字段名、词不在段落里、下标越界等都能指到 `文件 · 字段路径`） |
 | 第 1 篇从定向走到练习；答对 0 / 1 / 2 道分别进入精读补上 / 读准 / 挑战；三种练法互相切换 | ✓ |
 | 中途退出再打开，停在原来的步骤 | ✓（裸读中、检测答到一半、练习中切换练法后分别刷新页面，状态都保留） |
