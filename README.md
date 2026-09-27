@@ -109,15 +109,11 @@ npm start
 
 对方用手机浏览器（微信里点开也行）打开就能用，不用装任何东西。电脑上打开会在屏幕中间显示成手机宽度。
 
-**怎么更新**：代码推到 GitHub 后会自动打包发布，一两分钟后刷新网页就是新的。
-进度在仓库的 Actions 页面看"发布网页版"。
+**怎么更新**：代码合进 `main` 后会自动打包发布，一两分钟后刷新网页就是新的。
+进度在仓库的 Actions 页面看"发布网页版"和"pages build and deployment"。
+仓库里的 `gh-pages` 分支只放打包好的网页文件，由自动发布整个覆盖，不用管它、也不要手改。
 
-**第一次要做的设置（只做一次）**：
-
-1. 等 Actions 里"发布网页版"第一次跑完（绿勾），仓库里会多出一个 `gh-pages` 分支，里面只有打包好的网页文件，不用管它。
-2. 打开仓库 **Settings → Pages**。
-3. "Build and deployment" 下面：Source 选 **Deploy from a branch**；Branch 选 **gh-pages**，右边文件夹选 **/ (root)**，点 **Save**。
-4. 等一两分钟，打开上面的网址。
+**网址打不开（404）时**：打开仓库 **Settings → Pages**，确认 Source 是 **Deploy from a branch**、Branch 是 **gh-pages** / **/ (root)**（已经设好了，一般不用动）。
 
 **和手机 APP 的区别**：
 

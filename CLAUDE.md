@@ -274,10 +274,12 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
 - 键盘：`Screen` 的 ScrollView 开了 `automaticallyAdjustKeyboardInsets`（iOS），底部输入框不会被键盘挡住。
 - **网页版**（用来给别人看，主要平台仍是手机 APP）：`react-native-web` 把同一套代码跑在浏览器里，AsyncStorage 在网页上用 localStorage、
   朗读用浏览器自带语音。`web.output` 是 `single`（只有一个 index.html，页面由 APP 按网址自己显示）。
-  - 发布：`deploy-web.yml` 在 main 和当前开发分支有推送时运行：`npm ci` → `WEB_BASE_URL=/<仓库名> npm run build:web`
+  - 发布：`deploy-web.yml` 在 main 有推送时运行（也可以在 Actions 页面手动运行）：`npm ci` → `WEB_BASE_URL=/<仓库名> npm run build:web`
     → 复制 `index.html` 为 `404.html`（直接打开 `/article/xxx` 这类网址时 GitHub Pages 返回它，APP 再按网址显示）
     → 加 `.nojekyll`（否则 `_expo`、`node_modules` 目录被 Jekyll 忽略）→ 整个覆盖推到 `gh-pages` 分支。
-    仓库 Settings → Pages 选 "Deploy from a branch / gh-pages / (root)"（只需设一次）。
+    仓库 Settings → Pages 是 "Deploy from a branch / gh-pages / (root)"（2026-09-27 已开启）。
+    注意：机器人（GITHUB_TOKEN）推 gh-pages 不会自动开启 Pages；第一次是由人推了一次 gh-pages，GitHub 才自动开启并设成这个分支。
+    开启之后机器人的推送会正常触发 GitHub 自带的 "pages build and deployment"。
   - baseUrl 只在打包网页时通过 `app.config.js` 加上：写进 app.json 会连带改掉开发服务器给手机的地址。
   - 网页版是正式包（`__DEV__` 为 false）：设置页的开发工具（模拟日期、预览未发布、清空数据）不显示。
   - 电脑宽屏上由 `public/index.html` 的 CSS 把 APP 限制在居中 480px 一栏；底部弹出卡片（Modal）仍是整屏宽。
@@ -319,4 +321,6 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
   功能项全部通过；控制台只有"直接打开深层网址时 404.html 兜底"产生的 404 记录（页面本身正常显示），没有其他资源缺失。
 - 电脑宽屏居中一栏、手机宽度显示正常；站内跳转的网址都带前缀；干净 clone 后 `npm ci` + 打包结果和本地一致。
 - 不设 `WEB_BASE_URL` 时 `expo config` 没有 baseUrl；iOS / 安卓包照常打包。
+- 2026-09-27 GitHub Pages 开启，部署状态 success，网址 https://englishapp-cloud.github.io/English_Reading/
+  （云端开发环境访问不了 github.io，线上页面要在自己手机 / 电脑上打开确认；部署的文件和上面测过的包一致）。
 

@@ -2,13 +2,13 @@
 # 网址：https://<用户名>.github.io/<仓库名>/
 #
 # 做法：打包结果推到 gh-pages 分支（只放打包好的网页文件，每次整个覆盖），
-# GitHub Pages 从这个分支提供网页。第一次要在仓库 Settings → Pages 里选一次 gh-pages 分支（见 README）。
+# GitHub Pages 从这个分支提供网页（仓库 Settings → Pages：Deploy from a branch / gh-pages / (root)，已设好）。
 name: 发布网页版
 
 on:
   push:
-    # PR 合并前也从开发分支发布，方便先拿链接给别人看；以后以 main 为准
-    branches: [main, claude/admiring-hopper-nkjnuh]
+    # 网页版 = main 上的版本
+    branches: [main]
   workflow_dispatch:
 
 permissions:
