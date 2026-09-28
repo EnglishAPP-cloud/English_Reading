@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>资料库 4 · 分区与饼图</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #9EC0C0; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 44px 0 124px 0">
+
+<div style="padding: 0 12px 0 24px; display: flex; align-items: center; justify-content: space-between">
+<h1 style="margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 30px; line-height: 44px; letter-spacing: 2px">资料库</h1>
+<button type="button" aria-label="搜索" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
+</button>
+</div>
+
+<div style="padding: 14px 16px 0 16px; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{sections}}" as="sec" hint-placeholder-count="4">
+<div style="box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 18px; box-shadow: 4px 4px 0 #1C1C1C; overflow: hidden">
+<button type="button" aria-expanded="{{sec.expanded}}" onClick="{{sec.toggle}}" style="width: 100%; height: 52px; box-sizing: border-box; padding: 0 14px 0 16px; border: 0; background: transparent; display: flex; align-items: center; gap: 10px; font-family: inherit; color: #1C1C1C; cursor: pointer; text-align: left">
+<span aria-hidden="true" style="width: 14px; height: 14px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 4px; background: {{sec.color}}"></span>
+<span style="flex-grow: 1; font-size: 16px; line-height: 22px; font-weight: 700">{{sec.label}}</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 14px; color: #56524D">{{sec.count}}</span>
+<sc-if value="{{sec.open}}" hint-placeholder-val="{{true}}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
+</sc-if>
+<sc-if value="{{sec.closed}}" hint-placeholder-val="{{false}}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+</sc-if>
+</button>
+<sc-if value="{{sec.open}}" hint-placeholder-val="{{true}}">
+<div style="border-top: 1px solid #E6E1D6; padding: 4px 0">
+<sc-for list="{{sec.items}}" as="it" hint-placeholder-count="3">
+<a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 16px; text-decoration: none; color: #1C1C1C">
+<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" style="flex-shrink: 0"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#1C1C1C" stroke-width="8.5" stroke-dasharray="{{it.dash}}" transform="rotate(-90 10 10)"></circle></svg>
+<span style="flex-grow: 1; min-width: 0; font-family: Newsreader, 'Noto Sans SC', serif; font-size: 16px; line-height: 21px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{it.title}}</span>
+<span style="flex-shrink: 0; font-size: 12px; line-height: 16px; color: #56524D">{{it.meta}}</span>
+</a>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+
+</div>
+
+<nav aria-label="主导航" style="position: absolute; left: 101px; bottom: 30px; display: flex; gap: 4px; padding: 6px; border-radius: 28px; background: #1C1C1C; box-shadow: 0 10px 24px rgba(28, 28, 28, 0.28)">
+<a href="GreetB.dc.html" aria-label="今日" style="width: 56px; height: 44px; border-radius: 22px; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"></rect><path d="M7 10h6"></path><path d="M7 14h10"></path></svg>
+</a>
+<a href="#" aria-label="资料库" aria-current="page" style="width: 56px; height: 44px; border-radius: 22px; background: #9EC0C0; color: #1C1C1C; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+</a>
+<button type="button" aria-label="我的" style="width: 56px; height: 44px; border: 0; padding: 0; border-radius: 22px; background: transparent; color: #D9D4C9; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.5 18.5c1.3-2.2 3.3-3.3 5.5-3.3s4.2 1.1 5.5 3.3"></path></svg>
+</button>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { closed: {} };
+  }
+
+  renderVals() {
+    const s = this.state || {};
+    const closed = s.closed || {};
+    const C = 2 * Math.PI * 4.25;
+    const SECTIONS = [
+      { id: 'news', label: '资讯', color: '#925F50', items: [
+        { title: 'Why Every Company Suddenly Wants an AI Agent', meta: '六级', p: 0.6 },
+        { title: 'The Science of Procrastination', meta: '四级', p: 0.3 },
+        { title: 'What a Four-Day Week Really Changes', meta: '四级', p: 1 }
+      ] },
+      { id: 'pro', label: '专业领域', color: '#2F5E60', items: [
+        { title: 'Opportunity Cost, Explained', meta: '经济学', p: 1 },
+        { title: 'The Spotlight Effect', meta: '心理学', p: 0.4 },
+        { title: 'How Neural Networks Learn', meta: '计算机', p: 0 }
+      ] },
+      { id: 'book', label: '拆书', color: '#1C1C1C', items: [
+        { title: 'How to Know a Person', meta: 'D. Brooks', p: 0.25 },
+        { title: 'Thinking, Fast and Slow', meta: 'D. Kahneman', p: 0.5 },
+        { title: 'Atomic Habits', meta: 'J. Clear', p: 1 }
+      ] },
+      { id: 'pod', label: '播客', color: '#D89585', items: [
+        { title: '资讯快听 · AI Agents', meta: '12 分钟', p: 0.7 },
+        { title: '拆书播客 · How to Know a Person', meta: '24 分钟', p: 0 }
+      ] }
+    ];
+    const sections = SECTIONS.map((sec) => {
+      const open = !closed[sec.id];
+      return {
+        label: sec.label,
+        color: sec.color,
+        count: sec.items.length,
+        open: open,
+        closed: !open,
+        expanded: open ? 'true' : 'false',
+        toggle: () => {
+          const next = Object.assign({}, closed);
+          next[sec.id] = open;
+          this.setState({ closed: next });
+        },
+        items: sec.items.map((it) => ({
+          title: it.title,
+          meta: it.meta,
+          dash: (it.p * C).toFixed(2) + ' ' + C.toFixed(2)
+        }))
+      };
+    });
+    return { sections: sections };
+  }
+}
+</script>
+</body>
+</html>

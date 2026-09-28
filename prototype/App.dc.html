@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Underline · 可点原型</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #1C1C1C; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div aria-hidden="{{S.today.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.today.x}}); visibility: {{S.today.vis}}; transition: {{S.today.tr}}; z-index: {{S.today.z}}">
+<dc-import name="UnderlineHome" variant="b" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.library.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.library.x}}); visibility: {{S.library.vis}}; transition: {{S.library.tr}}; z-index: {{S.library.z}}">
+<dc-import name="LibV6" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.me.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.me.x}}); visibility: {{S.me.vis}}; transition: {{S.me.tr}}; z-index: {{S.me.z}}">
+<dc-import name="Me" variant="d" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.book.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.book.x}}); visibility: {{S.book.vis}}; transition: {{S.book.tr}}; z-index: {{S.book.z}}; box-shadow: {{S.book.sh}}">
+<dc-import name="Book" variant="b" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.intro.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.intro.x}}); visibility: {{S.intro.vis}}; transition: {{S.intro.tr}}; z-index: {{S.intro.z}}; box-shadow: {{S.intro.sh}}">
+<dc-import name="ArticleIntro" variant="photo" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.reader.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.reader.x}}); visibility: {{S.reader.vis}}; transition: {{S.reader.tr}}; z-index: {{S.reader.z}}; box-shadow: {{S.reader.sh}}">
+<dc-import name="ReadD" paper="pure" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.settings.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.settings.x}}); visibility: {{S.settings.vis}}; transition: {{S.settings.tr}}; z-index: {{S.settings.z}}; box-shadow: {{S.settings.sh}}">
+<dc-import name="Settings" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.vocab.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.vocab.x}}); visibility: {{S.vocab.vis}}; transition: {{S.vocab.tr}}; z-index: {{S.vocab.z}}; box-shadow: {{S.vocab.sh}}">
+<dc-import name="Vocab" variant="b" nav="{{nav}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div aria-hidden="{{S.highlights.hidden}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; transform: translateX({{S.highlights.x}}); visibility: {{S.highlights.vis}}; transition: {{S.highlights.tr}}; z-index: {{S.highlights.z}}; box-shadow: {{S.highlights.sh}}">
+<dc-import name="Highlights" nav="{{nav}}" extra="{{extraHL}}" hint-size="390px,844px"></dc-import>
+</div>
+
+<div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; z-index: 200; pointer-events: none">
+<dc-import name="Player" variant="c" bare="{{true}}" open-tick="{{openTick}}" mini-bottom="{{miniBottom}}" on-mark="{{onMark}}" hint-size="390px,844px"></dc-import>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { stack: ['today'], openTick: 0, extraHL: [] };
+  }
+
+  renderVals() {
+    const s = this.state || {};
+    const stack = s.stack || ['today'];
+    const cur = stack[stack.length - 1];
+    const TABS = ['today', 'library', 'me'];
+    const ids = ['today', 'library', 'me', 'book', 'intro', 'reader', 'settings', 'vocab', 'highlights'];
+    const EASE = 'transform 0.36s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    const S = {};
+    ids.forEach((id) => {
+      const i = stack.indexOf(id);
+      const isTab = TABS.indexOf(id) >= 0;
+      let x = '0';
+      let vis = 'hidden';
+      let z = 0;
+      let sh = 'none';
+      let tr = 'none';
+      if (i >= 0) {
+        vis = 'visible';
+        z = 10 + i;
+        x = i === stack.length - 1 ? '0' : '-28%';
+        sh = i > 0 ? '-10px 0 28px rgba(28, 28, 28, 0.16)' : 'none';
+        tr = EASE + ', visibility 0s';
+      } else if (!isTab) {
+        x = '100%';
+        z = 60;
+        tr = EASE + ', visibility 0s linear 0.36s';
+      }
+      S[id] = { x: x, vis: vis, z: String(z), sh: sh, tr: tr, hidden: vis === 'visible' && i === stack.length - 1 ? 'false' : 'true' };
+    });
+    const nav = (to) => {
+      const st = ((this.state || {}).stack || ['today']).slice();
+      if (to === 'player') { this.setState({ openTick: ((this.state || {}).openTick || 0) + 1 }); return; }
+      if (to === 'back') { if (st.length > 1) st.pop(); this.setState({ stack: st }); return; }
+      if (TABS.indexOf(to) >= 0) { this.setState({ stack: [to] }); return; }
+      const i = st.indexOf(to);
+      if (i >= 0) { this.setState({ stack: st.slice(0, i + 1) }); } else { st.push(to); this.setState({ stack: st }); }
+    };
+    return {
+      S: S,
+      nav: nav,
+      openTick: s.openTick || 0,
+      extraHL: s.extraHL || [],
+      miniBottom: (TABS.indexOf(cur) >= 0 || cur === 'intro') ? '98px' : '30px',
+      onMark: (m) => this.setState({ extraHL: [m].concat((this.state || {}).extraHL || []) })
+    };
+  }
+}
+</script>
+</body>
+</html>

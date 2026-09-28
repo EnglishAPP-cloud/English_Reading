@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>每日长文 · 阅读页</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: {{bg}}; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none">
+<article style="padding: 100px 28px 80px 28px; display: flex; flex-direction: column">
+
+<sc-if value="{{isA}}" hint-placeholder-val="{{true}}">
+<header style="display: flex; flex-direction: column">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 14px; line-height: 20px; color: #2F5E60">September 28, 2026</span>
+<h1 style="margin: 8px 0 0 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 32px; line-height: 39px; letter-spacing: -0.4px">The Work of Being Seen</h1>
+<span style="margin-top: 12px; font-size: 12.5px; line-height: 18px; color: #56524D">[作者] · [刊物名] · 12 min</span>
+</header>
+<div style="margin-top: 22px; padding: 12px 0; border-top: 1px solid #2F5E60; border-bottom: 1px solid #2F5E60; display: flex; align-items: center; gap: 14px">
+<button type="button" aria-label="{{playLabel}}" aria-pressed="{{playingStr}}" onClick="{{togglePlay}}" style="width: 44px; height: 44px; flex-shrink: 0; border: 0; padding: 0; border-radius: 22px; background: #1C1C1C; color: #FBF8F1; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{{iconPath}}" fill="currentColor"></path></svg>
+</button>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<span style="font-size: 14px; line-height: 20px; font-weight: 600">播客解读</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D; font-variant-numeric: tabular-nums">{{timeText}}</span>
+</span>
+<span aria-hidden="true" style="display: block; height: 3px; border-radius: 2px; background: #DCE8E7; overflow: hidden">
+<span style="display: block; height: 3px; width: {{progPct}}; background: #2F5E60"></span>
+</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isB}}" hint-placeholder-val="{{false}}">
+<header style="display: flex; flex-direction: column">
+<span style="font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 2px">每日长文</span>
+<h1 style="margin: 10px 0 0 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 33px; line-height: 40px; letter-spacing: -0.5px">The Work of Being Seen</h1>
+<span style="margin-top: 12px; font-size: 12.5px; line-height: 18px; color: #56524D">[作者] · [刊物名] · 12 min</span>
+</header>
+<div style="margin-top: 22px; position: relative; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; box-shadow: 3px 3px 0 #D89585; padding: 10px 12px 10px 10px; display: flex; align-items: center; gap: 12px; overflow: hidden">
+<span aria-hidden="true" style="width: 58px; height: 58px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 11px; background: #DCE8E7; display: flex; align-items: center; justify-content: center"><svg width="54" height="54" viewBox="0 0 96 96" aria-hidden="true"><defs><pattern id="ink-rd" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.62" fill="#1C1C1C"></circle></pattern><pattern id="cor-rd" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><circle cx="1.4" cy="1.4" r="0.95" fill="#D89585"></circle></pattern></defs><path d="M56.06 55.5 L90.7 75.5 L73.38 85.5 L38.74 65.5 Z" fill="#D89585"></path><path d="M32.68 62.0 L67.32 82.0 L67.32 56.0 L32.68 36.0 Z" fill="#FBF8F1"></path><path d="M32.68 62.0 L67.32 82.0 L67.32 56.0 L32.68 36.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M84.64 72.0 L67.32 82.0 L67.32 56.0 L84.64 46.0 Z" fill="#FBF8F1"></path><path d="M84.64 72.0 L67.32 82.0 L67.32 56.0 L84.64 46.0 Z" fill="url(#ink-rd)"></path><path d="M84.64 72.0 L67.32 82.0 L67.32 56.0 L84.64 46.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M50.0 26.0 L84.64 46.0 L67.32 56.0 L32.68 36.0 Z" fill="#FBF8F1"></path><path d="M50.0 26.0 L84.64 46.0 L67.32 56.0 L32.68 36.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M77.71 46.0 L86.37 25.0" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="86.37" cy="25.0" r="1.8" fill="#1C1C1C"></circle><path d="M47.4 34.5 L48.53 33.74 L49.65 33.02 L50.78 32.36 L51.91 31.81 L53.03 31.39 L54.16 31.12 L55.28 31.03 L56.41 31.14 L57.53 31.46 L58.66 32.0 L59.79 32.76 L60.91 33.74 L62.04 34.93 L63.16 36.32 L64.29 37.89 L65.42 39.61 L66.54 41.46 L67.67 43.42 L68.79 45.44 L69.92 47.5" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></path><path d="M52.17 60.25 L52.07 58.87 L51.8 57.42 L51.36 55.93 L50.76 54.44 L50.01 52.99 L49.13 51.62 L48.15 50.36 L47.08 49.23 L45.96 48.27 L44.8 47.5 L43.65 46.94 L42.53 46.6 L41.46 46.5 L40.48 46.63 L39.6 46.98 L38.85 47.57 L38.24 48.35 L37.8 49.33 L37.53 50.47 L37.44 51.75 L37.53 53.13 L37.8 54.58 L38.24 56.07 L38.85 57.56 L39.6 59.01 L40.48 60.38 L41.46 61.64 L42.53 62.77 L43.65 63.73 L44.8 64.5 L45.96 65.06 L47.08 65.4 L48.15 65.5 L49.13 65.37 L50.01 65.02 L50.76 64.43 L51.36 63.65 L51.8 62.67 L52.07 61.53 Z" fill="url(#cor-rd)"></path><path d="M52.17 60.25 L52.07 58.87 L51.8 57.42 L51.36 55.93 L50.76 54.44 L50.01 52.99 L49.13 51.62 L48.15 50.36 L47.08 49.23 L45.96 48.27 L44.8 47.5 L43.65 46.94 L42.53 46.6 L41.46 46.5 L40.48 46.63 L39.6 46.98 L38.85 47.57 L38.24 48.35 L37.8 49.33 L37.53 50.47 L37.44 51.75 L37.53 53.13 L37.8 54.58 L38.24 56.07 L38.85 57.56 L39.6 59.01 L40.48 60.38 L41.46 61.64 L42.53 62.77 L43.65 63.73 L44.8 64.5 L45.96 65.06 L47.08 65.4 L48.15 65.5 L49.13 65.37 L50.01 65.02 L50.76 64.43 L51.36 63.65 L51.8 62.67 L52.07 61.53 Z" fill="none" stroke="#1C1C1C" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></path><path d="M62.12 61.0 L62.04 60.17 L61.78 59.3 L61.36 58.44 L60.83 57.65 L60.2 56.99 L59.53 56.5 L58.85 56.21 L58.23 56.15 L57.69 56.32 L57.28 56.7 L57.02 57.27 L56.93 58.0 L57.02 58.83 L57.28 59.7 L57.69 60.56 L58.23 61.35 L58.85 62.01 L59.53 62.5 L60.2 62.79 L60.83 62.85 L61.36 62.68 L61.78 62.3 L62.04 61.73 Z" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></path><path d="M62.12 71.0 L62.04 70.17 L61.78 69.3 L61.36 68.44 L60.83 67.65 L60.2 66.99 L59.53 66.5 L58.85 66.21 L58.23 66.15 L57.69 66.32 L57.28 66.7 L57.02 67.27 L56.93 68.0 L57.02 68.83 L57.28 69.7 L57.69 70.56 L58.23 71.35 L58.85 72.01 L59.53 72.5 L60.2 72.79 L60.83 72.85 L61.36 72.68 L61.78 72.3 L62.04 71.73 Z" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></path></svg></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 15px; line-height: 21px; font-weight: 600">本文解读播客</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D; font-variant-numeric: tabular-nums">AI 解读 · {{timeText}}</span>
+</span>
+<button type="button" aria-label="{{playLabel}}" aria-pressed="{{playingStr}}" onClick="{{togglePlay}}" style="width: 44px; height: 44px; flex-shrink: 0; border: 0; padding: 0; border-radius: 22px; background: #1C1C1C; color: #FBF8F1; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{{iconPath}}" fill="currentColor"></path></svg>
+</button>
+<span aria-hidden="true" style="position: absolute; left: 0; bottom: 0; height: 3px; width: {{progPct}}; background: #2F5E60"></span>
+</div>
+</sc-if>
+
+<sc-if value="{{isC}}" hint-placeholder-val="{{false}}">
+<header style="display: flex; flex-direction: column; align-items: center; text-align: center">
+<span style="font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 2.5px; color: #2F5E60">SEPTEMBER 28 · 2026</span>
+<h1 style="margin: 14px 0 0 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 32px; line-height: 39px; letter-spacing: -0.4px">The Work of Being Seen</h1>
+<span aria-hidden="true" style="margin-top: 16px; width: 28px; height: 2px; background: #D89585"></span>
+<span style="margin-top: 14px; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 15px; line-height: 20px; color: #56524D">[作者] · [刊物名]</span>
+</header>
+<div style="margin-top: 26px; display: flex; flex-direction: column; gap: 10px">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<span style="font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 1.5px; color: #2F5E60">播客解读</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D; font-variant-numeric: tabular-nums">{{timeText}}</span>
+</span>
+<span style="display: flex; align-items: center; gap: 14px">
+<button type="button" aria-label="{{playLabel}}" aria-pressed="{{playingStr}}" onClick="{{togglePlay}}" style="width: 44px; height: 44px; flex-shrink: 0; border: 0; padding: 0; border-radius: 22px; background: #1C1C1C; color: #FBF8F1; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{{iconPath}}" fill="currentColor"></path></svg>
+</button>
+<span aria-hidden="true" style="flex: 1; min-width: 0; height: 36px; display: flex; align-items: center; justify-content: space-between">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="44">
+<span style="width: 3px; height: {{b.h}}; border-radius: 2px; background: {{b.c}}"></span>
+</sc-for>
+</span>
+</span>
+</div>
+<div aria-hidden="true" style="margin-top: 22px; border-top: 1px solid #D9D4CA"></div>
+</sc-if>
+
+<div style="margin-top: {{bodyTop}}; font-family: Newsreader, Georgia, serif; font-size: {{fs}}; line-height: {{lh}}; color: #1C1C1C">
+<sc-if value="{{isC}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0 0 18px 0"><span style="float: left; font-size: 66px; line-height: 54px; margin: 5px 9px 0 -2px; font-weight: 500; color: #2F5E60">T</span>hink of the last time someone really noticed you. Not your order number or your file, but you: a teacher who caught the hesitation before you raised your hand, a nurse who remembered how you take your tea. These moments are small and easy to overlook. They are also a kind of work.</p>
+</sc-if>
+<sc-if value="{{notC}}" hint-placeholder-val="{{true}}">
+<p style="margin: 0 0 18px 0">Think of the last time someone really noticed you. Not your order number or your file, but you: a teacher who caught the hesitation before you raised your hand, a nurse who remembered how you take your tea. These moments are small and easy to overlook. They are also a kind of work.</p>
+</sc-if>
+<h2 style="margin: 30px 0 14px 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 23px; line-height: 30px">1 <span style="color: #D89585; font-weight: 400">|</span> The invisible part of the job</h2>
+<p style="margin: 0 0 18px 0">Researchers have a name for it, connective labor: the effort of perceiving another person and letting them know they have been perceived. It rarely appears in a job description, and it does not fit neatly on a dashboard. So when an organization looks for something to streamline, it is often the first thing to go.</p>
+<p style="margin: 0 0 18px 0">What replaces it is efficient, and often perfectly pleasant. <span style="text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 5px; text-decoration-skip-ink: none">But efficiency is not the same as recognition,</span> and people can feel the difference long before they can name it.</p>
+<p style="margin: 0 0 18px 0">The question is not whether machines can help. It is what we lose when the moment of being seen is treated as a cost rather than as the point.</p>
+<h2 style="margin: 30px 0 14px 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 23px; line-height: 30px">2 <span style="color: #D89585; font-weight: 400">|</span> Who gets to be seen</h2>
+<p style="margin: 0 0 18px 0">Attention has never been evenly shared. Those with money have always been able to buy it: the private tutor, the family doctor who knows your history. As more services are automated, that gap may widen, with a human on the other end becoming a premium feature and everyone else getting the app.</p>
+<p style="margin: 0">That is why the most expensive service of the future may simply be a person who looks up and sees you.</p>
+</div>
+
+</article>
+</div>
+
+<div style="position: absolute; left: 0; top: 0; right: 0; height: 92px; background: {{bg}}">
+<div style="position: absolute; left: 10px; right: 10px; top: 44px; display: flex; align-items: center; justify-content: space-between">
+<a href="ArticleIntroPhoto.dc.html" aria-label="返回" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #1C1C1C; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+</a>
+<span style="display: flex; align-items: center">
+<button type="button" aria-label="字号" onClick="{{cycleSize}}" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 24px; font-weight: 600; cursor: pointer">Aa</button>
+<button type="button" aria-label="喜欢" aria-pressed="{{likedStr}}" onClick="{{toggleLike}}" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.5-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.5 12 20 12 20z" fill="{{likeFill}}" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round"></path></svg>
+</button>
+<button type="button" aria-label="收藏" aria-pressed="{{savedStr}}" onClick="{{toggleSave}}" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.5L5 21V4.5a1 1 0 0 1 1-1z" fill="{{saveFill}}" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round"></path></svg>
+</button>
+</span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"variant":{"editor":"enum","options":["a","b","c"],"default":"a"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { liked: false, saved: false, playing: false, size: 1 };
+  }
+
+  renderVals() {
+    const s = this.state || {};
+    const v = this.props.variant ?? 'a';
+    const sizes = [[16.5, 28], [18, 31], [19.5, 33]];
+    const idx = s.size ?? 1;
+    const liked = !!s.liked;
+    const saved = !!s.saved;
+    const playing = !!s.playing;
+    const played = playing ? 0.35 : 0;
+    const bars = [];
+    for (let i = 0; i < 44; i++) {
+      const h = 7 + Math.round(Math.abs(Math.sin(i * 1.9) * Math.cos(i * 0.47)) * 22) + (i % 5 === 0 ? 4 : 0);
+      bars.push({ h: h + 'px', c: i < 44 * played ? '#2F5E60' : '#9EC0C0' });
+    }
+    return {
+      bg: v === 'c' ? '#FBF8F1' : '#F7F4ED',
+      isA: v === 'a',
+      isB: v === 'b',
+      isC: v === 'c',
+      notC: v !== 'c',
+      bodyTop: v === 'c' ? '22px' : '26px',
+      fs: sizes[idx][0] + 'px',
+      lh: sizes[idx][1] + 'px',
+      bars,
+      timeText: playing ? '2:26 / 6:57' : '6:57',
+      progPct: playing ? '35%' : '0%',
+      iconPath: playing ? 'M7 5h3.6v14H7zM13.4 5H17v14h-3.6z' : 'M8.5 5.8v12.4L18.5 12z',
+      playLabel: playing ? '暂停播客' : '播放播客',
+      playingStr: playing ? 'true' : 'false',
+      likedStr: liked ? 'true' : 'false',
+      savedStr: saved ? 'true' : 'false',
+      likeFill: liked ? '#D89585' : 'none',
+      saveFill: saved ? '#D89585' : 'none',
+      togglePlay: () => this.setState({ playing: !playing }),
+      toggleLike: () => this.setState({ liked: !liked }),
+      toggleSave: () => this.setState({ saved: !saved }),
+      cycleSize: () => this.setState({ size: (idx + 1) % sizes.length })
+    };
+  }
+}
+</script>
+</body>
+</html>

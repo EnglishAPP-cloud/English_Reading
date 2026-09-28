@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>资料库 5 · 分类大卡</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #9EC0C0; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 44px 0 124px 0">
+
+<div style="padding: 0 12px 0 24px; display: flex; align-items: center; justify-content: space-between">
+<h1 style="margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 30px; line-height: 44px; letter-spacing: 2px">资料库</h1>
+<button type="button" aria-label="搜索" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
+</button>
+</div>
+
+<div style="padding: 14px 20px 0 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="4">
+<a href="#" style="height: 148px; box-sizing: border-box; padding: 14px 14px 14px 16px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: {{c.color}}; color: {{c.fg}}; box-shadow: 4px 4px 0 #1C1C1C; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none">
+<span style="display: flex; align-items: flex-start; justify-content: space-between">
+<span aria-hidden="true" style="font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 34px; line-height: 40px">{{c.glyph}}</span>
+<span aria-hidden="true" style="width: 40px; height: 40px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 20px; background: #FBF8F1; display: flex; align-items: center; justify-content: center">
+<svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="none" stroke="#E1DDD3" stroke-width="4"></circle><circle cx="15" cy="15" r="11" fill="none" stroke="#1C1C1C" stroke-width="4" stroke-dasharray="{{c.dash}}" transform="rotate(-90 15 15)"></circle></svg>
+</span>
+</span>
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 18px; line-height: 24px; font-weight: 700">{{c.label}}</span>
+<span style="font-size: 12px; line-height: 16px; font-weight: 500">{{c.count}}</span>
+</span>
+</a>
+</sc-for>
+</div>
+
+<div style="padding: 24px 24px 0 24px; display: flex; align-items: baseline; justify-content: space-between">
+<h2 style="margin: 0; font-size: 18px; line-height: 24px; font-weight: 700">继续</h2>
+</div>
+<div style="display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; padding: 12px 20px 8px 16px">
+<sc-for list="{{cont}}" as="it" hint-placeholder-count="3">
+<a href="#" style="flex-shrink: 0; width: 232px; box-sizing: border-box; padding: 14px 14px 16px 14px; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 16px; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; height: 20px; box-sizing: border-box; padding: 0 7px; border: 1.5px solid #1C1C1C; border-radius: 6px; background: {{it.color}}; color: {{it.fg}}; font-size: 11px; font-weight: 600">{{it.typeLabel}}</span>
+<span style="font-family: Newsreader, 'Noto Sans SC', serif; font-size: 17px; line-height: 22px; font-weight: 500; height: 44px; overflow: hidden">{{it.title}}</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D">{{it.meta}}</span>
+<span aria-hidden="true" style="height: 4px; border-radius: 2px; background: #E1DDD3; overflow: hidden; display: flex"><span style="width: {{it.pct}}; background: #1C1C1C"></span></span>
+</a>
+</sc-for>
+</div>
+
+<div style="padding: 18px 24px 0 24px">
+<h2 style="margin: 0; font-size: 18px; line-height: 24px; font-weight: 700">本周新到</h2>
+</div>
+<div style="margin: 12px 16px 0 16px; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 18px; box-shadow: 4px 4px 0 #1C1C1C; padding: 4px 0">
+<sc-for list="{{fresh}}" as="it" hint-placeholder-count="4">
+<a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 6px 16px; text-decoration: none; color: #1C1C1C">
+<span aria-hidden="true" style="width: 12px; height: 12px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 3px; background: {{it.color}}"></span>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+<span style="font-family: Newsreader, 'Noto Sans SC', serif; font-size: 16px; line-height: 21px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{it.title}}</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D">{{it.typeLabel}} · {{it.meta}}</span>
+</span>
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0"><circle cx="12" cy="12" r="9" fill="none" stroke="#E1DDD3" stroke-width="3"></circle><circle cx="12" cy="12" r="9" fill="none" stroke="#1C1C1C" stroke-width="3" stroke-dasharray="{{it.dash}}" transform="rotate(-90 12 12)"></circle></svg>
+</a>
+</sc-for>
+</div>
+
+</div>
+
+<nav aria-label="主导航" style="position: absolute; left: 101px; bottom: 30px; display: flex; gap: 4px; padding: 6px; border-radius: 28px; background: #1C1C1C; box-shadow: 0 10px 24px rgba(28, 28, 28, 0.28)">
+<a href="GreetB.dc.html" aria-label="今日" style="width: 56px; height: 44px; border-radius: 22px; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"></rect><path d="M7 10h6"></path><path d="M7 14h10"></path></svg>
+</a>
+<a href="#" aria-label="资料库" aria-current="page" style="width: 56px; height: 44px; border-radius: 22px; background: #9EC0C0; color: #1C1C1C; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+</a>
+<button type="button" aria-label="我的" style="width: 56px; height: 44px; border: 0; padding: 0; border-radius: 22px; background: transparent; color: #D9D4C9; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.5 18.5c1.3-2.2 3.3-3.3 5.5-3.3s4.2 1.1 5.5 3.3"></path></svg>
+</button>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const TYPES = {
+      news: { label: '资讯', glyph: '资', color: '#925F50', fg: '#FBF8F1' },
+      pro: { label: '专业', glyph: '专', color: '#2F5E60', fg: '#FBF8F1' },
+      book: { label: '拆书', glyph: '拆', color: '#1C1C1C', fg: '#FBF8F1' },
+      pod: { label: '播客', glyph: '播', color: '#D89585', fg: '#1C1C1C' }
+    };
+    const C11 = 2 * Math.PI * 11;
+    const C9 = 2 * Math.PI * 9;
+    const cardDefs = [
+      { type: 'news', count: '38 篇', p: 0.45 },
+      { type: 'pro', count: '24 篇', p: 0.3 },
+      { type: 'book', count: '12 本', p: 0.6 },
+      { type: 'pod', count: '17 期', p: 0.2 }
+    ];
+    const cards = cardDefs.map((c) => {
+      const t = TYPES[c.type];
+      return {
+        label: c.type === 'pro' ? '专业领域' : t.label,
+        glyph: t.glyph,
+        color: t.color,
+        fg: t.fg,
+        count: c.count,
+        dash: (c.p * C11).toFixed(2) + ' ' + C11.toFixed(2)
+      };
+    });
+    const contDefs = [
+      { type: 'news', title: 'Why Every Company Suddenly Wants an AI Agent', meta: '六级 · 418 词', p: 0.6 },
+      { type: 'book', title: 'How to Know a Person', meta: 'David Brooks', p: 0.25 },
+      { type: 'pro', title: 'The Spotlight Effect', meta: '心理学 · 六级', p: 0.4 }
+    ];
+    const cont = contDefs.map((d) => {
+      const t = TYPES[d.type];
+      return { typeLabel: t.label, color: t.color, fg: t.fg, title: d.title, meta: d.meta, pct: Math.round(d.p * 100) + '%' };
+    });
+    const freshDefs = [
+      { type: 'pod', title: '拆书播客 · How to Know a Person', meta: '24 分钟', p: 0 },
+      { type: 'pro', title: 'How Neural Networks Learn', meta: '计算机 · 托雅', p: 0 },
+      { type: 'news', title: 'The Science of Procrastination', meta: '四级 · 472 词', p: 0.3 },
+      { type: 'pod', title: '资讯快听 · AI Agents', meta: '12 分钟', p: 0.7 }
+    ];
+    const fresh = freshDefs.map((d) => {
+      const t = TYPES[d.type];
+      return { typeLabel: t.label, color: t.color, title: d.title, meta: d.meta, dash: (d.p * C9).toFixed(2) + ' ' + C9.toFixed(2) };
+    });
+    return { cards: cards, cont: cont, fresh: fresh };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>设置</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #F7F4ED; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 44px 0 48px 0">
+
+<div style="padding: 0 24px 0 10px; display: flex; align-items: center; gap: 2px">
+<a href="{{L.back.href}}" onClick="{{L.back.click}}" aria-label="返回我的" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #1C1C1C; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+</a>
+<h1 style="margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 26px; line-height: 44px; letter-spacing: 2px">设置</h1>
+</div>
+
+<div style="padding: 8px 24px 0 24px; display: flex; flex-direction: column">
+
+<h2 style="margin: 10px 0 8px 4px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">阅读</h2>
+<section aria-label="阅读" style="box-sizing: border-box; padding: 14px 16px 6px 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+
+<div aria-label="效果预览" style="box-sizing: border-box; padding: 14px 16px; border: 1px solid #1C1C1C; border-radius: 12px; background: {{previewBg}}; color: {{previewFg}}; font-family: {{previewFamily}}; font-size: {{fs}}; line-height: {{lh}}">Every September, a familiar promise fills university dorms: this year, I will <span style="text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 4px; text-decoration-skip-ink: none">finally get good at English</span>.</div>
+
+<div style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E4DFD6; margin-top: 6px">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">字号</span>
+<span style="display: flex; align-items: center; gap: 6px">
+<span aria-hidden="true" style="font-family: Newsreader, Georgia, serif; font-size: 13px; font-weight: 500">A</span>
+<span style="position: relative; display: flex; align-items: center">
+<span aria-hidden="true" style="position: absolute; left: 14px; right: 14px; top: 50%; border-top: 1px solid #CFCAC0"></span>
+<sc-for list="{{sizeDots}}" as="d" hint-placeholder-count="5">
+<button type="button" aria-label="{{d.aria}}" aria-pressed="{{d.pressed}}" onClick="{{d.pick}}" style="position: relative; width: 28px; height: 40px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: {{d.w}}; height: {{d.w}}; box-sizing: border-box; border-radius: 8px; background: {{d.bg}}; border: {{d.border}}"></span></button>
+</sc-for>
+</span>
+<span aria-hidden="true" style="font-family: Newsreader, Georgia, serif; font-size: 20px; font-weight: 500">A</span>
+</span>
+</div>
+
+<div style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">英文字体</span>
+<span style="display: flex; gap: 6px">
+<sc-for list="{{fontSegs}}" as="f" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="height: 34px; box-sizing: border-box; padding: 0 12px; border: {{f.border}}; border-radius: 10px; background: {{f.bg}}; color: #1C1C1C; font-family: {{f.family}}; font-size: 14px; font-weight: 600; cursor: pointer">{{f.label}}</button>
+</sc-for>
+</span>
+</div>
+
+<div style="min-height: 56px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E4DFD6">
+<span style="display: flex; align-items: baseline; gap: 8px"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">背景</span><span style="font-size: 12.5px; line-height: 18px; color: #8A857C">{{paperName}}</span></span>
+<span style="display: flex; gap: 4px">
+<sc-for list="{{papers}}" as="p" hint-placeholder-count="3">
+<button type="button" aria-label="{{p.name}}" aria-pressed="{{p.pressed}}" onClick="{{p.pick}}" style="width: 40px; height: 40px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 28px; height: 28px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 14px; background: {{p.color}}; box-shadow: {{p.ring}}"></span></button>
+</sc-for>
+</span>
+</div>
+
+<div style="padding: 14px 0; display: flex; flex-direction: column; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">阅读辅助</span>
+<span style="margin-top: 10px; display: flex; gap: 6px">
+<sc-for list="{{assistSegs}}" as="a" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{a.pressed}}" onClick="{{a.pick}}" style="flex: 1; height: 36px; box-sizing: border-box; border: {{a.border}}; border-radius: 10px; background: {{a.bg}}; color: #1C1C1C; font-family: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer">{{a.label}}</button>
+</sc-for>
+</span>
+<span role="status" style="margin-top: 8px; font-size: 12.5px; line-height: 18px; color: #56524D">{{assistDesc}}</span>
+</div>
+
+<div style="min-height: 56px; display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">朗读语速</span>
+<span style="display: flex; gap: 5px">
+<sc-for list="{{rateSegs}}" as="r" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{r.pressed}}" onClick="{{r.pick}}" style="height: 34px; box-sizing: border-box; padding: 0 9px; border: {{r.border}}; border-radius: 10px; background: {{r.bg}}; color: #1C1C1C; font-family: inherit; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; cursor: pointer">{{r.label}}</button>
+</sc-for>
+</span>
+</div>
+</section>
+
+<h2 style="margin: 24px 0 8px 4px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">通知</h2>
+<section aria-label="通知" style="box-sizing: border-box; padding: 0 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+
+<div style="min-height: 66px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #E4DFD6">
+<span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">每日提醒</span><span style="font-size: 12px; line-height: 17px; color: #8A857C">与习惯卡同步 · 当天读过就不打扰</span></span>
+<a href="#" aria-label="提醒时间 19:30" style="height: 30px; box-sizing: border-box; padding: 0 10px; border: 1px solid #1C1C1C; border-radius: 15px; display: inline-flex; align-items: center; color: #1C1C1C; text-decoration: none; font-family: Newsreader, Georgia, serif; font-size: 15px; font-variant-numeric: tabular-nums">19:30</a>
+<button type="button" role="switch" aria-label="每日提醒" aria-checked="{{dailyStr}}" onClick="{{toggleDaily}}" style="width: 48px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{dailyBg}}"><span style="position: absolute; top: 2px; left: {{dailyKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span></button>
+</div>
+
+<div style="min-height: 66px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #E4DFD6">
+<span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">连续记录保护</span><span style="font-size: 12px; line-height: 17px; color: #8A857C">漏读一天后，当晚 21:00 提醒一次</span></span>
+<button type="button" role="switch" aria-label="连续记录保护" aria-checked="{{streakStr}}" onClick="{{toggleStreak}}" style="width: 48px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{streakBg}}"><span style="position: absolute; top: 2px; left: {{streakKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span></button>
+</div>
+
+<div style="min-height: 66px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #E4DFD6">
+<span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">会员到期提醒</span><span style="font-size: 12px; line-height: 17px; color: #8A857C">到期前 14 天、3 天各一次</span></span>
+<button type="button" role="switch" aria-label="会员到期提醒" aria-checked="{{expireStr}}" onClick="{{toggleExpire}}" style="width: 48px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{expireBg}}"><span style="position: absolute; top: 2px; left: {{expireKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span></button>
+</div>
+
+<div style="min-height: 66px; display: flex; align-items: center; gap: 10px">
+<span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">月度小结</span><span style="font-size: 12px; line-height: 17px; color: #8A857C">每月 1 日，上个月读了多少</span></span>
+<button type="button" role="switch" aria-label="月度小结" aria-checked="{{monthlyStr}}" onClick="{{toggleMonthly}}" style="width: 48px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{monthlyBg}}"><span style="position: absolute; top: 2px; left: {{monthlyKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span></button>
+</div>
+</section>
+<span style="margin: 8px 4px 0 4px; font-size: 11.5px; line-height: 16px; color: #8A857C">荣誉解锁、新文上架不推送，打开 App 就能看到。</span>
+
+<h2 style="margin: 24px 0 8px 4px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">帮助与反馈</h2>
+<section aria-label="帮助与反馈" style="box-sizing: border-box; padding: 0 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+<a href="#" style="min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">常见问题</span><span style="font-size: 12px; line-height: 17px; color: #8A857C">打卡怎么算 · 兑换码 · 导出划线 · 退款</span></span>
+<span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+<a href="#" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">意见反馈</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: #8A857C">可附截图</span><span aria-hidden="true" style="color: #8A857C">›</span></span>
+</a>
+<a href="#" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">联系我们</span>
+<span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+</section>
+
+<h2 style="margin: 24px 0 8px 4px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">账号</h2>
+<section aria-label="账号" style="box-sizing: border-box; padding: 0 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+<a href="#" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">手机号</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="font-size: 13px; color: #56524D; font-variant-numeric: tabular-nums">138****2817</span><span aria-hidden="true" style="color: #8A857C">›</span></span>
+</a>
+<a href="#" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">兑换记录</span>
+<span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+</section>
+
+<h2 style="margin: 24px 0 8px 4px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">隐私与协议</h2>
+<section aria-label="隐私与协议" style="box-sizing: border-box; padding: 0 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+<a href="#" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">个人信息收集清单</span><span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+<a href="#" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">第三方信息共享清单</span><span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+<a href="#" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none">
+<span style="font-size: 14.5px; line-height: 20px; font-weight: 600">隐私政策与用户协议</span><span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+</section>
+
+<button type="button" style="margin-top: 28px; height: 52px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 26px; background: #FBF8F1; color: #1C1C1C; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">退出登录</button>
+<a href="#" style="align-self: center; margin-top: 6px; min-height: 44px; padding: 0 12px; display: flex; align-items: center; font-size: 13px; color: #8A857C; text-decoration: none">注销账号</a>
+
+<div style="margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 15px; line-height: 20px; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 2px; text-underline-offset: 4px">Underline</span>
+<span style="margin-top: 4px; font-size: 11.5px; line-height: 16px; color: #8A857C; font-variant-numeric: tabular-nums">版本 1.0.0</span>
+<a href="#" style="font-size: 11.5px; line-height: 16px; color: #8A857C">App 备案号：[备案号]</a>
+</div>
+
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nav":{"editor":null},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { size: 2, font: 'serif', paper: 'pure', assist: 'mid', rate: '1.0', daily: true, streak: true, expire: true, monthly: false };
+  }
+
+  renderVals() {
+    const __nav = this.props.nav;
+    const __go = (to, href) => ({ href: __nav ? '#' : href, click: (e) => { if (__nav) { if (e && e.preventDefault) e.preventDefault(); __nav(to); } } });
+    const L = {back: __go('back', 'MeD.dc.html')};
+    const s = this.state || {};
+    const sizes = [16, 17, 18, 19.5, 21];
+    const size = s.size ?? 2;
+    const fs = sizes[size];
+    const sizeDots = sizes.map((px, i) => {
+      const on = i === size;
+      return {
+        aria: '字号 ' + (i + 1) + ' 档',
+        pressed: on ? 'true' : 'false',
+        w: on ? '14px' : '8px',
+        bg: on ? '#1C1C1C' : '#FBF8F1',
+        border: on ? 'none' : '1.5px solid #BDB7AC',
+        pick: () => this.setState({ size: i })
+      };
+    });
+    const seg = on => ({
+      bg: on ? '#9EC0C0' : 'transparent',
+      border: on ? '1.5px solid #1C1C1C' : '1px solid #CFCAC0',
+      pressed: on ? 'true' : 'false'
+    });
+    const font = s.font || 'serif';
+    const SERIF = 'Newsreader, Georgia, serif';
+    const SANS = "'Noto Sans SC', system-ui, sans-serif";
+    const fontSegs = [
+      Object.assign({ label: 'Newsreader', family: SERIF, pick: () => this.setState({ font: 'serif' }) }, seg(font === 'serif')),
+      Object.assign({ label: '无衬线', family: SANS, pick: () => this.setState({ font: 'sans' }) }, seg(font === 'sans'))
+    ];
+    const paperDefs = [
+      { id: 'pure', name: '纯白', color: '#FFFFFF', fg: '#1C1C1C' },
+      { id: 'warm', name: '暖白', color: '#FDFBF7', fg: '#1C1C1C' },
+      { id: 'night', name: '夜读', color: '#1F2324', fg: '#E9E4DA' }
+    ];
+    const paper = s.paper || 'pure';
+    const cur = paperDefs.find(p => p.id === paper) || paperDefs[0];
+    const papers = paperDefs.map(p => ({
+      name: p.name,
+      color: p.color,
+      pressed: p.id === paper ? 'true' : 'false',
+      ring: p.id === paper ? '0 0 0 2px #FBF8F1, 0 0 0 4px #D89585' : 'none',
+      pick: () => this.setState({ paper: p.id })
+    }));
+    const assistDefs = [
+      { id: 'base', label: '基础', desc: '显示中文导读和每段大意，适合刚开始读英文' },
+      { id: 'mid', label: '进阶', desc: '点词看释义，长难句结构高亮，不显示中文大意' },
+      { id: 'hard', label: '挑战', desc: '只留英文原文和文末练习' }
+    ];
+    const assist = s.assist || 'mid';
+    const assistSegs = assistDefs.map(a => Object.assign({ label: a.label, pick: () => this.setState({ assist: a.id }) }, seg(a.id === assist)));
+    const assistDesc = (assistDefs.find(a => a.id === assist) || assistDefs[1]).desc;
+    const rate = s.rate || '1.0';
+    const rateSegs = ['0.8', '1.0', '1.2', '1.5'].map(r => Object.assign({ label: r + '×', pick: () => this.setState({ rate: r }) }, seg(r === rate)));
+    const sw = on => ({ bg: on ? '#9EC0C0' : '#ECE9E2', knob: on ? '20px' : '2px', str: on ? 'true' : 'false' });
+    const daily = sw(s.daily !== false);
+    const streak = sw(s.streak !== false);
+    const expire = sw(s.expire !== false);
+    const monthly = sw(!!s.monthly);
+    return {
+      L: L,
+      fs: fs + 'px',
+      lh: Math.round(fs * 1.62) + 'px',
+      sizeDots,
+      fontSegs,
+      papers,
+      paperName: cur.name,
+      previewBg: cur.color,
+      previewFg: cur.fg,
+      previewFamily: font === 'serif' ? SERIF : SANS,
+      assistSegs,
+      assistDesc,
+      rateSegs,
+      dailyBg: daily.bg, dailyKnob: daily.knob, dailyStr: daily.str,
+      streakBg: streak.bg, streakKnob: streak.knob, streakStr: streak.str,
+      expireBg: expire.bg, expireKnob: expire.knob, expireStr: expire.str,
+      monthlyBg: monthly.bg, monthlyKnob: monthly.knob, monthlyStr: monthly.str,
+      toggleDaily: () => this.setState({ daily: s.daily === false }),
+      toggleStreak: () => this.setState({ streak: s.streak === false }),
+      toggleExpire: () => this.setState({ expire: s.expire === false }),
+      toggleMonthly: () => this.setState({ monthly: !s.monthly })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>拆书 · How to Know a Person</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: {{pageBg}}; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 0 0 48px 0">
+
+<sc-if value="{{isA}}" hint-placeholder-val="{{true}}">
+<div style="padding: 104px 20px 8px 20px; display: flex; gap: 18px; align-items: flex-end">
+<div style="position: relative; width: 116px; height: 164px; flex-shrink: 0; box-sizing: border-box; padding: 14px 12px; border: 1.5px solid #1C1C1C; border-radius: 6px 12px 12px 6px; background: #2F5E60; box-shadow: 5px 5px 0 #1C1C1C; color: #FBF8F1; display: flex; flex-direction: column">
+<span aria-hidden="true" style="position: absolute; left: 8px; top: 0; bottom: 0; width: 1.5px; background: rgba(28, 28, 28, 0.35)"></span>
+<span style="padding-left: 6px; font-size: 8.5px; line-height: 12px; font-weight: 600; letter-spacing: 1.5px; color: #9EC0C0">DAVID BROOKS</span>
+<span style="margin-top: 8px; padding-left: 6px; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 17px; line-height: 20px">How to Know a Person</span>
+<svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true" style="margin-top: auto; align-self: center"><circle cx="24" cy="20" r="15" fill="none" stroke="#FBF8F1" stroke-width="1.6"></circle><circle cx="40" cy="20" r="15" fill="none" stroke="#FBF8F1" stroke-width="1.6"></circle><path d="M32 7.31A15 15 0 0 1 32 32.69A15 15 0 0 1 32 7.31Z" fill="#D89585"></path></svg>
+</div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; padding-bottom: 4px">
+<span style="align-self: flex-start; height: 22px; box-sizing: border-box; padding: 0 8px; border: 1.5px solid #1C1C1C; border-radius: 11px; background: #FBF8F1; display: inline-flex; align-items: center; font-size: 11.5px; font-weight: 700">拆书 · 6 天</span>
+<h1 style="margin: 10px 0 0 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 27px; line-height: 31px; letter-spacing: -0.3px">How to Know a Person</h1>
+<span style="margin-top: 6px; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 14.5px; line-height: 20px; color: #1C1C1C">David Brooks · 2023</span>
+<span role="img" aria-label="6 天里读完 2 天，今天第 3 天" style="margin-top: 14px; display: flex; gap: 4px">
+<sc-for list="{{segs}}" as="sg" hint-placeholder-count="6">
+<span style="flex: 1; height: 6px; box-sizing: border-box; border-radius: 3px; border: 1px solid #1C1C1C; background: {{sg.bg}}"></span>
+</sc-for>
+</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isB}}" hint-placeholder-val="{{false}}">
+<div style="padding: 100px 20px 22px 20px; background: #2F5E60; color: #FBF8F1; display: flex; gap: 18px; align-items: flex-end; border-bottom: 1.5px solid #1C1C1C">
+<img src="assets/book-cover.jpg" alt="《How to Know a Person》英文版封面" style="width: 104px; height: 158px; flex-shrink: 0; display: block; box-sizing: border-box; object-fit: cover; border: 1.5px solid #1C1C1C; border-radius: 4px 8px 8px 4px; box-shadow: 5px 5px 0 #D89585; background: #FBF8F1">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span style="font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 2px; color: #9EC0C0">拆书 · 6 天</span>
+<h1 style="margin: 8px 0 0 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 26px; line-height: 30px; letter-spacing: -0.3px">How to Know a Person</h1>
+<span style="margin-top: 6px; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 14px; line-height: 20px; color: #DCE8E7">David Brooks · 2023</span>
+<span role="img" aria-label="6 天里读完 2 天，今天第 3 天" style="margin-top: 14px; display: flex; gap: 4px">
+<sc-for list="{{segsB}}" as="sg" hint-placeholder-count="6">
+<span style="flex: 1; height: 6px; border-radius: 3px; background: {{sg.bg}}"></span>
+</sc-for>
+</span>
+</div>
+</div>
+<div role="tablist" aria-label="这本书的内容" style="position: sticky; top: 92px; z-index: 5; padding: 0 8px; background: #DCE8E7; border-bottom: 1px solid #B9D0CF; display: flex">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="6">
+<button type="button" role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="position: relative; flex: 1; height: 46px; box-sizing: border-box; border: 0; border-radius: 0; padding: 0; background: {{t.glow}}; color: {{t.fg}}; font-family: inherit; font-size: 14px; font-weight: {{t.weight}}; cursor: pointer">{{t.label}}<span aria-hidden="true" style="position: absolute; left: 50%; bottom: -1px; width: 30px; height: 3px; margin-left: -15px; border-radius: 2px 2px 0 0; background: {{t.line}}"></span></button>
+</sc-for>
+</div>
+</sc-if>
+
+<div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 16px">
+
+<sc-if value="{{showIntro}}" hint-placeholder-val="{{true}}">
+<section aria-label="作者简介" style="box-sizing: border-box; padding: 16px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<h2 style="margin: 0; font-size: 13px; line-height: 18px; font-weight: 700; color: #2F5E60">作者简介</h2>
+<span style="margin-top: 12px; display: flex; align-items: center; gap: 12px">
+<img src="assets/david-brooks.jpg" alt="David Brooks 肖像" style="width: 44px; height: 44px; flex-shrink: 0; display: block; box-sizing: border-box; object-fit: cover; object-position: 50% 22%; border: 1.5px solid #1C1C1C; border-radius: 22px; background: #9EC0C0">
+<span style="display: flex; flex-direction: column"><span style="font-family: Newsreader, Georgia, serif; font-size: 18px; line-height: 22px; font-weight: 500">David Brooks</span><span style="font-size: 12px; line-height: 17px; color: #56524D">《纽约时报》专栏作家</span></span>
+</span>
+<p style="margin: 12px 0 0 0; font-size: 14px; line-height: 23px">长期书写人与社会、品格与人际关系，著有《品格之路》《第二座山》。这本书是他对「怎样真正认识一个人」的一次系统梳理。</p>
+</section>
+
+<section aria-label="内容简介" style="box-sizing: border-box; padding: 16px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<h2 style="margin: 0; font-size: 13px; line-height: 18px; font-weight: 700; color: #2F5E60">内容简介</h2>
+<p style="margin: 10px 0 0 0; font-size: 14px; line-height: 23px">我们都渴望被真正看见，却很少有人学过怎么去看见别人。作者把「认识一个人」拆成可以练习的能力：怎样提问，怎样倾听，怎样陪一个处在低谷的人，怎样读懂一个人背后的故事。</p>
+<p style="margin: 10px 0 0 0; font-size: 14px; line-height: 23px">书里有一组对照：让人觉得被照亮的 <span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 15.5px; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 2.5px; text-underline-offset: 4px">illuminator</span>（照亮者），和让人觉得自己很渺小的 <span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 15.5px">diminisher</span>（削弱者）。</p>
+</section>
+
+<section aria-label="这本书回答的问题" style="box-sizing: border-box; padding: 16px 18px 8px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<h2 style="margin: 0; font-size: 13px; line-height: 18px; font-weight: 700; color: #2F5E60">这本书回答的问题</h2>
+<ol style="margin: 6px 0 0 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{questions}}" as="q" hint-placeholder-count="4">
+<li style="padding: 10px 0; display: flex; gap: 12px; border-bottom: 1px dashed #D9D4CA"><span style="width: 18px; flex-shrink: 0; font-family: Newsreader, Georgia, serif; font-size: 20px; line-height: 22px; font-weight: 500; color: #D89585">{{q.n}}</span><span style="font-size: 14.5px; line-height: 22px; font-weight: 600">{{q.text}}</span></li>
+</sc-for>
+</ol>
+</section>
+
+<section aria-label="适合谁读" style="box-sizing: border-box; padding: 16px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<h2 style="margin: 0; font-size: 13px; line-height: 18px; font-weight: 700; color: #2F5E60">适合谁读</h2>
+<span style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px">
+<span style="min-height: 32px; box-sizing: border-box; padding: 5px 12px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #DCE8E7; display: inline-flex; align-items: center; font-size: 13px; line-height: 18px; font-weight: 600">总觉得聊天停在表面的人</span>
+<span style="min-height: 32px; box-sizing: border-box; padding: 5px 12px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #F5E4DD; display: inline-flex; align-items: center; font-size: 13px; line-height: 18px; font-weight: 600">刚进大学、想交到更深朋友的人</span>
+<span style="min-height: 32px; box-sizing: border-box; padding: 5px 12px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #EFE7D2; display: inline-flex; align-items: center; font-size: 13px; line-height: 18px; font-weight: 600">想学会倾听的人</span>
+</span>
+</section>
+</sc-if>
+
+<sc-if value="{{showDays}}" hint-placeholder-val="{{true}}">
+<section aria-label="优质语段精选" style="box-sizing: border-box; padding: 16px 18px 6px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">优质语段精选</h2><span style="font-size: 12px; color: #8A857C; font-variant-numeric: tabular-nums">6 天</span></span>
+<div style="margin-top: 6px; display: flex; flex-direction: column">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="6">
+<sc-if value="{{d.open}}" hint-placeholder-val="{{true}}">
+<a href="{{d.href}}" onClick="{{d.click}}" style="min-height: 62px; padding: 8px 0; border-bottom: 1px solid #EFEBE3; display: flex; align-items: center; gap: 12px; color: #1C1C1C; text-decoration: none">
+<span style="width: 34px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center"><span style="font-size: 10px; line-height: 12px; color: #8A857C">DAY</span><span style="font-family: Newsreader, Georgia, serif; font-size: 20px; line-height: 22px; font-weight: 500">{{d.n}}</span></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-family: Newsreader, Georgia, serif; font-size: 16.5px; line-height: 21px; font-weight: 500">{{d.en}}</span><span style="font-size: 12px; line-height: 17px; color: #56524D">{{d.zh}}</span></span>
+<sc-if value="{{d.isToday}}" hint-placeholder-val="{{false}}"><span style="height: 24px; box-sizing: border-box; padding: 0 9px; border: 1.5px solid #1C1C1C; border-radius: 12px; background: #D89585; display: inline-flex; align-items: center; font-size: 11.5px; font-weight: 700">今天</span></sc-if>
+<sc-if value="{{d.isDone}}" hint-placeholder-val="{{true}}"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#2F5E60" stroke-width="8.5" stroke-dasharray="{{d.dash}}" transform="rotate(-90 10 10)"></circle></svg></sc-if>
+</a>
+</sc-if>
+<sc-if value="{{d.locked}}" hint-placeholder-val="{{false}}">
+<div style="min-height: 62px; padding: 8px 0; border-bottom: 1px solid #EFEBE3; display: flex; align-items: center; gap: 12px">
+<span style="width: 34px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; opacity: 0.45"><span style="font-size: 10px; line-height: 12px">DAY</span><span style="font-family: Newsreader, Georgia, serif; font-size: 20px; line-height: 22px; font-weight: 500">{{d.n}}</span></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; opacity: 0.45"><span style="font-family: Newsreader, Georgia, serif; font-size: 16.5px; line-height: 21px; font-weight: 500">{{d.en}}</span><span style="font-size: 12px; line-height: 17px">{{d.zh}}</span></span>
+<span style="height: 24px; box-sizing: border-box; padding: 0 8px; border: 1px solid #1C1C1C; border-radius: 12px; background: #EFEBE3; display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; font-variant-numeric: tabular-nums"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>{{d.unlock}}</span>
+</div>
+</sc-if>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showMap}}" hint-placeholder-val="{{true}}">
+<section aria-label="全书思维导图" style="box-sizing: border-box; padding: 16px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">全书思维导图</h2><a href="#" style="font-size: 12.5px; font-weight: 600; color: #2F5E60; text-decoration: none">查看完整导图 ›</a></span>
+<svg width="306" height="170" viewBox="0 0 306 170" role="img" aria-label="思维导图预览：中心是书名，四个分支是看见、提问、陪伴、理解" style="margin-top: 12px; align-self: center">
+<path d="M100 85C84 85 90 30 104 30M100 85C84 85 90 140 104 140M206 85C222 85 216 30 202 30M206 85C222 85 216 140 202 140" fill="none" stroke="#1C1C1C" stroke-width="1.5"></path>
+<rect x="100" y="67" width="106" height="36" rx="18" fill="#2F5E60" stroke="#1C1C1C" stroke-width="1.5"></rect>
+<text x="153" y="89" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="11.5" fill="#FBF8F1">How to Know a Person</text>
+<rect x="14" y="14" width="90" height="32" rx="9" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.5"></rect>
+<text x="59" y="35" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="12.5" font-weight="600" fill="#1C1C1C">看见 Seeing</text>
+<rect x="14" y="124" width="90" height="32" rx="9" fill="#D89585" stroke="#1C1C1C" stroke-width="1.5"></rect>
+<text x="59" y="145" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="12.5" font-weight="600" fill="#1C1C1C">提问 Asking</text>
+<rect x="202" y="14" width="90" height="32" rx="9" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.5"></rect>
+<text x="247" y="35" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="12.5" font-weight="600" fill="#1C1C1C">陪伴 Company</text>
+<rect x="202" y="124" width="90" height="32" rx="9" fill="#DCE8E7" stroke="#1C1C1C" stroke-width="1.5"></rect>
+<text x="247" y="145" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="12.5" font-weight="600" fill="#1C1C1C">理解 Stories</text>
+</svg>
+</section>
+</sc-if>
+
+<sc-if value="{{showWords}}" hint-placeholder-val="{{true}}">
+<section aria-label="关键表达词库" style="box-sizing: border-box; padding: 16px 18px 8px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">关键表达词库</h2><a href="#" style="font-size: 12.5px; font-weight: 600; color: #2F5E60; text-decoration: none">全部 24 个 ›</a></span>
+<div style="margin-top: 6px; display: flex; flex-direction: column">
+<sc-for list="{{phrases}}" as="p" hint-placeholder-count="4">
+<div style="min-height: 50px; padding: 8px 0; border-bottom: 1px solid #EFEBE3; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 22px; font-weight: 500">{{p.en}}</span>
+<span style="font-size: 12.5px; line-height: 18px; color: #56524D; text-align: right">{{p.zh}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showPod}}" hint-placeholder-val="{{true}}">
+<section aria-label="拆书播客" style="box-sizing: border-box; padding: 16px 18px 6px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">拆书播客</h2><span style="font-size: 12px; color: #8A857C; font-variant-numeric: tabular-nums">6 期</span></span>
+<div style="margin-top: 6px; display: flex; flex-direction: column">
+<sc-for list="{{eps}}" as="e" hint-placeholder-count="6">
+<sc-if value="{{e.open}}" hint-placeholder-val="{{true}}">
+<a href="{{e.href}}" onClick="{{e.click}}" style="min-height: 58px; padding: 8px 0; border-bottom: 1px solid #EFEBE3; display: flex; align-items: center; gap: 12px; color: #1C1C1C; text-decoration: none">
+<span aria-hidden="true" style="width: 34px; height: 34px; flex-shrink: 0; border-radius: 17px; background: #1C1C1C; color: #FBF8F1; display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z" fill="currentColor"></path></svg></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">{{e.title}}</span><span style="font-size: 12px; line-height: 17px; color: #8A857C; font-variant-numeric: tabular-nums">第 {{e.n}} 期 · {{e.dur}}</span></span>
+<sc-if value="{{e.isToday}}" hint-placeholder-val="{{false}}"><span style="height: 24px; box-sizing: border-box; padding: 0 9px; border: 1.5px solid #1C1C1C; border-radius: 12px; background: #D89585; display: inline-flex; align-items: center; font-size: 11.5px; font-weight: 700">今天</span></sc-if>
+<sc-if value="{{e.isDone}}" hint-placeholder-val="{{true}}"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#2F5E60" stroke-width="8.5" stroke-dasharray="{{e.dash}}" transform="rotate(-90 10 10)"></circle></svg></sc-if>
+</a>
+</sc-if>
+<sc-if value="{{e.locked}}" hint-placeholder-val="{{false}}">
+<div style="min-height: 58px; padding: 8px 0; border-bottom: 1px solid #EFEBE3; display: flex; align-items: center; gap: 12px">
+<span aria-hidden="true" style="width: 34px; height: 34px; flex-shrink: 0; box-sizing: border-box; border: 1.5px dashed #BDB7AC; border-radius: 17px; opacity: 0.8"></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; opacity: 0.45"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">{{e.title}}</span><span style="font-size: 12px; line-height: 17px; font-variant-numeric: tabular-nums">第 {{e.n}} 期 · {{e.dur}}</span></span>
+<span style="height: 24px; box-sizing: border-box; padding: 0 8px; border: 1px solid #1C1C1C; border-radius: 12px; background: #EFEBE3; display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; font-variant-numeric: tabular-nums"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>{{e.unlock}}</span>
+</div>
+</sc-if>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showTalk}}" hint-placeholder-val="{{true}}">
+<section aria-label="讨论区" style="box-sizing: border-box; padding: 16px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #FBF8F1; box-shadow: {{cardShadow}}; display: flex; flex-direction: column">
+<h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">讨论区</h2>
+<div style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{talks}}" as="k" hint-placeholder-count="2">
+<a href="#" style="box-sizing: border-box; padding: 14px 14px 12px 14px; border: 1.5px solid #1C1C1C; border-radius: 14px; background: {{k.bg}}; display: flex; flex-direction: column; gap: 12px; color: #1C1C1C; text-decoration: none">
+<span style="font-size: 15px; line-height: 22px; font-weight: 700">{{k.q}}</span>
+<span style="display: flex; align-items: center; gap: 8px">
+<span aria-hidden="true" style="display: flex">
+<span style="width: 24px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: #9EC0C0; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700">L</span>
+<span style="width: 24px; height: 24px; margin-left: -7px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: #D89585; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700">Y</span>
+<span style="width: 24px; height: 24px; margin-left: -7px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: #EFE7D2; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700">Z</span>
+</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D; font-variant-numeric: tabular-nums">{{k.count}} 人参与</span>
+<span style="margin-left: auto; font-size: 12.5px; font-weight: 700; color: #2F5E60">去讨论 ›</span>
+</span>
+</a>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+</div>
+</div>
+
+<div style="position: absolute; left: 0; top: 0; right: 0; height: 92px; background: {{barBg}}">
+<div style="position: absolute; left: 10px; right: 10px; top: 44px; display: flex; align-items: center; justify-content: space-between">
+<a href="{{L.back.href}}" onClick="{{L.back.click}}" aria-label="返回" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {{barFg}}; text-decoration: none"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+<button type="button" aria-label="加入书架" aria-pressed="{{shelfStr}}" onClick="{{toggleShelf}}" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.5L5 21V4.5a1 1 0 0 1 1-1z" fill="{{shelfFill}}" stroke="{{barFg}}" stroke-width="1.8" stroke-linejoin="round"></path></svg></button>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"variant":{"editor":"enum","options":["a","b"],"default":"a"},"nav":{"editor":null},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'intro', shelf: true };
+  }
+
+  renderVals() {
+    const __nav = this.props.nav;
+    const __go = (to, href) => ({ href: __nav ? '#' : href, click: (e) => { if (__nav) { if (e && e.preventDefault) e.preventDefault(); __nav(to); } } });
+    const L = { back: __go('back', 'GreetB.dc.html'), intro: __go('intro', 'ArticleIntroPhoto.dc.html'), player: __go('player', 'PlayerC.dc.html') };
+    const s = this.state || {};
+    const v = this.props.variant ?? 'a';
+    const isA = v !== 'b';
+    const tab = s.tab || 'intro';
+    const show = (id) => isA || tab === id;
+    const status = ['done', 'done', 'today', 'lock', 'lock', 'lock'];
+    const unlock = ['', '', '', '9.29 解锁', '9.30 解锁', '10.01 解锁'];
+    const dayDefs = [
+      ['Seeing and Being Seen', '被看见，是一种需要'],
+      ['Illuminators and Diminishers', '照亮别人的人'],
+      ['The Art of Asking', '好问题是一扇门'],
+      ['Conversations That Go Deep', '把聊天聊深'],
+      ['Keeping Company in Hard Times', '陪一个在低谷的人'],
+      ['How People See the World', '每个人都带着自己的故事']
+    ];
+    const days = dayDefs.map((d, i) => ({
+      n: String(i + 1), en: d[0], zh: d[1],
+      open: status[i] !== 'lock', locked: status[i] === 'lock',
+      isToday: status[i] === 'today', isDone: status[i] === 'done',
+      dash: '26.7 26.7', unlock: unlock[i],
+      href: L.intro.href, click: L.intro.click
+    }));
+    const epDefs = [
+      ['为什么我们都想被看见', '12:40'],
+      ['两种人：照亮你的，和让你变小的', '14:05'],
+      ['好问题长什么样', '11:20'],
+      ['怎样把一次聊天聊深', '13:30'],
+      ['朋友在低谷时，别急着给建议', '15:10'],
+      ['读懂一个人背后的故事', '12:55']
+    ];
+    const eps = epDefs.map((e, i) => ({
+      n: String(i + 1), title: e[0], dur: e[1],
+      open: status[i] !== 'lock', locked: status[i] === 'lock',
+      isToday: status[i] === 'today', isDone: status[i] === 'done',
+      dash: '26.7 26.7', unlock: unlock[i],
+      href: L.player.href, click: L.player.click
+    }));
+    const segColors = { done: '#1C1C1C', today: '#D89585', lock: '#FBF8F1' };
+    const segColorsB = { done: '#FBF8F1', today: '#D89585', lock: 'rgba(251, 248, 241, 0.25)' };
+    const tabDefs = [['intro', '简介'], ['days', '精选'], ['map', '导图'], ['words', '词库'], ['pod', '播客'], ['talk', '讨论']];
+    const shelf = s.shelf !== false;
+    return {
+      L: L,
+      isA: isA,
+      isB: !isA,
+      pageBg: isA ? '#9EC0C0' : '#DCE8E7',
+      barBg: isA ? '#9EC0C0' : '#2F5E60',
+      barFg: isA ? '#1C1C1C' : '#FBF8F1',
+      cardShadow: isA ? '3px 3px 0 #1C1C1C' : 'none',
+      segs: status.map((st) => ({ bg: segColors[st] })),
+      segsB: status.map((st) => ({ bg: segColorsB[st] })),
+      // 划线型标签：选中的在下面划线，上方铺一层淡淡的阴影；没选中的是灰字
+      tabs: tabDefs.map((t) => {
+        const on = t[0] === tab;
+        return {
+          label: t[1],
+          selected: on ? 'true' : 'false',
+          fg: on ? '#1C1C1C' : '#56524D',
+          weight: on ? '700' : '500',
+          glow: on ? 'linear-gradient(to top, rgba(47, 94, 96, 0.2), rgba(47, 94, 96, 0.06) 55%, rgba(47, 94, 96, 0))' : 'transparent',
+          line: on ? '#2F5E60' : 'transparent',
+          pick: () => this.setState({ tab: t[0] })
+        };
+      }),
+      showIntro: show('intro'),
+      showDays: show('days'),
+      showMap: show('map'),
+      showWords: show('words'),
+      showPod: show('pod'),
+      showTalk: show('talk'),
+      questions: [
+        { n: '1', text: '为什么有的人让你觉得被看见，有的人却让你觉得自己很渺小？' },
+        { n: '2', text: '怎样问问题，才能让对方真正打开？' },
+        { n: '3', text: '朋友陷入低谷时，说什么才不像说教？' },
+        { n: '4', text: '一个人看世界的方式，是怎么形成的？' }
+      ],
+      days: days,
+      eps: eps,
+      phrases: [
+        { en: 'to be deeply seen', zh: '被真正地看见' },
+        { en: 'illuminator', zh: '让人觉得被照亮的人' },
+        { en: 'diminisher', zh: '让人觉得自己渺小的人' },
+        { en: 'ask a big question', zh: '问一个真正重要的问题' }
+      ],
+      talks: [
+        { q: '你最近一次觉得「被看见」，是什么时候？', count: '128', bg: '#DCE8E7' },
+        { q: '你身边有 illuminator 吗？他做了什么？', count: '86', bg: '#F5E4DD' }
+      ],
+      shelfStr: shelf ? 'true' : 'false',
+      shelfFill: shelf ? '#D89585' : 'none',
+      toggleShelf: () => this.setState({ shelf: !shelf })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>音频播放</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: {{rootBg}}; pointer-events: {{rootPE}}; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<sc-if value="{{notBare}}" hint-placeholder-val="{{true}}">
+<div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px">
+<dc-import name="ReadD" paper="pure" hint-size="390px,844px"></dc-import>
+</div>
+</sc-if>
+
+<section aria-label="音频播放" aria-hidden="{{collapsedStr}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; overflow: hidden; background: {{base}}; color: #F3EFE6; pointer-events: {{overlayPE}}; transform: translateY({{overlayY}}); transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1)">
+
+<sc-if value="{{isA}}" hint-placeholder-val="{{true}}">
+<img src="assets/article-photo.png" alt="" style="position: absolute; left: -80px; top: -80px; width: 550px; height: 1004px; object-fit: cover; filter: blur(46px) saturate(1.25); opacity: 0.85">
+<span aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; background: rgba(11, 16, 17, 0.64)"></span>
+</sc-if>
+<sc-if value="{{isC}}" hint-placeholder-val="{{false}}">
+<svg width="390" height="420" viewBox="0 0 390 420" aria-hidden="true" style="position: absolute; left: 0; top: 0"><defs><pattern id="pl-dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.3" fill="#9EC0C0"></circle></pattern></defs><rect width="390" height="420" fill="url(#pl-dots)" opacity="0.16"></rect></svg>
+</sc-if>
+
+<div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; display: flex; flex-direction: column; align-items: center">
+
+<div style="margin-top: 44px; width: 390px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; justify-content: space-between">
+<button type="button" aria-label="收起播放器" onClick="{{collapse}}" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #F3EFE6; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<span style="font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 2px; color: {{sub}}">每日长文 · 音频</span>
+<span aria-hidden="true" style="width: 44px; height: 44px"></span>
+</div>
+
+<div role="group" aria-label="选择音频" style="margin-top: 8px; padding: 3px; border-radius: 19px; background: rgba(243, 239, 230, 0.1); display: flex; gap: 2px">
+<sc-for list="{{tracks}}" as="t" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="height: 32px; box-sizing: border-box; padding: 0 14px; border: 0; border-radius: 16px; background: {{t.bg}}; color: {{t.fg}}; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{t.label}}<span style="font-weight: 500; opacity: 0.7; font-variant-numeric: tabular-nums">{{t.dur}}</span></button>
+</sc-for>
+</div>
+
+<img src="assets/article-photo.png" alt="本文封面：桌边一只握着咖啡杯的手" style="margin-top: {{coverTop}}; width: {{coverSize}}; height: {{coverSize}}; box-sizing: border-box; object-fit: cover; object-position: 64% 50%; border-radius: {{coverRadius}}; border: {{coverBorder}}; box-shadow: {{coverShadow}}; display: block">
+
+<div style="margin-top: 20px; width: 326px; display: flex; flex-direction: column">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 23px; line-height: 29px; color: #F3EFE6">The Work of Being Seen</span>
+<span style="margin-top: 3px; font-size: 13px; line-height: 18px; color: {{sub}}">{{trackName}} · [作者] · [刊物名]</span>
+</div>
+
+<sc-if value="{{isB}}" hint-placeholder-val="{{false}}">
+<div aria-live="polite" style="margin-top: 14px; width: 326px; height: 104px; box-sizing: border-box; padding: 10px 14px; border-radius: 14px; background: rgba(243, 239, 230, 0.06); display: flex; flex-direction: column; justify-content: center; gap: 4px; overflow: hidden">
+<span style="font-family: {{lineFont}}; font-size: 13.5px; line-height: 20px; color: rgba(243, 239, 230, 0.38); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{linePrev}}</span>
+<span style="font-family: {{lineFont}}; font-size: 16px; line-height: 23px; font-weight: 500; color: #F3EFE6; text-decoration-line: {{curDeco}}; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 5px">{{lineCur}}</span>
+<span style="font-family: {{lineFont}}; font-size: 13.5px; line-height: 20px; color: rgba(243, 239, 230, 0.38); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lineNext}}</span>
+</div>
+</sc-if>
+
+<div style="margin-top: {{progTop}}; width: 326px; display: flex; flex-direction: column">
+<button type="button" aria-label="拖动进度" onClick="{{seek}}" style="position: relative; height: 24px; border: 0; padding: 0; background: transparent; cursor: pointer">
+<span aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 10px; height: 4px; border-radius: 2px; background: rgba(243, 239, 230, 0.18)"></span>
+<span aria-hidden="true" style="position: absolute; left: 0; top: 10px; height: 4px; width: {{progPct}}; border-radius: 2px; background: #F3EFE6"></span>
+<sc-for list="{{ticks}}" as="k" hint-placeholder-count="2">
+<span aria-hidden="true" style="position: absolute; left: {{k.left}}; top: 6px; width: 3px; height: 12px; margin-left: -1.5px; border-radius: 1.5px; background: #D89585"></span>
+</sc-for>
+<span aria-hidden="true" style="position: absolute; left: {{progPct}}; top: 5px; width: 14px; height: 14px; margin-left: -7px; border-radius: 7px; background: #F3EFE6"></span>
+</button>
+<span style="margin-top: 2px; display: flex; justify-content: space-between; font-size: 12px; line-height: 16px; color: {{sub}}; font-variant-numeric: tabular-nums"><span>{{curTime}}</span><span>-{{leftTime}}</span></span>
+</div>
+
+<div style="margin-top: {{ctrlTop}}; width: 342px; display: flex; align-items: center; justify-content: space-between">
+<button type="button" aria-label="播放速度 {{rateLabel}}" onClick="{{cycleRate}}" style="width: 56px; height: 44px; border: 0; padding: 0; background: transparent; color: #F3EFE6; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="height: 28px; box-sizing: border-box; padding: 0 8px; border: 1.5px solid {{sideLine}}; border-radius: 14px; display: inline-flex; align-items: center; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums">{{rateLabel}}</span></button>
+<button type="button" aria-label="后退 15 秒" onClick="{{back15}}" style="width: 52px; height: 52px; border: {{sideBorder}}; border-radius: 26px; padding: 0; background: transparent; color: #F3EFE6; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M8.2 9.2A10 10 0 1 1 5 16.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M8.6 4.4 8.2 9.2 13 9.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><text x="15.5" y="19.6" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="8.5" font-weight="700" fill="currentColor">15</text></svg></button>
+<button type="button" aria-label="{{playLabel}}" onClick="{{togglePlay}}" style="width: 76px; height: 76px; border: {{playBorder}}; border-radius: 38px; padding: 0; background: {{playBg}}; color: {{playFg}}; box-shadow: {{playShadow}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="{{playIcon}}" fill="currentColor"></path></svg></button>
+<button type="button" aria-label="前进 15 秒" onClick="{{fwd15}}" style="width: 52px; height: 52px; border: {{sideBorder}}; border-radius: 26px; padding: 0; background: transparent; color: #F3EFE6; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M21.8 9.2A10 10 0 1 0 25 16.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M21.4 4.4 21.8 9.2 17 9.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><text x="14.5" y="19.6" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="8.5" font-weight="700" fill="currentColor">15</text></svg></button>
+<button type="button" aria-label="记重点：把这一句存进划线" onClick="{{markNow}}" style="width: 56px; height: 52px; border: 0; padding: 0; background: transparent; color: #F3EFE6; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 11h11" stroke="currentColor" stroke-width="2"></path><path d="M4 17.5h13" stroke="#D89585" stroke-width="3.2"></path><path d="M20 14v7M16.5 17.5h7" stroke="currentColor" stroke-width="2"></path></svg><span style="font-size: 11px; line-height: 14px; font-weight: 600">记重点</span></button>
+</div>
+
+<sc-if value="{{isA}}" hint-placeholder-val="{{true}}">
+<span style="margin-top: 22px; font-size: 12px; line-height: 16px; color: {{sub}}">记下的重点会存进「我的 · 划线」</span>
+</sc-if>
+
+</div>
+
+<sc-if value="{{isC}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; left: 0; right: 0; bottom: 0; height: {{drawerH}}; box-sizing: border-box; padding: 8px 24px 0 24px; border-top: 1.5px solid rgba(243, 239, 230, 0.35); border-radius: 22px 22px 0 0; background: #1A2324; display: flex; flex-direction: column; transition: height 0.3s ease">
+<button type="button" aria-expanded="{{drawerStr}}" onClick="{{toggleDrawer}}" style="height: 48px; border: 0; padding: 0; background: transparent; color: #F3EFE6; display: flex; flex-direction: column; align-items: center; cursor: pointer; font-family: inherit">
+<span aria-hidden="true" style="width: 36px; height: 4px; border-radius: 2px; background: rgba(243, 239, 230, 0.35)"></span>
+<span style="margin-top: 10px; width: 100%; display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 14px; line-height: 20px; font-weight: 700">本集重点 <span style="color: #D89585; font-variant-numeric: tabular-nums">{{markCount}}</span></span><span style="font-size: 12px; line-height: 16px; color: #A9BDBC">{{drawerHint}}</span></span>
+</button>
+<div style="margin-top: 6px; display: flex; flex-direction: column; overflow-y: auto; scrollbar-width: none">
+<sc-for list="{{markList}}" as="m" hint-placeholder-count="2">
+<button type="button" onClick="{{m.jump}}" style="min-height: 52px; border: 0; border-bottom: 1px solid rgba(243, 239, 230, 0.1); padding: 8px 0; background: transparent; color: #F3EFE6; display: flex; align-items: center; gap: 12px; text-align: left; font-family: inherit; cursor: pointer">
+<span style="width: 44px; flex-shrink: 0; font-size: 12px; font-weight: 600; color: #D89585; font-variant-numeric: tabular-nums">{{m.time}}</span>
+<span style="font-family: {{lineFont}}; font-size: 14px; line-height: 20px; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 2px; text-underline-offset: 4px">{{m.text}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}">
+<span role="status" style="position: absolute; left: 50%; top: 150px; transform: translateX(-50%); max-width: 320px; box-sizing: border-box; padding: 9px 14px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #F3EFE6; color: #1C1C1C; box-shadow: 3px 3px 0 #D89585; font-size: 13px; line-height: 18px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{toast}}</span>
+</sc-if>
+</section>
+
+<div style="position: absolute; left: 20px; right: 24px; bottom: {{miniBottom}}; pointer-events: {{miniPE}}; height: 60px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 30px; background: {{miniBg}}; box-shadow: 4px 4px 0 #D89585; color: #F3EFE6; display: flex; align-items: center; overflow: hidden; opacity: {{miniOpacity}}; transform: translateY({{miniY}}); transition: opacity 0.25s ease, transform 0.3s ease, bottom 0.3s ease">
+<button type="button" aria-label="展开播放器" aria-hidden="{{expandedStr}}" onClick="{{expand}}" style="flex: 1; min-width: 0; height: 58px; border: 0; padding: 0 0 0 9px; background: transparent; color: #F3EFE6; display: flex; align-items: center; gap: 10px; text-align: left; font-family: inherit; cursor: pointer">
+<img src="assets/article-photo.png" alt="" style="width: 40px; height: 40px; flex-shrink: 0; object-fit: cover; object-position: 64% 50%; border-radius: 20px; display: block">
+<span style="min-width: 0; display: flex; flex-direction: column"><span style="font-family: Newsreader, Georgia, serif; font-size: 15px; line-height: 19px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">The Work of Being Seen</span><span style="font-size: 11.5px; line-height: 16px; color: #A9BDBC; font-variant-numeric: tabular-nums">{{trackName}} · {{curTime}} / {{durTime}}</span></span>
+</button>
+<button type="button" aria-label="{{playLabel}}" aria-hidden="{{expandedStr}}" onClick="{{togglePlay}}" style="width: 44px; height: 44px; margin-right: 8px; flex-shrink: 0; border: 0; border-radius: 22px; padding: 0; background: #F3EFE6; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="{{playIcon}}" fill="currentColor"></path></svg></button>
+<span aria-hidden="true" style="position: absolute; left: 0; bottom: 0; height: 2.5px; width: {{progPct}}; background: #D89585"></span>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"bare":{"editor":null},"openTick":{"editor":null},"miniBottom":{"editor":null},"onMark":{"editor":null},"variant":{"editor":"enum","options":["a","b","c"],"default":"a"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const bare = !!props.bare;
+    this.state = { expanded: !bare, playing: !bare, started: !bare, track: 'guide', pos: { guide: 146, full: 95 }, rate: 0, marks: { guide: [2, 6], full: [3] }, toast: '', drawer: false };
+  }
+
+  data() {
+    return {
+      dur: { guide: 252, full: 760 },
+      name: { guide: '导读', full: '本文音频' },
+      rates: [1, 1.25, 1.5, 2, 0.75],
+      lines: {
+        guide: [
+          [0, '今天这篇，讲的是一件很小的事：被看见。'],
+          [14, '上一次有人真正注意到你，而不只是你的订单号，是什么时候？'],
+          [32, '作者给这种注意力起了个名字：连接性劳动。'],
+          [51, '它很少写进岗位说明，也很难放进数据看板。'],
+          [70, '所以机构想提效的时候，它往往最先被砍掉。'],
+          [92, '替代它的东西很高效，甚至挺舒服。'],
+          [110, '但高效不等于被认可，人往往先感觉到差别，才说得出来。'],
+          [134, '读的时候留意 recognition 这个词，它是全文的关键。'],
+          [158, '文章后半段还有一句长难句，我们放在文末拆。'],
+          [181, '建议第一遍先别查词，顺着读完。'],
+          [205, '读完再回来听一遍，你会听出不一样的东西。'],
+          [228, '好，下面进入原文。']
+        ],
+        full: [
+          [0, 'The Work of Being Seen.'],
+          [6, 'Think of the last time someone really noticed you.'],
+          [14, 'Not your order number or your file, but you.'],
+          [22, 'A teacher who caught the hesitation before you raised your hand.'],
+          [33, 'A nurse who remembered how you take your tea.'],
+          [42, 'These moments are small and easy to overlook.'],
+          [50, 'They are also a kind of work.'],
+          [60, 'Researchers have a name for it: connective labor.'],
+          [96, 'It rarely appears in a job description.'],
+          [140, 'What replaces it is efficient, and often perfectly pleasant.'],
+          [152, 'But efficiency is not the same as recognition.'],
+          [200, 'The question is not whether machines can help.']
+        ]
+      }
+    };
+  }
+
+  componentDidMount() {
+    this._timer = setInterval(() => {
+      const s = this.state;
+      if (!s.playing) return;
+      const D = this.data();
+      const d = D.dur[s.track];
+      const p = Math.min(d, s.pos[s.track] + D.rates[s.rate]);
+      const pos = Object.assign({}, s.pos);
+      pos[s.track] = p;
+      this.setState({ pos: pos, playing: p < d });
+    }, 1000);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.openTick && this.props.openTick !== prevProps.openTick) {
+      this.setState({ expanded: true, started: true, playing: true });
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._timer);
+    clearTimeout(this._toastTimer);
+  }
+
+  showToast(text) {
+    clearTimeout(this._toastTimer);
+    this.setState({ toast: text });
+    this._toastTimer = setTimeout(() => this.setState({ toast: '' }), 2200);
+  }
+
+  renderVals() {
+    const s = this.state || {};
+    const v = this.props.variant ?? 'a';
+    const D = this.data();
+    const track = s.track || 'guide';
+    const dur = D.dur[track];
+    const pos = Math.min(dur, (s.pos || {})[track] || 0);
+    const lines = D.lines[track];
+    const fmt = (x) => { const t = Math.max(0, Math.round(x)); const m = Math.floor(t / 60); const sec = t % 60; return (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec; };
+    let cur = 0;
+    for (let i = 0; i < lines.length; i++) { if (lines[i][0] <= pos) cur = i; }
+    const marks = ((s.marks || {})[track] || []).slice().sort((a, b) => a - b);
+    const setPos = (p) => { const np = Object.assign({}, s.pos); np[track] = Math.max(0, Math.min(dur, p)); this.setState({ pos: np }); };
+    const playing = !!s.playing;
+    const PLAY = 'M8 5.2v13.6L19 12z';
+    const PAUSE = 'M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z';
+    const expanded = s.expanded !== false;
+    const bare = !!this.props.bare;
+    const showMini = (s.started !== false) && !expanded;
+    const rate = D.rates[s.rate || 0];
+    const tracks = ['guide', 'full'].map((id) => ({
+      label: D.name[id], dur: fmt(D.dur[id]),
+      pressed: id === track ? 'true' : 'false',
+      bg: id === track ? '#F3EFE6' : 'transparent',
+      fg: id === track ? '#1C1C1C' : '#F3EFE6',
+      pick: () => this.setState({ track: id })
+    }));
+    const look = {
+      a: { base: '#0F1516', sub: '#A9BDBC', coverTop: '26px', coverSize: '326px', coverRadius: '18px', coverBorder: 'none', coverShadow: '0 22px 44px rgba(0, 0, 0, 0.45)', progTop: '22px', ctrlTop: '14px', playBg: '#F3EFE6', playFg: '#1C1C1C', playBorder: '0', playShadow: 'none', sideBorder: '0', sideLine: 'rgba(243, 239, 230, 0.55)' },
+      b: { base: '#1B1512', sub: '#C9B3A8', coverTop: '22px', coverSize: '250px', coverRadius: '16px', coverBorder: 'none', coverShadow: '0 16px 36px rgba(0, 0, 0, 0.5)', progTop: '16px', ctrlTop: '10px', playBg: '#D89585', playFg: '#1C1C1C', playBorder: '0', playShadow: 'none', sideBorder: '0', sideLine: 'rgba(243, 239, 230, 0.55)' },
+      c: { base: '#0F1718', sub: '#A9BDBC', coverTop: '24px', coverSize: '296px', coverRadius: '16px', coverBorder: '1.5px solid #F3EFE6', coverShadow: '6px 6px 0 #D89585', progTop: '22px', ctrlTop: '12px', playBg: '#F3EFE6', playFg: '#1C1C1C', playBorder: '1.5px solid #F3EFE6', playShadow: '3px 3px 0 #D89585', sideBorder: '1.5px solid rgba(243, 239, 230, 0.4)', sideLine: 'rgba(243, 239, 230, 0.55)' }
+    }[v] || {};
+    const markList = marks.map((i) => ({ time: fmt(lines[i][0]), text: lines[i][1], jump: () => setPos(lines[i][0]) }));
+    return Object.assign({}, look, {
+      isA: v === 'a', isB: v === 'b', isC: v === 'c',
+      overlayY: expanded ? '0' : '100%',
+      miniY: showMini ? '0' : '90px',
+      miniOpacity: showMini ? '1' : '0',
+      miniPE: showMini ? 'auto' : 'none',
+      miniBottom: this.props.miniBottom || '30px',
+      overlayPE: expanded ? 'auto' : 'none',
+      rootBg: bare ? 'transparent' : '#FFFFFF',
+      rootPE: bare ? 'none' : 'auto',
+      notBare: !bare,
+      miniBg: '#0F1516',
+      collapsedStr: expanded ? 'false' : 'true',
+      expandedStr: expanded ? 'true' : 'false',
+      tracks: tracks,
+      trackName: D.name[track],
+      curTime: fmt(pos), durTime: fmt(dur), leftTime: fmt(dur - pos),
+      progPct: (pos / dur * 100).toFixed(2) + '%',
+      ticks: marks.map((i) => ({ left: (lines[i][0] / dur * 100).toFixed(2) + '%' })),
+      rateLabel: (rate === 1 ? '1.0' : String(rate)) + '×',
+      playIcon: playing ? PAUSE : PLAY,
+      playLabel: playing ? '暂停' : '播放',
+      lineFont: track === 'full' ? 'Newsreader, Georgia, serif' : "'Noto Sans SC', sans-serif",
+      linePrev: cur > 0 ? lines[cur - 1][1] : ' ',
+      lineCur: lines[cur][1],
+      lineNext: cur < lines.length - 1 ? lines[cur + 1][1] : ' ',
+      curDeco: marks.indexOf(cur) >= 0 ? 'underline' : 'none',
+      markCount: String(marks.length),
+      markList: markList,
+      drawerH: s.drawer ? '420px' : '112px',
+      drawerStr: s.drawer ? 'true' : 'false',
+      drawerHint: s.drawer ? '收起' : '点开查看',
+      hasToast: !!s.toast,
+      toast: s.toast || '',
+      collapse: () => this.setState({ expanded: false }),
+      expand: () => this.setState({ expanded: true }),
+      togglePlay: () => this.setState({ playing: !playing }),
+      back15: () => setPos(pos - 15),
+      fwd15: () => setPos(pos + 15),
+      cycleRate: () => this.setState({ rate: ((s.rate || 0) + 1) % D.rates.length }),
+      toggleDrawer: () => this.setState({ drawer: !s.drawer }),
+      seek: (e) => { const r = e.currentTarget.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)); setPos(f * dur); },
+      markNow: () => {
+        if (marks.indexOf(cur) >= 0) { this.showToast('这一句已经记过了'); return; }
+        const m = Object.assign({}, s.marks);
+        m[track] = marks.concat([cur]);
+        this.setState({ marks: m });
+        this.showToast('已存进划线 · ' + fmt(lines[cur][0]));
+        if (this.props.onMark && track === 'full') this.props.onMark({ text: lines[cur][1], at: fmt(lines[cur][0]) });
+      }
+    });
+  }
+}
+</script>
+</body>
+</html>
