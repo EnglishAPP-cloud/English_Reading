@@ -43,8 +43,7 @@ npm run build:web    # 打包网页版到 dist/（发布由 GitHub 自动做，�
 .github/workflows/deploy-web.yml  打包网页版并发布到 GitHub Pages（gh-pages 分支）
 app.config.js             打包网页版时补上网址前缀 baseUrl（读环境变量 WEB_BASE_URL），平时原样用 app.json
 public/index.html         网页版的页面模板（背景色、电脑上居中显示手机宽度一栏）
-public/design/            设计稿的静态网页版（发链接给别人看），不属于 APP 代码；打包网页时原样复制
-  book-b/                 拆书详情页 B 版：/English_Reading/design/book-b/
+public/prototype/         朋友做的 Underline 设计原型（Design 画布里的文件），和网页版一起发布到 /English_Reading/prototype/；不属于 APP 代码
 app/                      只放路由和页面拼装，不写业务逻辑
   _layout.tsx             根布局：加载 Lora 字体、等本地数据读回、Stack 导航
   (tabs)/_layout.tsx      底部三个标签：今日 / 知识库 / 单词；右上角"设置"
@@ -285,10 +284,17 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
   - baseUrl 只在打包网页时通过 `app.config.js` 加上：写进 app.json 会连带改掉开发服务器给手机的地址。
   - 网页版是正式包（`__DEV__` 为 false）：设置页的开发工具（模拟日期、预览未发布、清空数据）不显示。
   - 电脑宽屏上由 `public/index.html` 的 CSS 把 APP 限制在居中 480px 一栏；底部弹出卡片（Modal）仍是整屏宽。
-  - **设计稿演示页** `public/design/<名字>/index.html`：把 Design 画布里的一页改写成独立的静态 HTML（纯 HTML/CSS/少量 JS，
-    图片和英文字体 Newsreader 放在同一文件夹，不依赖 Google Fonts，国内也能打开），随网页版一起发布。
-    它们只是给人看的设计稿，数据是示例，不走 `src/theme` tokens、不接 APP 的 store；设计定稿后要在 APP 里按规矩重新实现。
-    现有：`book-b/` ← 画布 https://claude.ai/artifact/EHPysrp2AwP7dC7fmL8nUJ 的 `Main.dc.html`（改了画布记得同步这里）。
+  - **设计原型** `public/prototype/`：朋友的 Design 画布 https://claude.ai/artifact/BDZcPpeNCdMeDDzT4aosse 原样搬过来，
+    网址 https://englishapp-cloud.github.io/English_Reading/prototype/ （可点的完整 App；`boards.html` 列出画布里全部画板）。
+    只是给人看的设计稿，数据是示例，不走 `src/theme` tokens、不接 APP 的 store；设计定稿后要在 APP 里按规矩重新实现。
+    - `*.dc.html` = 画布 `project/` 下的画板文件；`canvas.json` = 画布的索引（用来生成 `boards.html`）。
+    - `support.js` = Design 类型的运行时 `artifact-type/dc-runtime.js`（自带 React），画板按 `./名字.dc.html` 互相加载。
+    - 为了离开 claude.ai 也能打开，只做了两种替换：Google Fonts 链接 → `fonts.css`（Newsreader 放在 `fonts/`，中文用系统字体）；
+      `/_blob/<id>` 图片 → `assets/` 下的本地文件。
+    - `index.html` = `App.dc.html` 加一个"按屏幕缩放、居中"的外壳（`#stage`），由 App.dc.html 生成，别单独改内容。
+    - 在朋友原稿上改过的地方（再从画布同步时要重新做）：`App.dc.html` 里拆书详情用 `variant="b"`；
+      `Book.dc.html` 的 B 版分栏改成划线型（选中下划线 + 上方淡阴影）、B 版头部用真实封面 `assets/book-cover.jpg`、
+      作者头像用照片 `assets/david-brooks.jpg`、作者简介一句话润色、illuminator / diminisher 后加了中文（照亮者 / 削弱者）。
 - Lora 字体在 `app/_layout.tsx` 加载完才渲染页面；Lora 的粗细靠字体名区分（安卓不认 fontWeight）。
 
 ## 验收自测记录（阶段 5，2026-09-25）

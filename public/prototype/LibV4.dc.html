@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>资料库 V4 · 双标签 + 月份宫格</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #ECE9E2; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 44px 0 124px 0">
+
+<div style="padding: 0 10px 0 24px; display: flex; align-items: center; justify-content: space-between">
+<h1 style="margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 30px; line-height: 44px; letter-spacing: 2px">资料库</h1>
+<div style="display: flex; align-items: center">
+<button type="button" aria-label="搜索" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
+</button>
+<button type="button" aria-label="筛选" onClick="{{openSheet}}" style="position: relative; width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10"></path><path d="M18 7h2"></path><circle cx="16" cy="7" r="2"></circle><path d="M4 17h2"></path><path d="M10 17h10"></path><circle cx="8" cy="17" r="2"></circle></svg>
+<sc-if value="{{hasFilter}}" hint-placeholder-val="{{false}}">
+<span aria-hidden="true" style="position: absolute; top: 9px; right: 8px; width: 9px; height: 9px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 5px; background: #9EC0C0"></span>
+</sc-if>
+</button>
+</div>
+</div>
+
+<div role="group" aria-label="模块" style="margin: 10px 16px 0 16px; padding: 3px; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3px">
+<button type="button" aria-pressed="{{deskStr}}" onClick="{{goDesk}}" style="height: 40px; box-sizing: border-box; border: 1.5px solid {{deskBorder}}; border-radius: 20px; background: {{deskBg}}; color: #1C1C1C; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">我的书桌</button>
+<button type="button" aria-pressed="{{archStr}}" onClick="{{goArch}}" style="height: 40px; box-sizing: border-box; border: 1.5px solid {{archBorder}}; border-radius: 20px; background: {{archBg}}; color: #1C1C1C; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">历史资料库</button>
+</div>
+
+<sc-if value="{{isArch}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-direction: column">
+
+<div style="margin: 16px 16px 0 16px; box-sizing: border-box; padding: 14px 14px 16px 14px; background: #9EC0C0; border: 1.5px solid #1C1C1C; border-radius: 22px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 4px">
+<h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">按分类</h2>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 14px">612 篇</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+
+<a href="#" style="height: 124px; box-sizing: border-box; padding: 4px 12px 10px 12px; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 14px; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-decoration: none; color: #1C1C1C">
+<svg width="82" height="82" viewBox="0 0 96 96" aria-hidden="true"><defs><pattern id="ink-n1" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.62" fill="#1C1C1C"></circle></pattern><pattern id="cor-n1" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><circle cx="1.4" cy="1.4" r="0.95" fill="#D89585"></circle></pattern></defs><path d="M52.06 37.5 L91.9 60.5 L62.45 77.5 L22.62 54.5 Z" fill="#D89585"></path><path d="M16.56 51.0 L56.39 74.0 L56.39 69.0 L16.56 46.0 Z" fill="#FBF8F1"></path><path d="M16.56 51.0 L56.39 74.0 L56.39 69.0 L16.56 46.0 Z" fill="url(#ink-n1)"></path><path d="M16.56 51.0 L56.39 74.0 L56.39 69.0 L16.56 46.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M85.84 57.0 L56.39 74.0 L56.39 69.0 L85.84 52.0 Z" fill="#FBF8F1"></path><path d="M85.84 57.0 L56.39 74.0 L56.39 69.0 L85.84 52.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M46.0 29.0 L85.84 52.0 L56.39 69.0 L16.56 46.0 Z" fill="#FBF8F1"></path><path d="M46.0 29.0 L85.84 52.0 L56.39 69.0 L16.56 46.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M46.87 33.5 L68.52 46.0 L64.19 48.5 L42.54 36.0 Z" fill="#1C1C1C"></path><path d="M57.26 48.5 L70.25 56.0 L59.86 62.0 L46.87 54.5 Z" fill="url(#cor-n1)"></path><path d="M57.26 48.5 L70.25 56.0 L59.86 62.0 L46.87 54.5 Z" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M39.07 38.0 L52.93 46.0" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round"></path><path d="M35.61 40.0 L49.46 48.0" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round"></path><path d="M32.14 42.0 L46.0 50.0" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round"></path><path d="M28.68 44.0 L42.54 52.0" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round"></path><path d="M25.22 46.0 L56.39 64.0" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round"></path></svg>
+<span style="align-self: stretch; display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 14px; line-height: 20px; font-weight: 700">资讯</span><span style="font-family: Newsreader, Georgia, serif; font-size: 13px; color: #56524D">212</span></span>
+</a>
+
+<a href="#" style="height: 124px; box-sizing: border-box; padding: 4px 12px 10px 12px; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 14px; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-decoration: none; color: #1C1C1C">
+<svg width="82" height="82" viewBox="0 0 96 96" aria-hidden="true"><defs><pattern id="ink-p1" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.62" fill="#1C1C1C"></circle></pattern></defs><path d="M54.93 45.0 L73.98 56.0 L54.93 67.0 L35.88 56.0 Z" fill="#D89585"></path><path d="M28.95 52.0 L48.0 63.0 L48.0 50.0 L28.95 39.0 Z" fill="#FBF8F1"></path><path d="M28.95 52.0 L48.0 63.0 L48.0 50.0 L28.95 39.0 Z" fill="url(#ink-p1)"></path><path d="M28.95 52.0 L48.0 63.0 L48.0 50.0 L28.95 39.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M67.05 52.0 L48.0 63.0 L48.0 50.0 L67.05 39.0 Z" fill="#FBF8F1"></path><path d="M67.05 52.0 L48.0 63.0 L48.0 50.0 L67.05 39.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M48.0 28.0 L67.05 39.0 L48.0 50.0 L28.95 39.0 Z" fill="#FBF8F1"></path><path d="M48.0 28.0 L67.05 39.0 L48.0 50.0 L28.95 39.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M11.63 39.0 L48.0 60.0 L48.0 57.0 L11.63 36.0 Z" fill="#FBF8F1"></path><path d="M11.63 39.0 L48.0 60.0 L48.0 57.0 L11.63 36.0 Z" fill="url(#ink-p1)"></path><path d="M11.63 39.0 L48.0 60.0 L48.0 57.0 L11.63 36.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M84.37 39.0 L48.0 60.0 L48.0 57.0 L84.37 36.0 Z" fill="#FBF8F1"></path><path d="M84.37 39.0 L48.0 60.0 L48.0 57.0 L84.37 36.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M48.0 15.0 L84.37 36.0 L48.0 57.0 L11.63 36.0 Z" fill="#FBF8F1"></path><path d="M48.0 15.0 L84.37 36.0 L48.0 57.0 L11.63 36.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M48.0 36.0 L62.72 48.5" stroke="#1C1C1C" stroke-width="1.6" stroke-linecap="round"></path><path d="M62.72 48.5 L63.59 64.0" stroke="#1C1C1C" stroke-width="1.6" stroke-linecap="round"></path><path d="M60.59 64.0 L66.59 64.0 L67.59 75.0 L59.59 75.0 Z" fill="#D89585" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><ellipse cx="48.0" cy="36.0" rx="3.2" ry="1.9" fill="#1C1C1C"></ellipse></svg>
+<span style="align-self: stretch; display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 14px; line-height: 20px; font-weight: 700">专业领域</span><span style="font-family: Newsreader, Georgia, serif; font-size: 13px; color: #56524D">146</span></span>
+</a>
+
+<a href="#" style="height: 124px; box-sizing: border-box; padding: 4px 12px 10px 12px; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 14px; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-decoration: none; color: #1C1C1C">
+<svg width="82" height="82" viewBox="0 0 96 96" aria-hidden="true"><defs><pattern id="ink-b1" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.62" fill="#1C1C1C"></circle></pattern></defs><path d="M52.06 53.5 L86.7 73.5 L60.72 88.5 L26.08 68.5 Z" fill="#D89585"></path><path d="M20.02 65.0 L54.66 85.0 L54.66 82.5 L20.02 62.5 Z" fill="#FBF8F1"></path><path d="M20.02 65.0 L54.66 85.0 L54.66 82.5 L20.02 62.5 Z" fill="url(#ink-b1)"></path><path d="M20.02 65.0 L54.66 85.0 L54.66 82.5 L20.02 62.5 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M80.64 70.0 L54.66 85.0 L54.66 82.5 L80.64 67.5 Z" fill="#FBF8F1"></path><path d="M80.64 70.0 L54.66 85.0 L54.66 82.5 L80.64 67.5 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M46.0 47.5 L80.64 67.5 L54.66 82.5 L20.02 62.5 Z" fill="#FBF8F1"></path><path d="M46.0 47.5 L80.64 67.5 L54.66 82.5 L20.02 62.5 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M80.64 67.5 L80.64 61.0" fill="none" stroke="#1C1C1C" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="2 2.4"></path><path d="M54.66 82.5 L54.66 76.0" fill="none" stroke="#1C1C1C" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="2 2.4"></path><path d="M20.02 62.5 L20.02 56.0" fill="none" stroke="#1C1C1C" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="2 2.4"></path><path d="M23.48 56.0 L54.66 74.0 L54.66 64.0 L23.48 46.0 Z" fill="#FBF8F1"></path><path d="M23.48 56.0 L54.66 74.0 L54.66 64.0 L23.48 46.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M77.18 61.0 L54.66 74.0 L54.66 64.0 L77.18 51.0 Z" fill="#FBF8F1"></path><path d="M77.18 61.0 L54.66 74.0 L54.66 64.0 L77.18 51.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M46.0 33.0 L77.18 51.0 L54.66 64.0 L23.48 46.0 Z" fill="#FBF8F1"></path><path d="M46.0 33.0 L77.18 51.0 L54.66 64.0 L23.48 46.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M75.88 59.25 L55.96 70.75" fill="none" stroke="#1C1C1C" stroke-width="0.8" stroke-linecap="round"></path><path d="M24.78 54.25 L53.36 70.75" fill="none" stroke="#1C1C1C" stroke-width="0.8" stroke-linecap="round"></path><path d="M75.88 56.75 L55.96 68.25" fill="none" stroke="#1C1C1C" stroke-width="0.8" stroke-linecap="round"></path><path d="M24.78 51.75 L53.36 68.25" fill="none" stroke="#1C1C1C" stroke-width="0.8" stroke-linecap="round"></path><path d="M75.88 54.25 L55.96 65.75" fill="none" stroke="#1C1C1C" stroke-width="0.8" stroke-linecap="round"></path><path d="M24.78 49.25 L53.36 65.75" fill="none" stroke="#1C1C1C" stroke-width="0.8" stroke-linecap="round"></path><path d="M80.64 51.0 L80.64 44.5" fill="none" stroke="#1C1C1C" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="2 2.4"></path><path d="M54.66 66.0 L54.66 59.5" fill="none" stroke="#1C1C1C" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="2 2.4"></path><path d="M20.02 46.0 L20.02 39.5" fill="none" stroke="#1C1C1C" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="2 2.4"></path><path d="M20.02 39.5 L54.66 59.5 L54.66 57.0 L20.02 37.0 Z" fill="#FBF8F1"></path><path d="M20.02 39.5 L54.66 59.5 L54.66 57.0 L20.02 37.0 Z" fill="url(#ink-b1)"></path><path d="M20.02 39.5 L54.66 59.5 L54.66 57.0 L20.02 37.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M80.64 44.5 L54.66 59.5 L54.66 57.0 L80.64 42.0 Z" fill="#FBF8F1"></path><path d="M80.64 44.5 L54.66 59.5 L54.66 57.0 L80.64 42.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M46.0 22.0 L80.64 42.0 L54.66 57.0 L20.02 37.0 Z" fill="#FBF8F1"></path><path d="M46.0 22.0 L80.64 42.0 L54.66 57.0 L20.02 37.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M34.74 36.5 L53.79 47.5 L51.2 49.0 L32.14 38.0 Z" fill="#D89585" stroke="#1C1C1C" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></path><path d="M46.0 30.0 L65.05 41.0" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round"></path><path d="M41.67 32.5 L55.53 40.5" fill="none" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round"></path></svg>
+<span style="align-self: stretch; display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 14px; line-height: 20px; font-weight: 700">拆书</span><span style="font-family: Newsreader, Georgia, serif; font-size: 13px; color: #56524D">96</span></span>
+</a>
+
+<a href="#" style="height: 124px; box-sizing: border-box; padding: 4px 12px 10px 12px; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 14px; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-decoration: none; color: #1C1C1C">
+<svg width="82" height="82" viewBox="0 0 96 96" aria-hidden="true"><defs><pattern id="ink-d1" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.62" fill="#1C1C1C"></circle></pattern><pattern id="cor-d1" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><circle cx="1.4" cy="1.4" r="0.95" fill="#D89585"></circle></pattern></defs><path d="M56.06 55.5 L90.7 75.5 L73.38 85.5 L38.74 65.5 Z" fill="#D89585"></path><path d="M32.68 62.0 L67.32 82.0 L67.32 56.0 L32.68 36.0 Z" fill="#FBF8F1"></path><path d="M32.68 62.0 L67.32 82.0 L67.32 56.0 L32.68 36.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M84.64 72.0 L67.32 82.0 L67.32 56.0 L84.64 46.0 Z" fill="#FBF8F1"></path><path d="M84.64 72.0 L67.32 82.0 L67.32 56.0 L84.64 46.0 Z" fill="url(#ink-d1)"></path><path d="M84.64 72.0 L67.32 82.0 L67.32 56.0 L84.64 46.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M50.0 26.0 L84.64 46.0 L67.32 56.0 L32.68 36.0 Z" fill="#FBF8F1"></path><path d="M50.0 26.0 L84.64 46.0 L67.32 56.0 L32.68 36.0 Z" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M77.71 46.0 L86.37 25.0" fill="none" stroke="#1C1C1C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="86.37" cy="25.0" r="1.8" fill="#1C1C1C"></circle><path d="M47.4 34.5 L48.53 33.74 L49.65 33.02 L50.78 32.36 L51.91 31.81 L53.03 31.39 L54.16 31.12 L55.28 31.03 L56.41 31.14 L57.53 31.46 L58.66 32.0 L59.79 32.76 L60.91 33.74 L62.04 34.93 L63.16 36.32 L64.29 37.89 L65.42 39.61 L66.54 41.46 L67.67 43.42 L68.79 45.44 L69.92 47.5" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></path><path d="M52.17 60.25 L52.07 58.87 L51.8 57.42 L51.36 55.93 L50.76 54.44 L50.01 52.99 L49.13 51.62 L48.15 50.36 L47.08 49.23 L45.96 48.27 L44.8 47.5 L43.65 46.94 L42.53 46.6 L41.46 46.5 L40.48 46.63 L39.6 46.98 L38.85 47.57 L38.24 48.35 L37.8 49.33 L37.53 50.47 L37.44 51.75 L37.53 53.13 L37.8 54.58 L38.24 56.07 L38.85 57.56 L39.6 59.01 L40.48 60.38 L41.46 61.64 L42.53 62.77 L43.65 63.73 L44.8 64.5 L45.96 65.06 L47.08 65.4 L48.15 65.5 L49.13 65.37 L50.01 65.02 L50.76 64.43 L51.36 63.65 L51.8 62.67 L52.07 61.53 Z" fill="url(#cor-d1)"></path><path d="M52.17 60.25 L52.07 58.87 L51.8 57.42 L51.36 55.93 L50.76 54.44 L50.01 52.99 L49.13 51.62 L48.15 50.36 L47.08 49.23 L45.96 48.27 L44.8 47.5 L43.65 46.94 L42.53 46.6 L41.46 46.5 L40.48 46.63 L39.6 46.98 L38.85 47.57 L38.24 48.35 L37.8 49.33 L37.53 50.47 L37.44 51.75 L37.53 53.13 L37.8 54.58 L38.24 56.07 L38.85 57.56 L39.6 59.01 L40.48 60.38 L41.46 61.64 L42.53 62.77 L43.65 63.73 L44.8 64.5 L45.96 65.06 L47.08 65.4 L48.15 65.5 L49.13 65.37 L50.01 65.02 L50.76 64.43 L51.36 63.65 L51.8 62.67 L52.07 61.53 Z" fill="none" stroke="#1C1C1C" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></path><path d="M62.12 61.0 L62.04 60.17 L61.78 59.3 L61.36 58.44 L60.83 57.65 L60.2 56.99 L59.53 56.5 L58.85 56.21 L58.23 56.15 L57.69 56.32 L57.28 56.7 L57.02 57.27 L56.93 58.0 L57.02 58.83 L57.28 59.7 L57.69 60.56 L58.23 61.35 L58.85 62.01 L59.53 62.5 L60.2 62.79 L60.83 62.85 L61.36 62.68 L61.78 62.3 L62.04 61.73 Z" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></path><path d="M62.12 71.0 L62.04 70.17 L61.78 69.3 L61.36 68.44 L60.83 67.65 L60.2 66.99 L59.53 66.5 L58.85 66.21 L58.23 66.15 L57.69 66.32 L57.28 66.7 L57.02 67.27 L56.93 68.0 L57.02 68.83 L57.28 69.7 L57.69 70.56 L58.23 71.35 L58.85 72.01 L59.53 72.5 L60.2 72.79 L60.83 72.85 L61.36 72.68 L61.78 72.3 L62.04 71.73 Z" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+<span style="align-self: stretch; display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 14px; line-height: 20px; font-weight: 700">播客</span><span style="font-family: Newsreader, Georgia, serif; font-size: 13px; color: #56524D">158</span></span>
+</a>
+
+</div>
+</div>
+
+<div style="padding: 22px 12px 0 24px; display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 16px; line-height: 22px; font-weight: 700">按时间</h2>
+<div style="display: flex; align-items: center">
+<button type="button" aria-label="上一年" style="width: 36px; height: 36px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 16px; font-weight: 500">2026</span>
+<button type="button" aria-label="下一年" style="width: 36px; height: 36px; border: 0; padding: 0; background: transparent; color: #A9A49B; display: flex; align-items: center; justify-content: center; cursor: default"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+
+<div style="padding: 8px 16px 0 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{months}}" as="m" hint-placeholder-count="9">
+<button type="button" aria-pressed="{{m.pressed}}" onClick="{{m.pick}}" style="height: 64px; box-sizing: border-box; padding: 8px 10px; background: {{m.bg}}; border: 1.5px solid #1C1C1C; border-radius: 12px; box-shadow: {{m.shadow}}; display: flex; flex-direction: column; justify-content: space-between; font-family: inherit; color: #1C1C1C; cursor: pointer; text-align: left">
+<span style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 22px; font-weight: 500">{{m.label}}</span>
+<svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.6"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#1C1C1C" stroke-width="8.5" stroke-dasharray="{{m.dash}}" transform="rotate(-90 10 10)"></circle></svg>
+</span>
+<span style="font-size: 11px; line-height: 14px; font-weight: 500">{{m.count}}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="margin: 14px 16px 0 16px; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 16px; box-shadow: 3px 3px 0 #1C1C1C; overflow: hidden">
+<div style="padding: 12px 16px; display: flex; align-items: baseline; justify-content: space-between; background: #9EC0C0; border-bottom: 1.5px solid #1C1C1C">
+<span style="font-size: 14px; line-height: 20px; font-weight: 700">{{monthTitle}}</span>
+<a href="#" style="font-size: 12px; font-weight: 600; color: #1C1C1C">这个月全部</a>
+</div>
+<sc-for list="{{monthItems}}" as="it" hint-placeholder-count="5">
+<a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 16px; border-bottom: 1px solid #E6E1D6; text-decoration: none; color: #1C1C1C">
+<span style="width: 30px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 18px; line-height: 20px; font-weight: 500">{{it.day}}</span>
+<span style="font-size: 10px; line-height: 13px; color: #56524D">{{it.wk}}</span>
+</span>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Newsreader, 'Noto Sans SC', serif; font-size: 15px; line-height: 20px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{it.title}}</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 16px; color: #56524D"><span aria-hidden="true" style="width: 9px; height: 9px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 2px; background: {{it.color}}"></span>{{it.typeLabel}}</span>
+</span>
+<svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" style="flex-shrink: 0"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#1C1C1C" stroke-width="8.5" stroke-dasharray="{{it.dash}}" transform="rotate(-90 10 10)"></circle></svg>
+</a>
+</sc-for>
+</div>
+
+</div>
+</sc-if>
+
+<sc-if value="{{isDesk}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column">
+<div style="padding: 20px 24px 0 24px"><h2 style="margin: 0; font-size: 17px; line-height: 24px; font-weight: 700">在看</h2></div>
+<div style="margin: 10px 16px 0 16px; box-sizing: border-box; background: #9EC0C0; border: 1.5px solid #1C1C1C; border-radius: 18px; box-shadow: 4px 4px 0 #1C1C1C; padding: 4px 0">
+<sc-for list="{{reading}}" as="it" hint-placeholder-count="3">
+<a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 6px 16px; text-decoration: none; color: #1C1C1C">
+<svg width="24" height="24" viewBox="0 0 20 20" aria-hidden="true" style="flex-shrink: 0"><circle cx="10" cy="10" r="8.5" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#1C1C1C" stroke-width="8.5" stroke-dasharray="{{it.dash}}" transform="rotate(-90 10 10)"></circle></svg>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Newsreader, 'Noto Sans SC', serif; font-size: 16px; line-height: 21px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{it.title}}</span>
+<span style="font-size: 12px; line-height: 16px; color: #1C1C1C">{{it.typeLabel}} · {{it.meta}}</span>
+</span>
+</a>
+</sc-for>
+</div>
+<div style="padding: 22px 24px 0 24px; display: flex; align-items: baseline; justify-content: space-between">
+<h2 style="margin: 0; font-size: 17px; line-height: 24px; font-weight: 700">收藏夹</h2>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 14px; color: #56524D">18</span>
+</div>
+<div style="margin: 10px 16px 0 16px; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 16px; box-shadow: 3px 3px 0 #1C1C1C; padding: 4px 0">
+<sc-for list="{{saved}}" as="it" hint-placeholder-count="4">
+<a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 6px 16px; text-decoration: none; color: #1C1C1C">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink: 0"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.5L5 21V4.5a1 1 0 0 1 1-1z" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round"></path></svg>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Newsreader, 'Noto Sans SC', serif; font-size: 16px; line-height: 21px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{it.title}}</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D">{{it.typeLabel}} · {{it.meta}}</span>
+</span>
+<svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" style="flex-shrink: 0"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#1C1C1C" stroke-width="8.5" stroke-dasharray="{{it.dash}}" transform="rotate(-90 10 10)"></circle></svg>
+</a>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<nav aria-label="主导航" style="position: absolute; left: 101px; bottom: 30px; display: flex; gap: 4px; padding: 6px; border-radius: 28px; background: #1C1C1C; box-shadow: 0 10px 24px rgba(28, 28, 28, 0.28)">
+<a href="GreetB.dc.html" aria-label="今日" style="width: 56px; height: 44px; border-radius: 22px; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"></rect><path d="M7 10h6"></path><path d="M7 14h10"></path></svg>
+</a>
+<a href="#" aria-label="资料库" aria-current="page" style="width: 56px; height: 44px; border-radius: 22px; background: #9EC0C0; color: #1C1C1C; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+</a>
+<button type="button" aria-label="我的" style="width: 56px; height: 44px; border: 0; padding: 0; border-radius: 22px; background: transparent; color: #D9D4C9; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.5 18.5c1.3-2.2 3.3-3.3 5.5-3.3s4.2 1.1 5.5 3.3"></path></svg>
+</button>
+</nav>
+
+<sc-if value="{{sheetOpen}}" hint-placeholder-val="{{false}}">
+<button type="button" aria-label="关闭筛选" onClick="{{closeSheet}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; border: 0; padding: 0; background: rgba(28, 28, 28, 0.38); cursor: pointer"></button>
+<div role="dialog" aria-modal="true" aria-label="筛选" style="position: absolute; left: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 10px 20px 30px 20px; background: #FBF8F1; border-top: 1.5px solid #1C1C1C; border-radius: 24px 24px 0 0; display: flex; flex-direction: column; gap: 16px">
+<span aria-hidden="true" style="align-self: center; width: 40px; height: 4px; border-radius: 2px; background: #CFCAC0"></span>
+<div style="display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 18px; line-height: 24px; font-weight: 700">筛选</h2>
+<button type="button" aria-label="关闭" onClick="{{closeSheet}}" style="width: 44px; height: 44px; margin-right: -10px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
+</div>
+<sc-for list="{{fgroups}}" as="g" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; line-height: 18px; font-weight: 700">{{g.label}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{g.opts}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="height: 36px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: {{o.bg}}; color: #1C1C1C; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{o.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<div style="margin-top: 4px; display: flex; gap: 10px">
+<button type="button" onClick="{{resetF}}" style="height: 48px; box-sizing: border-box; padding: 0 20px; border: 1.5px solid #1C1C1C; border-radius: 24px; background: transparent; font-family: inherit; font-size: 14px; font-weight: 600; color: #1C1C1C; cursor: pointer">重置</button>
+<button type="button" onClick="{{closeSheet}}" style="flex-grow: 1; height: 48px; border: 0; border-radius: 24px; background: #1C1C1C; font-family: inherit; font-size: 14px; font-weight: 600; color: #FBF8F1; cursor: pointer">查看 {{resultCount}} 篇</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'arch', month: 9, sheet: false, f: { cat: {}, lvl: {}, dur: {}, sort: 'new' } };
+  }
+
+  filterVals() {
+    const s = this.state || {};
+    const f = s.f || { cat: {}, lvl: {}, dur: {}, sort: 'new' };
+    const TOTAL = { news: 212, pro: 146, book: 96, pod: 158 };
+    const GROUPS = [
+      { id: 'cat', label: '分类', multi: true, opts: [['news', '资讯'], ['pro', '专业'], ['book', '拆书'], ['pod', '播客']] },
+      { id: 'lvl', label: '难度', multi: true, opts: [['c4', '四级'], ['c6', '六级'], ['ty', '托雅']] },
+      { id: 'dur', label: '时长', multi: true, opts: [['s', '5 分钟内'], ['m', '5–15 分钟'], ['l', '15 分钟以上']] },
+      { id: 'sort', label: '排序', multi: false, opts: [['new', '最新在前'], ['old', '最早在前']] }
+    ];
+    const setF = (next) => this.setState({ f: next });
+    const fgroups = GROUPS.map((g) => ({
+      label: g.label,
+      opts: g.opts.map(([id, label]) => {
+        const on = g.multi ? !!f[g.id][id] : f.sort === id;
+        return {
+          label: label,
+          bg: on ? '#9EC0C0' : '#FBF8F1',
+          pressed: on ? 'true' : 'false',
+          pick: () => {
+            const next = Object.assign({}, f);
+            if (g.multi) {
+              const m = Object.assign({}, f[g.id]);
+              if (m[id]) delete m[id]; else m[id] = true;
+              next[g.id] = m;
+            } else {
+              next.sort = id;
+            }
+            setF(next);
+          }
+        };
+      })
+    }));
+    const cats = Object.keys(f.cat);
+    const base = cats.length ? cats.reduce((n, k) => n + TOTAL[k], 0) : 612;
+    const lv = Object.keys(f.lvl).length;
+    const du = Object.keys(f.dur).length;
+    const resultCount = Math.max(1, Math.round(base * (lv ? lv / 3 : 1) * (du ? du / 3 : 1)));
+    return {
+      fgroups: fgroups,
+      resultCount: resultCount,
+      hasFilter: cats.length + lv + du > 0,
+      sheetOpen: !!s.sheet,
+      openSheet: () => this.setState({ sheet: true }),
+      closeSheet: () => this.setState({ sheet: false }),
+      resetF: () => setF({ cat: {}, lvl: {}, dur: {}, sort: 'new' })
+    };
+  }
+
+  renderVals() {
+    const s = this.state || {};
+    const tab = s.tab || 'arch';
+    const month = s.month || 9;
+    const C = 2 * Math.PI * 4.25;
+    const dash = (p) => (p * C).toFixed(2) + ' ' + C.toFixed(2);
+    const T = {
+      news: { label: '资讯', color: '#925F50' },
+      pro: { label: '专业', color: '#2F5E60' },
+      book: { label: '拆书', color: '#1C1C1C' },
+      pod: { label: '播客', color: '#D89585' }
+    };
+    const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 28];
+    const COVER = [0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 0.9, 0.4];
+    const months = DAYS.map((n, i) => {
+      const m = i + 1;
+      const on = m === month;
+      return {
+        label: m + ' 月',
+        count: n + ' 篇',
+        dash: dash(COVER[i]),
+        bg: on ? '#9EC0C0' : '#FBF8F1',
+        shadow: on ? '3px 3px 0 #1C1C1C' : 'none',
+        pressed: on ? 'true' : 'false',
+        pick: () => this.setState({ month: m })
+      };
+    }).reverse();
+    const POOL = [
+      { type: 'book', title: 'How to Know a Person' },
+      { type: 'news', title: 'Why Every Company Suddenly Wants an AI Agent' },
+      { type: 'pro', title: 'The Spotlight Effect' },
+      { type: 'news', title: 'The Science of Procrastination' },
+      { type: 'pod', title: '资讯快听 · AI Agents' },
+      { type: 'pro', title: 'Opportunity Cost, Explained' },
+      { type: 'book', title: 'Atomic Habits' }
+    ];
+    const WK = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+    const last = DAYS[month - 1];
+    const monthItems = [0, 1, 2, 3, 4].map((k) => {
+      const day = last - k;
+      const d = new Date(2026, month - 1, day);
+      const it = POOL[(day + month) % POOL.length];
+      const p = month < 9 ? (k === 2 ? 0.5 : 1) : [0.25, 0.6, 0, 0.4, 1][k];
+      return { day: day, wk: WK[d.getDay()], title: it.title, typeLabel: T[it.type].label, color: T[it.type].color, dash: dash(p) };
+    });
+    const mk = (d) => ({ title: d.title, meta: d.meta, typeLabel: T[d.type].label, color: T[d.type].color, dash: dash(d.p) });
+    const reading = [
+      { type: 'news', title: 'Why Every Company Suddenly Wants an AI Agent', meta: '六级 · 418 词', p: 0.6 },
+      { type: 'book', title: 'How to Know a Person', meta: 'David Brooks', p: 0.25 },
+      { type: 'pro', title: 'The Spotlight Effect', meta: '心理学 · 六级', p: 0.4 }
+    ].map(mk);
+    const saved = [
+      { type: 'book', title: 'Thinking, Fast and Slow', meta: 'Daniel Kahneman', p: 0.5 },
+      { type: 'pro', title: 'Opportunity Cost, Explained', meta: '经济学', p: 1 },
+      { type: 'news', title: 'What a Four-Day Week Really Changes', meta: '四级', p: 1 },
+      { type: 'pod', title: '资讯快听 · AI Agents', meta: '12 分钟', p: 0.7 }
+    ].map(mk);
+    const isArch = tab === 'arch';
+    return Object.assign({
+      isArch: isArch,
+      isDesk: !isArch,
+      archStr: isArch ? 'true' : 'false',
+      deskStr: isArch ? 'false' : 'true',
+      archBg: isArch ? '#9EC0C0' : 'transparent',
+      archBorder: isArch ? '#1C1C1C' : 'transparent',
+      deskBg: isArch ? 'transparent' : '#9EC0C0',
+      deskBorder: isArch ? 'transparent' : '#1C1C1C',
+      goArch: () => this.setState({ tab: 'arch' }),
+      goDesk: () => this.setState({ tab: 'desk' }),
+      months: months,
+      monthTitle: '2026 年 ' + month + ' 月 · ' + DAYS[month - 1] + ' 篇',
+      monthItems: monthItems,
+      reading: reading,
+      saved: saved
+    }, this.filterVals());
+  }
+}
+</script>
+</body>
+</html>

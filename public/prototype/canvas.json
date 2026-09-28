@@ -1,0 +1,699 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Dusk.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "④ 暮紫 · 主页",
+      "w": 390,
+      "x": 1410,
+      "y": 0
+    },
+    "DuskPalette.dc.html": {
+      "h": 400,
+      "title": "④ 暮紫 · 色板",
+      "w": 390,
+      "x": 1410,
+      "y": 964
+    },
+    "GreetB.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "① 今日",
+      "w": 390,
+      "x": 0,
+      "y": 0,
+      "page": "proto"
+    },
+    "GreetC.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "问候 C · 问候接书名",
+      "w": 390,
+      "x": 2510,
+      "y": 2504
+    },
+    "GreetLibrary.dc.html": {
+      "h": 700,
+      "title": "问候语 · 按时段轮换",
+      "w": 390,
+      "x": 2040,
+      "y": 3468
+    },
+    "IconBoard.dc.html": {
+      "h": 580,
+      "title": "分类图标 · 两个方向",
+      "w": 880,
+      "x": 1410,
+      "y": 5852
+    },
+    "Ink.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "⑤ 墨黑 · 主页",
+      "w": 390,
+      "x": 1880,
+      "y": 0
+    },
+    "InkPalette.dc.html": {
+      "h": 400,
+      "title": "⑤ 墨黑 · 色板",
+      "w": 390,
+      "x": 1880,
+      "y": 964
+    },
+    "LibS1.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 1 · 筛选胶囊",
+      "w": 390,
+      "x": 0,
+      "y": 4588
+    },
+    "LibS2.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 2 · 分类目录",
+      "w": 390,
+      "x": 470,
+      "y": 4588
+    },
+    "LibS3.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 3 · 类型 × 难度",
+      "w": 390,
+      "x": 940,
+      "y": 4588
+    },
+    "LibS4.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 4 · 分区与饼图",
+      "w": 390,
+      "x": 1410,
+      "y": 4588
+    },
+    "LibS5.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 5 · 分类大卡",
+      "w": 390,
+      "x": 1880,
+      "y": 4588
+    },
+    "LibV1.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 V1 · 上下分区",
+      "w": 390,
+      "x": 0,
+      "y": 5852
+    },
+    "LibV2.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 V2 · 双标签",
+      "w": 390,
+      "x": 470,
+      "y": 5852
+    },
+    "LibV3.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 V3 · 插画大卡",
+      "w": 390,
+      "x": 940,
+      "y": 5852
+    },
+    "LibV4.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 V4 · 双标签 + 月份宫格",
+      "w": 390,
+      "x": 0,
+      "y": 7116
+    },
+    "LibV5.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "资料库 V5 · 单页 + 月份折叠",
+      "w": 390,
+      "x": 470,
+      "y": 7116
+    },
+    "LibV6.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "④ 资料库",
+      "w": 390,
+      "x": 0,
+      "y": 1264,
+      "page": "proto"
+    },
+    "Main.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "① 松绿 · 主页",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "Mist.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "③ 雾蓝 · 主页",
+      "w": 390,
+      "x": 940,
+      "y": 0
+    },
+    "MistPalette.dc.html": {
+      "h": 400,
+      "title": "③ 雾蓝 · 色板",
+      "w": 390,
+      "x": 940,
+      "y": 964
+    },
+    "Navy.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "② 墨蓝 · 主页",
+      "w": 390,
+      "x": 470,
+      "y": 0
+    },
+    "NavyDeepHome.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "B 藏蓝 · 主页",
+      "w": 390,
+      "x": 470,
+      "y": 2504
+    },
+    "NavyDeepPalette.dc.html": {
+      "h": 400,
+      "title": "B 藏蓝 · 色板",
+      "w": 390,
+      "x": 470,
+      "y": 3468
+    },
+    "NavyPalette.dc.html": {
+      "h": 400,
+      "title": "② 墨蓝 · 色板",
+      "w": 390,
+      "x": 470,
+      "y": 964
+    },
+    "PetrolHome.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "C 夜青 · 主页",
+      "w": 390,
+      "x": 940,
+      "y": 2504
+    },
+    "PetrolPalette.dc.html": {
+      "h": 400,
+      "title": "C 夜青 · 色板",
+      "w": 390,
+      "x": 940,
+      "y": 3468
+    },
+    "PinePalette.dc.html": {
+      "h": 400,
+      "title": "① 松绿 · 色板",
+      "w": 390,
+      "x": 0,
+      "y": 964
+    },
+    "TealDeepPalette.dc.html": {
+      "h": 400,
+      "title": "A 墨青 · 色板",
+      "w": 390,
+      "x": 0,
+      "y": 3468
+    },
+    "TealHome.dc.html": {
+      "h": 844,
+      "radius": 40,
+      "title": "A 墨青 · 主页",
+      "w": 390,
+      "x": 0,
+      "y": 2504
+    },
+    "UnderlineHome.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "问候 A · 时间问候",
+      "w": 390,
+      "x": 1570,
+      "y": 2504
+    },
+    "UnderlineShelf.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "书架（旧版）",
+      "w": 390,
+      "x": 2980,
+      "y": 2504
+    },
+    "VocabPalette.dc.html": {
+      "h": 540,
+      "title": "参考 · Vocabulary 取色",
+      "w": 820,
+      "x": 0,
+      "y": 1484
+    },
+    "ArticleIntro.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "每日长文介绍 · 插画版",
+      "w": 390,
+      "x": 0,
+      "y": 8380
+    },
+    "ArticleIntroPhoto.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "② 每日长文 · 介绍",
+      "w": 390,
+      "x": 470,
+      "y": 0,
+      "page": "proto"
+    },
+    "Read.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "阅读页 A · 细线播放条",
+      "w": 390,
+      "x": 0,
+      "y": 9824
+    },
+    "ReadB.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "阅读页 B · 播客卡片",
+      "w": 390,
+      "x": 470,
+      "y": 9824
+    },
+    "ReadC.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "阅读页 C · 波形音轨",
+      "w": 390,
+      "x": 940,
+      "y": 9824
+    },
+    "ReadD.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "阅读页 C · 暖白 #FDFBF7",
+      "w": 390,
+      "x": 1410,
+      "y": 9824
+    },
+    "ReadDPure.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "③ 阅读",
+      "w": 390,
+      "x": 940,
+      "y": 0,
+      "page": "proto"
+    },
+    "Me.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "我的 A · 档案（参考 Apple Books / Kindle）",
+      "w": 390,
+      "x": 0,
+      "y": 11268
+    },
+    "MeB.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "我的 B · 成就墙（参考 Duolingo / Apple Fitness）",
+      "w": 390,
+      "x": 470,
+      "y": 11268
+    },
+    "MeC.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "我的 C · 读者证（参考星巴克会员卡 / 护照印章）",
+      "w": 390,
+      "x": 940,
+      "y": 11268
+    },
+    "MeD.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "⑤ 我的",
+      "w": 390,
+      "x": 470,
+      "y": 1264,
+      "page": "proto"
+    },
+    "Settings.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "⑥ 设置",
+      "w": 390,
+      "x": 940,
+      "y": 1264,
+      "page": "proto"
+    },
+    "Player.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "音频 A · 封面取色（参考 Apple Podcasts）",
+      "w": 390,
+      "x": 0,
+      "y": 12832
+    },
+    "PlayerB.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "音频 B · 跟读字幕（参考 Spotify 歌词）",
+      "w": 390,
+      "x": 470,
+      "y": 12832
+    },
+    "PlayerC.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "⑦ 音频播放（阅读页点音频框进入）",
+      "w": 390,
+      "x": 1410,
+      "y": 0,
+      "page": "proto"
+    },
+    "Vocab.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "生词本 A · 翻卡格子",
+      "w": 390,
+      "x": 0,
+      "y": 14096
+    },
+    "VocabB.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "⑧ 生词本（我的 → 生词）",
+      "w": 390,
+      "x": 0,
+      "y": 2528,
+      "page": "proto"
+    },
+    "Highlights.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "⑨ 划线（我的 → 划线）",
+      "w": 390,
+      "x": 470,
+      "y": 2528,
+      "page": "proto"
+    },
+    "App.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Underline · 完整 App（点 ▶ 从今日开始）",
+      "w": 390,
+      "x": 0,
+      "y": 0,
+      "page": "app"
+    },
+    "Book.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "拆书详情 A · 一页长卷",
+      "w": 390,
+      "x": 880,
+      "y": 0,
+      "page": "app"
+    },
+    "BookB.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "拆书详情 B · 顶部封面 + 六个分栏",
+      "w": 390,
+      "x": 1350,
+      "y": 0,
+      "page": "app"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-27T04:20:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas",
+    "page": "app"
+  },
+  "notes": {
+    "heading": {
+      "kind": "title1",
+      "maxW": 2270,
+      "text": "阅读器主页 · 五套主题色",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "heavy": {
+      "kind": "title1",
+      "maxW": 1330,
+      "text": "加重色 · 三个方案",
+      "w": 240,
+      "x": 0,
+      "y": 2204
+    },
+    "library": {
+      "kind": "title1",
+      "maxW": 2270,
+      "text": "资料库 · 五个方案",
+      "w": 240,
+      "x": 0,
+      "y": 4288
+    },
+    "library2": {
+      "kind": "title1",
+      "maxW": 2290,
+      "text": "资料库 · 重做三版 + 图标",
+      "w": 240,
+      "x": 0,
+      "y": 5552
+    },
+    "library3": {
+      "kind": "title1",
+      "maxW": 1330,
+      "text": "资料库 · V2 × V3 整合三版",
+      "w": 240,
+      "x": 0,
+      "y": 6816
+    },
+    "underline": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "Underline · 首页与书架",
+      "w": 240,
+      "x": 1570,
+      "y": 2204
+    },
+    "intro": {
+      "kind": "title1",
+      "maxW": 860,
+      "text": "每日长文 · 介绍页",
+      "w": 240,
+      "x": 0,
+      "y": 8080
+    },
+    "reader": {
+      "kind": "title1",
+      "maxW": 2270,
+      "text": "阅读页 · 三版 → C 定稿（纯白 + 音频入口）",
+      "w": 240,
+      "x": 0,
+      "y": 9524
+    },
+    "me": {
+      "kind": "title1",
+      "maxW": 2270,
+      "text": "我的 · 三版 → 定稿 + 设置页",
+      "w": 240,
+      "x": 0,
+      "y": 10968
+    },
+    "proto1": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "定稿原型 · 各页单独看（串起来的版本在「可点原型」页）",
+      "w": 240,
+      "x": 0,
+      "y": -300,
+      "page": "proto"
+    },
+    "proto2": {
+      "kind": "title1",
+      "maxW": 1330,
+      "text": "底部导航：资料库 · 我的 · 设置",
+      "w": 240,
+      "x": 0,
+      "y": 964,
+      "page": "proto"
+    },
+    "proto3": {
+      "kind": "title1",
+      "maxW": 1330,
+      "text": "我的 → 生词本 · 划线（都能批量导出）",
+      "w": 240,
+      "x": 0,
+      "y": 2228,
+      "page": "proto"
+    },
+    "audioExplore": {
+      "kind": "title1",
+      "maxW": 860,
+      "text": "音频播放页 · 未选的两版",
+      "w": 240,
+      "x": 0,
+      "y": 12532
+    },
+    "vocabExplore": {
+      "kind": "title1",
+      "maxW": 860,
+      "text": "生词本 · 未选的 A 版",
+      "w": 240,
+      "x": 0,
+      "y": 13796
+    },
+    "appGuide": {
+      "x": 0,
+      "y": 880,
+      "w": 390,
+      "maxH": 520,
+      "fill": "teal",
+      "page": "app",
+      "text": "能走通的路线：\n1. 今日 → 日推里点书名 → 拆书详情（先接的 A 版）\n2. 今日 → 优质语段精选 → 介绍页 → 开始阅读 → 阅读页\n3. 今日 → 拆书播客，或阅读页点「导读 & 本文音频」→ 播放器；点 ⌄ 收起成底部小条，换页它还在\n4. 在「本文音频」里点「记重点」，再去 我的 → 划线，最上面会多出这一句\n5. 底部导航切 今日 / 资料库 / 我的；我的 → 生词本、划线、设置\n\n没设计的入口点了暂时没反应。"
+    },
+    "bookTitle": {
+      "kind": "title1",
+      "maxW": 860,
+      "text": "拆书详情页 · 两个方案",
+      "w": 240,
+      "x": 880,
+      "y": -300,
+      "page": "app"
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Navy.dc.html",
+    "Mist.dc.html",
+    "Dusk.dc.html",
+    "Ink.dc.html",
+    "PinePalette.dc.html",
+    "NavyPalette.dc.html",
+    "MistPalette.dc.html",
+    "DuskPalette.dc.html",
+    "InkPalette.dc.html",
+    "VocabPalette.dc.html",
+    "TealHome.dc.html",
+    "NavyDeepHome.dc.html",
+    "PetrolHome.dc.html",
+    "TealDeepPalette.dc.html",
+    "NavyDeepPalette.dc.html",
+    "PetrolPalette.dc.html",
+    "UnderlineHome.dc.html",
+    "GreetB.dc.html",
+    "GreetC.dc.html",
+    "GreetLibrary.dc.html",
+    "UnderlineShelf.dc.html",
+    "LibS1.dc.html",
+    "LibS2.dc.html",
+    "LibS3.dc.html",
+    "LibS4.dc.html",
+    "LibS5.dc.html",
+    "LibV1.dc.html",
+    "LibV2.dc.html",
+    "LibV3.dc.html",
+    "IconBoard.dc.html",
+    "LibV4.dc.html",
+    "LibV5.dc.html",
+    "LibV6.dc.html",
+    "ArticleIntro.dc.html",
+    "ArticleIntroPhoto.dc.html",
+    "Read.dc.html",
+    "ReadB.dc.html",
+    "ReadC.dc.html",
+    "ReadD.dc.html",
+    "ReadDPure.dc.html",
+    "Me.dc.html",
+    "MeB.dc.html",
+    "MeC.dc.html",
+    "MeD.dc.html",
+    "Settings.dc.html",
+    "Player.dc.html",
+    "PlayerB.dc.html",
+    "PlayerC.dc.html",
+    "Vocab.dc.html",
+    "VocabB.dc.html",
+    "Highlights.dc.html",
+    "App.dc.html",
+    "Book.dc.html",
+    "BookB.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "explore",
+      "name": "探索过程"
+    },
+    {
+      "id": "proto",
+      "name": "定稿原型"
+    },
+    {
+      "id": "app",
+      "name": "可点原型（完整 App）"
+    }
+  ],
+  "title": "阅读器主页 · 配色方案"
+}

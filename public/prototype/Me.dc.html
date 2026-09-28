@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>我的</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: {{bg}}; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 44px 0 124px 0">
+
+<div style="padding: 0 10px 0 24px; display: flex; align-items: center; justify-content: space-between">
+<h1 style="margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 30px; line-height: 44px; letter-spacing: 2px">我的</h1>
+<a href="{{L.settings.href}}" onClick="{{L.settings.click}}" aria-label="设置" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #1C1C1C">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+</a>
+</div>
+
+<sc-if value="{{isA}}" hint-placeholder-val="{{true}}">
+<div style="padding: 0 24px; display: flex; flex-direction: column">
+<span style="margin-top: 2px; font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 2.5px; color: #2F5E60">SINCE AUG 2026</span>
+
+<section aria-label="打卡" style="margin-top: 20px; display: flex; flex-direction: column">
+<span style="font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">连续阅读</span>
+<span style="margin-top: 2px; display: flex; align-items: baseline; gap: 8px">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 80px; line-height: 80px; letter-spacing: -2px">21</span>
+<span style="font-size: 16px; line-height: 22px; font-weight: 600">天</span>
+</span>
+<span style="margin-top: 14px; display: flex; align-items: baseline; justify-content: space-between">
+<span style="font-size: 13px; line-height: 18px; font-weight: 600">9 月</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D; font-variant-numeric: tabular-nums">24 / 28</span>
+</span>
+<span role="img" aria-label="9 月已过 28 天，读了 24 天" style="margin-top: 10px; display: flex; justify-content: space-between">
+<sc-for list="{{dots}}" as="d" hint-placeholder-count="30">
+<span style="width: 8px; height: 8px; box-sizing: border-box; border-radius: 4px; background: {{d.bg}}; border: {{d.border}}"></span>
+</sc-for>
+</span>
+</section>
+
+<div aria-hidden="true" style="margin: 22px 0; border-top: 1px solid #ECE9E2"></div>
+
+<section aria-label="荣誉" style="display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700">荣誉</h2>
+<a href="#" style="font-size: 13px; line-height: 18px; color: #56524D; text-decoration: none">全部 13 ›</a>
+</span>
+<span style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr 1fr">
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.5"/><circle cx="28" cy="28" r="21.5" fill="none" stroke="#CFCAC0" stroke-width="1" stroke-dasharray="2 2.4"/><g transform="translate(14.5 14.5) scale(1.125)"><path d="M7 16a5 5 0 0 1 10 0z" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round"/><path d="M3.5 16h17M12 5.5v2.2M5.6 9.2l1.6 1.4M18.4 9.2l-1.6 1.4" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg><span style="margin-top: 8px; font-size: 12.5px; line-height: 18px; font-weight: 600">Early Bird</span><span style="font-size: 11px; line-height: 16px; color: #8A857C">9.27</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.5"/><circle cx="28" cy="28" r="21.5" fill="none" stroke="#CFCAC0" stroke-width="1" stroke-dasharray="2 2.4"/><g transform="translate(14.5 14.5) scale(1.125)"><rect x="4.5" y="4.5" width="6.5" height="6.5" rx="1.2" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8"/><rect x="13" y="4.5" width="6.5" height="6.5" rx="1.2" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="4.5" y="13" width="6.5" height="6.5" rx="1.2" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="13" y="13" width="6.5" height="6.5" rx="1.2" fill="#9EC0C0" stroke="#1C1C1C" stroke-width="1.8"/></g></svg><span style="margin-top: 8px; font-size: 12.5px; line-height: 18px; font-weight: 600">全领域</span><span style="font-size: 11px; line-height: 16px; color: #8A857C">9.20</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.5"/><circle cx="28" cy="28" r="21.5" fill="none" stroke="#CFCAC0" stroke-width="1" stroke-dasharray="2 2.4"/><g transform="translate(14.5 14.5) scale(1.125)"><text x="12" y="16.2" text-anchor="middle" font-family="Noto Serif SC, serif" font-weight="600" font-size="11" fill="#1C1C1C">1万</text><path d="M6 19.2h12" stroke="#D89585" stroke-width="2.2" stroke-linecap="round"/></g></svg><span style="margin-top: 8px; font-size: 12.5px; line-height: 18px; font-weight: 600">1 万词</span><span style="font-size: 11px; line-height: 16px; color: #8A857C">9.14</span></span>
+</span>
+</section>
+
+<div aria-hidden="true" style="margin: 22px 0; border-top: 1px solid #ECE9E2"></div>
+
+<section aria-label="积累" style="display: flex; flex-direction: column">
+<h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700">积累</h2>
+<span style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr 1fr">
+<a href="#" style="display: flex; flex-direction: column; color: #1C1C1C; text-decoration: none"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 30px; line-height: 36px">126</span><span style="font-size: 12.5px; line-height: 18px; color: #56524D">生词</span></a>
+<span style="display: flex; flex-direction: column">
+<a href="#" style="display: flex; flex-direction: column; color: #1C1C1C; text-decoration: none"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 30px; line-height: 36px">58</span><span style="font-size: 12.5px; line-height: 18px; color: #56524D">划线</span></a>
+<button type="button" aria-haspopup="dialog" onClick="{{openSheet}}" style="margin-top: 6px; align-self: flex-start; height: 26px; box-sizing: border-box; padding: 0 10px 0 8px; border: 1px solid #1C1C1C; border-radius: 13px; background: transparent; color: #1C1C1C; display: inline-flex; align-items: center; gap: 4px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M5 20h14"></path></svg>批量导出</button>
+</span>
+<a href="#" style="display: flex; flex-direction: column; color: #1C1C1C; text-decoration: none"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 30px; line-height: 36px">12</span><span style="font-size: 12.5px; line-height: 18px; color: #56524D">我写的</span></a>
+</span>
+</section>
+
+<div aria-hidden="true" style="margin: 20px 0 0 0; border-top: 1px solid #ECE9E2"></div>
+
+<a href="#" style="min-height: 50px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #ECE9E2">
+<span style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 15px; line-height: 22px; font-weight: 600">年卡</span><span style="font-size: 13px; line-height: 18px; color: #56524D; font-variant-numeric: tabular-nums">有效至 2027.08.31</span></span>
+<span style="font-size: 13px; line-height: 18px; color: #56524D">兑换码 ›</span>
+</a>
+<a href="#" style="min-height: 50px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none">
+<span style="font-size: 15px; line-height: 22px; font-weight: 600">帮助与反馈</span>
+<span aria-hidden="true" style="font-size: 13px; color: #56524D">›</span>
+</a>
+</div>
+</sc-if>
+
+<sc-if value="{{isB}}" hint-placeholder-val="{{false}}">
+<div style="padding: 10px 24px 0 24px; display: flex; flex-direction: column; gap: 16px">
+
+<section aria-label="数据" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+<span style="height: 86px; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; justify-content: space-between">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8"></circle><path d="M8 12.2l2.7 2.6L16 9.5" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="display: flex; align-items: baseline; justify-content: space-between"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 30px; line-height: 34px">21</span><span style="font-size: 12px; line-height: 16px; color: #56524D">连续天数</span></span>
+</span>
+<span style="height: 86px; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; box-shadow: 3px 3px 0 #1C1C1C; display: flex; align-items: center; justify-content: space-between">
+<span style="display: flex; flex-direction: column; justify-content: space-between; height: 60px">
+<span style="font-size: 12px; line-height: 16px; color: #56524D">9 月打卡</span>
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 30px; line-height: 34px">24<span style="font-size: 16px; color: #8A857C">/28</span></span>
+</span>
+<svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="17" fill="none" stroke="#DCE8E7" stroke-width="6"></circle><circle cx="23" cy="23" r="17" fill="none" stroke="#2F5E60" stroke-width="6" stroke-linecap="round" stroke-dasharray="91.5 106.8" transform="rotate(-90 23 23)"></circle></svg>
+</span>
+<span style="height: 86px; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; justify-content: space-between">
+<span aria-hidden="true" style="font-family: Newsreader, Georgia, serif; font-weight: 600; font-size: 17px; line-height: 20px; color: #2F5E60">Aa</span>
+<span style="display: flex; align-items: baseline; justify-content: space-between"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 26px; line-height: 34px; font-variant-numeric: tabular-nums">21,480</span><span style="font-size: 12px; line-height: 16px; color: #56524D">累计词数</span></span>
+</span>
+<span style="height: 86px; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; box-shadow: 3px 3px 0 #1C1C1C; display: flex; flex-direction: column; justify-content: space-between">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" fill="#9EC0C0"></path><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"></path></svg>
+<span style="display: flex; align-items: baseline; justify-content: space-between"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 30px; line-height: 34px">52</span><span style="font-size: 12px; line-height: 16px; color: #56524D">读完篇数</span></span>
+</span>
+</section>
+
+<section aria-label="荣誉" style="box-sizing: border-box; padding: 14px 16px 16px 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<span style="display: flex; align-items: baseline; gap: 8px"><h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700">荣誉</h2><span style="font-size: 12px; line-height: 16px; color: #8A857C; font-variant-numeric: tabular-nums">5 / 13</span></span>
+<a href="#" style="font-size: 13px; line-height: 18px; color: #56524D; text-decoration: none">全部 ›</a>
+</span>
+<span style="margin-top: 10px; display: grid; grid-template-columns: repeat(4, 1fr)">
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><defs><pattern id="h-cs" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.7" fill="#1C1C1C"/></pattern></defs><circle cx="34" cy="34" r="26" fill="url(#h-cs)"/><circle cx="31" cy="31" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.6"/><circle cx="31" cy="31" r="20.5" fill="none" stroke="#D89585" stroke-width="2"/><g transform="translate(17.5 17.5) scale(1.125)"><path d="M7 16a5 5 0 0 1 10 0z" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round"/><path d="M3.5 16h17M12 5.5v2.2M5.6 9.2l1.6 1.4M18.4 9.2l-1.6 1.4" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600">Early Bird</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><defs><pattern id="h-cg" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.7" fill="#1C1C1C"/></pattern></defs><circle cx="34" cy="34" r="26" fill="url(#h-cg)"/><circle cx="31" cy="31" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.6"/><circle cx="31" cy="31" r="20.5" fill="none" stroke="#D89585" stroke-width="2"/><g transform="translate(17.5 17.5) scale(1.125)"><rect x="4.5" y="4.5" width="6.5" height="6.5" rx="1.2" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8"/><rect x="13" y="4.5" width="6.5" height="6.5" rx="1.2" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="4.5" y="13" width="6.5" height="6.5" rx="1.2" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="13" y="13" width="6.5" height="6.5" rx="1.2" fill="#9EC0C0" stroke="#1C1C1C" stroke-width="1.8"/></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600">全领域</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><defs><pattern id="h-cw" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.7" fill="#1C1C1C"/></pattern></defs><circle cx="34" cy="34" r="26" fill="url(#h-cw)"/><circle cx="31" cy="31" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.6"/><circle cx="31" cy="31" r="20.5" fill="none" stroke="#D89585" stroke-width="2"/><g transform="translate(17.5 17.5) scale(1.125)"><text x="12" y="16.2" text-anchor="middle" font-family="Noto Serif SC, serif" font-weight="600" font-size="11" fill="#1C1C1C">1万</text><path d="M6 19.2h12" stroke="#D89585" stroke-width="2.2" stroke-linecap="round"/></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600">1 万词</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="31" cy="31" r="26" fill="#EFEBE3" stroke="#BDB7AC" stroke-width="1.5" stroke-dasharray="3 3"/><g transform="translate(17.5 17.5) scale(1.125)"><text x="12" y="16.5" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-weight="600" font-size="13" fill="#BDB7AC">30</text></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: #8A857C">30 天</span><span role="img" aria-label="距离解锁还差 9 天" style="margin-top: 5px; width: 44px; height: 4px; border-radius: 2px; background: #E4DFD6; overflow: hidden; display: block"><span style="display: block; width: 70%; height: 4px; background: #D89585"></span></span></span>
+</span>
+</section>
+
+<section aria-label="积累" style="box-sizing: border-box; padding: 4px 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+<a href="#" style="height: 46px; display: flex; align-items: center; gap: 12px; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span aria-hidden="true" style="width: 26px; display: flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 4.5h11a2 2 0 0 1 2 2v9" stroke="#1C1C1C" stroke-width="1.8"></path><rect x="3.5" y="8" width="13.5" height="11.5" rx="2" fill="#DCE8E7" stroke="#1C1C1C" stroke-width="1.8"></rect></svg></span>
+<span style="flex: 1; font-size: 15px; line-height: 22px; font-weight: 600">生词</span>
+<span style="font-size: 14px; color: #56524D; font-variant-numeric: tabular-nums">126</span><span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+<span style="height: 46px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #E4DFD6">
+<span aria-hidden="true" style="width: 26px; display: flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h10" stroke="#1C1C1C" stroke-width="1.8"></path><path d="M4 18h13" stroke="#D89585" stroke-width="3"></path></svg></span>
+<a href="#" style="flex: 1; display: flex; align-items: center; justify-content: space-between; height: 46px; color: #1C1C1C; text-decoration: none"><span style="font-size: 15px; line-height: 22px; font-weight: 600">划线</span><span style="font-size: 14px; color: #56524D; font-variant-numeric: tabular-nums">58</span></a>
+<button type="button" aria-haspopup="dialog" onClick="{{openSheet}}" style="height: 28px; box-sizing: border-box; padding: 0 10px; border: 1.5px solid #1C1C1C; border-radius: 14px; background: #9EC0C0; color: #1C1C1C; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer">批量导出</button>
+</span>
+<a href="#" style="height: 46px; display: flex; align-items: center; gap: 12px; color: #1C1C1C; text-decoration: none">
+<span aria-hidden="true" style="width: 26px; display: flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"></path><path d="M14 6l3 3"></path></svg></span>
+<span style="flex: 1; font-size: 15px; line-height: 22px; font-weight: 600">我写的</span>
+<span style="font-size: 14px; color: #56524D; font-variant-numeric: tabular-nums">12</span><span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+</section>
+
+<a href="#" style="box-sizing: border-box; padding: 12px 14px 12px 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #DCE8E7; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none">
+<span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 22px; font-weight: 700">年卡</span><span style="font-size: 12px; line-height: 16px; color: #2F5E60; font-variant-numeric: tabular-nums">有效至 2027.08.31</span></span>
+<span style="height: 30px; box-sizing: border-box; padding: 0 12px; border: 1.5px solid #1C1C1C; border-radius: 15px; background: #FBF8F1; display: inline-flex; align-items: center; font-size: 12.5px; font-weight: 700">兑换码</span>
+</a>
+
+<a href="#" style="align-self: center; min-height: 44px; display: flex; align-items: center; font-size: 13px; color: #56524D; text-decoration: none">帮助与反馈 ›</a>
+</div>
+</sc-if>
+
+<sc-if value="{{isC}}" hint-placeholder-val="{{false}}">
+<div style="padding: 10px 24px 0 24px; display: flex; flex-direction: column">
+
+<section aria-label="读者证" style="position: relative; height: 206px; box-sizing: border-box; padding: 18px 20px 16px 20px; border: 1.5px solid #1C1C1C; border-radius: 20px; background: #2F5E60; box-shadow: 4px 4px 0 #D89585; color: #FBF8F1; overflow: hidden; display: flex; flex-direction: column">
+<svg width="190" height="190" viewBox="0 0 190 190" aria-hidden="true" style="position: absolute; right: -56px; top: -52px"><defs><pattern id="rc-dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#9EC0C0"></circle></pattern></defs><circle cx="95" cy="95" r="88" fill="url(#rc-dots)" opacity="0.5"></circle><circle cx="95" cy="95" r="54" fill="none" stroke="#9EC0C0" stroke-width="1" opacity="0.6"></circle></svg>
+<span style="position: relative; display: flex; align-items: flex-start; justify-content: space-between">
+<span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 500; font-size: 22px; line-height: 28px; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 5px">Underline</span>
+</span>
+<span style="position: relative; margin-top: 14px; display: flex; align-items: baseline; gap: 8px">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 60px; line-height: 60px; letter-spacing: -1px">21</span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; font-weight: 600">天</span><span style="font-size: 11.5px; line-height: 16px; color: #B9D0CF">连续阅读</span></span>
+</span>
+<span aria-hidden="true" style="position: relative; margin-top: auto; border-top: 1px dashed rgba(251, 248, 241, 0.4)"></span>
+<span style="position: relative; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr 1.3fr">
+<span style="display: flex; flex-direction: column"><span style="font-size: 9.5px; line-height: 14px; letter-spacing: 1.5px; color: #9EC0C0">READER NO.</span><span style="font-family: Newsreader, Georgia, serif; font-size: 15px; line-height: 20px; font-variant-numeric: tabular-nums">002817</span></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 9.5px; line-height: 14px; letter-spacing: 1.5px; color: #9EC0C0">SINCE</span><span style="font-family: Newsreader, Georgia, serif; font-size: 15px; line-height: 20px; font-variant-numeric: tabular-nums">2026.08</span></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 9.5px; line-height: 14px; letter-spacing: 1.5px; color: #9EC0C0">年卡有效至</span><span style="font-family: Newsreader, Georgia, serif; font-size: 15px; line-height: 20px; font-variant-numeric: tabular-nums">2027.08.31</span></span>
+</span>
+</section>
+
+<section aria-label="本月打卡" style="margin-top: 24px; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<span style="font-size: 13px; line-height: 18px; font-weight: 700">9 月</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D; font-variant-numeric: tabular-nums">24 / 28</span>
+</span>
+<span role="img" aria-label="9 月已过 28 天，读了 24 天" style="margin-top: 10px; height: 28px; display: flex; align-items: flex-end; justify-content: space-between">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="30">
+<span style="width: 6px; height: {{b.h}}; border-radius: 2px; background: {{b.c}}"></span>
+</sc-for>
+</span>
+</section>
+
+<section aria-label="荣誉" style="margin-top: 26px; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700">荣誉</h2>
+<a href="#" style="font-size: 13px; line-height: 18px; color: #56524D; text-decoration: none">全部 13 ›</a>
+</span>
+<span style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr 1fr">
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true"><defs><path id="p-ss" d="M 14.8 40 a 25.2 25.2 0 1 1 50.4 0 a 25.2 25.2 0 1 1 -50.4 0"/></defs><g transform="rotate(-9 40 40)" opacity="0.94"><circle cx="40" cy="40" r="35" fill="none" stroke="#D89585" stroke-width="1.8"/><circle cx="40" cy="40" r="30.5" fill="none" stroke="#D89585" stroke-width="0.9"/><circle cx="40" cy="40" r="19.5" fill="none" stroke="#D89585" stroke-width="0.9"/><text font-family="Newsreader, Georgia, serif" font-size="7.4" font-weight="600" letter-spacing="1.6" fill="#D89585"><textPath href="#p-ss" startOffset="0" textLength="152" lengthAdjust="spacing">EARLY BIRD ✦ 2026.09.27 ✦ </textPath></text><g transform="translate(28 28)"><path d="M7 16a5 5 0 0 1 10 0z" fill="#1C1C1C" stroke="#D89585" stroke-width="1.8" stroke-linejoin="round"/><path d="M3.5 16h17M12 5.5v2.2M5.6 9.2l1.6 1.4M18.4 9.2l-1.6 1.4" stroke="#D89585" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></g></svg><span style="font-size: 12px; line-height: 16px; font-weight: 600">Early Bird</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true"><defs><path id="p-sg" d="M 14.8 40 a 25.2 25.2 0 1 1 50.4 0 a 25.2 25.2 0 1 1 -50.4 0"/></defs><g transform="rotate(6 40 40)" opacity="0.94"><circle cx="40" cy="40" r="35" fill="none" stroke="#2F5E60" stroke-width="1.8"/><circle cx="40" cy="40" r="30.5" fill="none" stroke="#2F5E60" stroke-width="0.9"/><circle cx="40" cy="40" r="19.5" fill="none" stroke="#2F5E60" stroke-width="0.9"/><text font-family="Newsreader, Georgia, serif" font-size="7.4" font-weight="600" letter-spacing="1.6" fill="#2F5E60"><textPath href="#p-sg" startOffset="0" textLength="152" lengthAdjust="spacing">ALL FIELDS ✦ 2026.09.20 ✦ </textPath></text><g transform="translate(28 28)"><rect x="4.5" y="4.5" width="6.5" height="6.5" rx="1.2" fill="#D89585" stroke="#2F5E60" stroke-width="1.8"/><rect x="13" y="4.5" width="6.5" height="6.5" rx="1.2" stroke="#2F5E60" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="4.5" y="13" width="6.5" height="6.5" rx="1.2" stroke="#2F5E60" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="13" y="13" width="6.5" height="6.5" rx="1.2" fill="#9EC0C0" stroke="#2F5E60" stroke-width="1.8"/></g></g></svg><span style="font-size: 12px; line-height: 16px; font-weight: 600">全领域</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true"><defs><path id="p-sw" d="M 14.8 40 a 25.2 25.2 0 1 1 50.4 0 a 25.2 25.2 0 1 1 -50.4 0"/></defs><g transform="rotate(-4 40 40)" opacity="0.94"><circle cx="40" cy="40" r="35" fill="none" stroke="#1C1C1C" stroke-width="1.8"/><circle cx="40" cy="40" r="30.5" fill="none" stroke="#1C1C1C" stroke-width="0.9"/><circle cx="40" cy="40" r="19.5" fill="none" stroke="#1C1C1C" stroke-width="0.9"/><text font-family="Newsreader, Georgia, serif" font-size="7.4" font-weight="600" letter-spacing="1.6" fill="#1C1C1C"><textPath href="#p-sw" startOffset="0" textLength="152" lengthAdjust="spacing">10,000 WORDS ✦ 2026.09.14 ✦ </textPath></text><g transform="translate(28 28)"><text x="12" y="16.2" text-anchor="middle" font-family="Noto Serif SC, serif" font-weight="600" font-size="11" fill="#1C1C1C">1万</text><path d="M6 19.2h12" stroke="#D89585" stroke-width="2.2" stroke-linecap="round"/></g></g></svg><span style="font-size: 12px; line-height: 16px; font-weight: 600">1 万词</span></span>
+</span>
+</section>
+
+<section aria-label="积累" style="margin-top: 22px; display: flex; flex-direction: column; border-top: 1.5px solid #1C1C1C">
+<a href="#" style="height: 48px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 15px; line-height: 22px; font-weight: 600">生词</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="font-family: Newsreader, Georgia, serif; font-size: 18px; font-variant-numeric: tabular-nums">126</span><span aria-hidden="true" style="color: #8A857C">›</span></span>
+</a>
+<span style="height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #E4DFD6">
+<a href="#" style="flex: 1; height: 48px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none"><span style="font-size: 15px; line-height: 22px; font-weight: 600; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 5px">划线</span><span style="font-family: Newsreader, Georgia, serif; font-size: 18px; font-variant-numeric: tabular-nums">58</span></a>
+<button type="button" aria-haspopup="dialog" onClick="{{openSheet}}" style="height: 30px; box-sizing: border-box; padding: 0 12px; border: 0; border-radius: 15px; background: #1C1C1C; color: #FBF8F1; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer">批量导出</button>
+</span>
+<a href="#" style="height: 48px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 15px; line-height: 22px; font-weight: 600">我写的</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="font-family: Newsreader, Georgia, serif; font-size: 18px; font-variant-numeric: tabular-nums">12</span><span aria-hidden="true" style="color: #8A857C">›</span></span>
+</a>
+</section>
+
+<span style="margin-top: 10px; display: flex; justify-content: center; gap: 4px; font-size: 13px; line-height: 18px; color: #56524D">
+<a href="#" style="min-height: 44px; padding: 0 8px; display: flex; align-items: center; color: #56524D; text-decoration: none">兑换码</a>
+<span aria-hidden="true" style="display: flex; align-items: center">·</span>
+<a href="#" style="min-height: 44px; padding: 0 8px; display: flex; align-items: center; color: #56524D; text-decoration: none">售后与退款</a>
+<span aria-hidden="true" style="display: flex; align-items: center">·</span>
+<a href="#" style="min-height: 44px; padding: 0 8px; display: flex; align-items: center; color: #56524D; text-decoration: none">帮助与反馈</a>
+</span>
+</div>
+</sc-if>
+
+<sc-if value="{{isD}}" hint-placeholder-val="{{false}}">
+<div style="padding: 10px 24px 0 24px; display: flex; flex-direction: column">
+
+<section aria-label="读者证" style="position: relative; height: 206px; box-sizing: border-box; padding: 18px 20px 16px 20px; border: 1.5px solid #1C1C1C; border-radius: 20px; background: #2F5E60; box-shadow: 4px 4px 0 #D89585; color: #FBF8F1; overflow: hidden; display: flex; flex-direction: column">
+<svg width="190" height="190" viewBox="0 0 190 190" aria-hidden="true" style="position: absolute; right: -56px; top: -52px"><defs><pattern id="rc-dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#9EC0C0"></circle></pattern></defs><circle cx="95" cy="95" r="88" fill="url(#rc-dots)" opacity="0.5"></circle><circle cx="95" cy="95" r="54" fill="none" stroke="#9EC0C0" stroke-width="1" opacity="0.6"></circle></svg>
+<span style="position: relative; display: flex; align-items: flex-start; justify-content: space-between">
+<span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 500; font-size: 22px; line-height: 28px; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 5px">Underline</span>
+</span>
+<span style="position: relative; margin-top: 14px; display: flex; align-items: baseline; gap: 8px">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 60px; line-height: 60px; letter-spacing: -1px">21</span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 14px; line-height: 18px; font-weight: 600">天</span><span style="font-size: 11.5px; line-height: 16px; color: #B9D0CF">连续阅读</span></span>
+</span>
+<span aria-hidden="true" style="position: relative; margin-top: auto; border-top: 1px dashed rgba(251, 248, 241, 0.4)"></span>
+<span style="position: relative; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr 1.3fr">
+<span style="display: flex; flex-direction: column"><span style="font-size: 9.5px; line-height: 14px; letter-spacing: 1.5px; color: #9EC0C0">READER NO.</span><span style="font-family: Newsreader, Georgia, serif; font-size: 15px; line-height: 20px; font-variant-numeric: tabular-nums">002817</span></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 9.5px; line-height: 14px; letter-spacing: 1.5px; color: #9EC0C0">SINCE</span><span style="font-family: Newsreader, Georgia, serif; font-size: 15px; line-height: 20px; font-variant-numeric: tabular-nums">2026.08</span></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 9.5px; line-height: 14px; letter-spacing: 1.5px; color: #9EC0C0">累计词数</span><span style="font-family: Newsreader, Georgia, serif; font-size: 15px; line-height: 20px; font-variant-numeric: tabular-nums">21,480</span></span>
+</span>
+</section>
+
+<section aria-label="本月打卡" style="margin-top: 24px; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<span style="font-size: 13px; line-height: 18px; font-weight: 700">9 月</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D; font-variant-numeric: tabular-nums">24 / 28</span>
+</span>
+<span role="img" aria-label="9 月已过 28 天，读了 24 天" style="margin-top: 10px; height: 28px; display: flex; align-items: flex-end; justify-content: space-between">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="30">
+<span style="width: 6px; height: {{b.h}}; border-radius: 2px; background: {{b.c}}"></span>
+</sc-for>
+</span>
+</section>
+
+<section aria-label="荣誉" style="margin-top: 24px; box-sizing: border-box; padding: 14px 16px 16px 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column">
+<span style="display: flex; align-items: baseline; justify-content: space-between">
+<span style="display: flex; align-items: baseline; gap: 8px"><h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 700">荣誉</h2><span style="font-size: 12px; line-height: 16px; color: #8A857C; font-variant-numeric: tabular-nums">5 / 13</span></span>
+<a href="#" style="font-size: 13px; line-height: 18px; color: #56524D; text-decoration: none">全部 ›</a>
+</span>
+<span style="margin-top: 10px; display: grid; grid-template-columns: repeat(4, 1fr)">
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><defs><pattern id="h-cs" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.7" fill="#1C1C1C"/></pattern></defs><circle cx="34" cy="34" r="26" fill="url(#h-cs)"/><circle cx="31" cy="31" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.6"/><circle cx="31" cy="31" r="20.5" fill="none" stroke="#D89585" stroke-width="2"/><g transform="translate(17.5 17.5) scale(1.125)"><path d="M7 16a5 5 0 0 1 10 0z" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8" stroke-linejoin="round"/><path d="M3.5 16h17M12 5.5v2.2M5.6 9.2l1.6 1.4M18.4 9.2l-1.6 1.4" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600">Early Bird</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><defs><pattern id="h-cg" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.7" fill="#1C1C1C"/></pattern></defs><circle cx="34" cy="34" r="26" fill="url(#h-cg)"/><circle cx="31" cy="31" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.6"/><circle cx="31" cy="31" r="20.5" fill="none" stroke="#D89585" stroke-width="2"/><g transform="translate(17.5 17.5) scale(1.125)"><rect x="4.5" y="4.5" width="6.5" height="6.5" rx="1.2" fill="#D89585" stroke="#1C1C1C" stroke-width="1.8"/><rect x="13" y="4.5" width="6.5" height="6.5" rx="1.2" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="4.5" y="13" width="6.5" height="6.5" rx="1.2" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="13" y="13" width="6.5" height="6.5" rx="1.2" fill="#9EC0C0" stroke="#1C1C1C" stroke-width="1.8"/></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600">全领域</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><defs><pattern id="h-cw" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="0.7" fill="#1C1C1C"/></pattern></defs><circle cx="34" cy="34" r="26" fill="url(#h-cw)"/><circle cx="31" cy="31" r="26" fill="#FBF8F1" stroke="#1C1C1C" stroke-width="1.6"/><circle cx="31" cy="31" r="20.5" fill="none" stroke="#D89585" stroke-width="2"/><g transform="translate(17.5 17.5) scale(1.125)"><text x="12" y="16.2" text-anchor="middle" font-family="Noto Serif SC, serif" font-weight="600" font-size="11" fill="#1C1C1C">1万</text><path d="M6 19.2h12" stroke="#D89585" stroke-width="2.2" stroke-linecap="round"/></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600">1 万词</span></span>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="31" cy="31" r="26" fill="#EFEBE3" stroke="#BDB7AC" stroke-width="1.5" stroke-dasharray="3 3"/><g transform="translate(17.5 17.5) scale(1.125)"><text x="12" y="16.5" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-weight="600" font-size="13" fill="#BDB7AC">30</text></g></svg><span style="margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: #8A857C">30 天</span><span role="img" aria-label="距离解锁还差 9 天" style="margin-top: 5px; width: 44px; height: 4px; border-radius: 2px; background: #E4DFD6; overflow: hidden; display: block"><span style="display: block; width: 70%; height: 4px; background: #D89585"></span></span></span>
+</span>
+</section>
+
+<section aria-label="积累" style="margin-top: 22px; display: flex; flex-direction: column; border-top: 1.5px solid #1C1C1C">
+<a href="{{L.vocab.href}}" onClick="{{L.vocab.click}}" style="height: 48px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 15px; line-height: 22px; font-weight: 600">生词</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="font-family: Newsreader, Georgia, serif; font-size: 18px; font-variant-numeric: tabular-nums">126</span><span aria-hidden="true" style="color: #8A857C">›</span></span>
+</a>
+<span style="height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #E4DFD6">
+<a href="{{L.highlights.href}}" onClick="{{L.highlights.click}}" style="flex: 1; height: 48px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none"><span style="font-size: 15px; line-height: 22px; font-weight: 600; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 5px">划线</span><span style="font-family: Newsreader, Georgia, serif; font-size: 18px; font-variant-numeric: tabular-nums">58</span></a>
+<button type="button" aria-haspopup="dialog" onClick="{{openSheet}}" style="height: 30px; box-sizing: border-box; padding: 0 12px; border: 0; border-radius: 15px; background: #1C1C1C; color: #FBF8F1; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer">批量导出</button>
+</span>
+<a href="#" style="height: 48px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="font-size: 15px; line-height: 22px; font-weight: 600">我写的</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="font-family: Newsreader, Georgia, serif; font-size: 18px; font-variant-numeric: tabular-nums">12</span><span aria-hidden="true" style="color: #8A857C">›</span></span>
+</a>
+</section>
+
+<div style="margin-top: 22px; box-sizing: border-box; padding: 10px 12px 10px 16px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #DCE8E7; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="#" style="flex: 1; min-height: 44px; display: flex; flex-direction: column; justify-content: center; color: #1C1C1C; text-decoration: none"><span style="font-size: 15px; line-height: 22px; font-weight: 700">年卡</span><span style="font-size: 12px; line-height: 16px; color: #2F5E60; font-variant-numeric: tabular-nums">有效至 2027.08.31 · 续费与售后 ›</span></a>
+<a href="#" style="height: 32px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: inline-flex; align-items: center; color: #1C1C1C; text-decoration: none; font-size: 12.5px; font-weight: 700">兑换码</a>
+</div>
+
+<div style="margin-top: 18px; display: flex; flex-direction: column; border-top: 1px solid #E4DFD6">
+<a href="{{L.settings.href}}" onClick="{{L.settings.click}}" style="height: 50px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span style="font-size: 15px; line-height: 22px; font-weight: 600">设置</span></span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12.5px; color: #8A857C">阅读偏好 · 提醒 · 账号 · 隐私</span><span aria-hidden="true" style="color: #8A857C">›</span></span>
+</a>
+<a href="{{L.settings.href}}" onClick="{{L.settings.click}}" style="height: 50px; display: flex; align-items: center; justify-content: space-between; color: #1C1C1C; text-decoration: none; border-bottom: 1px solid #E4DFD6">
+<span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.6"></path><path d="M12 17.2h.01"></path></svg><span style="font-size: 15px; line-height: 22px; font-weight: 600">帮助与反馈</span></span>
+<span aria-hidden="true" style="color: #8A857C">›</span>
+</a>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<nav aria-label="主导航" style="position: absolute; left: 101px; bottom: 30px; display: flex; gap: 4px; padding: 6px; border-radius: 28px; background: #1C1C1C; box-shadow: 0 10px 24px rgba(28, 28, 28, 0.28)">
+<a href="{{L.today.href}}" onClick="{{L.today.click}}" aria-label="今日" style="width: 56px; height: 44px; border-radius: 22px; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"></rect><path d="M7 10h6"></path><path d="M7 14h10"></path></svg>
+</a>
+<a href="{{L.library.href}}" onClick="{{L.library.click}}" aria-label="资料库" style="width: 56px; height: 44px; border-radius: 22px; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+</a>
+<a href="#" aria-label="我的" aria-current="page" style="width: 56px; height: 44px; border-radius: 22px; background: #9EC0C0; color: #1C1C1C; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.5 18.5c1.3-2.2 3.3-3.3 5.5-3.3s4.2 1.1 5.5 3.3"></path></svg>
+</a>
+</nav>
+
+<sc-if value="{{sheet}}" hint-placeholder-val="{{false}}">
+<button type="button" aria-label="关闭导出" onClick="{{closeSheet}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; border: 0; padding: 0; background: rgba(28, 28, 28, 0.38); cursor: pointer"></button>
+<section role="dialog" aria-label="导出划线" style="position: absolute; left: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 10px 24px 34px 24px; background: #FBF8F1; border-top: 1.5px solid #1C1C1C; border-radius: 24px 24px 0 0; display: flex; flex-direction: column">
+<span aria-hidden="true" style="align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #CFCAC0"></span>
+<span style="margin-top: 6px; display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 700">导出划线</h2>
+<button type="button" aria-label="关闭" onClick="{{closeSheet}}" style="width: 44px; height: 44px; margin-right: -12px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</span>
+
+<span style="margin-top: 6px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">范围</span>
+<span style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{ranges}}" as="r" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{r.pressed}}" onClick="{{r.pick}}" style="height: 34px; box-sizing: border-box; padding: 0 12px; border: {{r.border}}; border-radius: 17px; background: {{r.bg}}; color: #1C1C1C; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{r.label}}<span style="font-weight: 500; color: #56524D; font-variant-numeric: tabular-nums">{{r.n}}</span></button>
+</sc-for>
+</span>
+
+<span style="margin-top: 20px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">格式</span>
+<span style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{fmts}}" as="f" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="min-height: 54px; box-sizing: border-box; padding: 8px 14px; border: {{f.border}}; border-radius: 12px; background: {{f.bg}}; color: #1C1C1C; display: flex; align-items: center; gap: 12px; text-align: left; font-family: inherit; cursor: pointer">
+<span aria-hidden="true" style="width: 18px; height: 18px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; display: flex; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{f.dot}}"></span></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">{{f.title}}</span><span style="font-size: 12px; line-height: 17px; color: #56524D">{{f.sub}}</span></span>
+</button>
+</sc-for>
+</span>
+
+<span style="margin-top: 12px; display: flex; flex-direction: column">
+<button type="button" role="switch" aria-checked="{{notesStr}}" onClick="{{toggleNotes}}" style="min-height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: space-between; font-family: inherit; cursor: pointer">
+<span style="font-size: 14px; line-height: 20px; font-weight: 500">附上我的想法</span>
+<span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{notesBg}}"><span style="position: absolute; top: 2px; left: {{notesKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span>
+</button>
+<button type="button" role="switch" aria-checked="{{sourceStr}}" onClick="{{toggleSource}}" style="min-height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: space-between; font-family: inherit; cursor: pointer">
+<span style="font-size: 14px; line-height: 20px; font-weight: 500">附上出处（标题 · 日期 · 分类）</span>
+<span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{sourceBg}}"><span style="position: absolute; top: 2px; left: {{sourceKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span>
+</button>
+</span>
+
+<button type="button" onClick="{{doExport}}" style="margin-top: 14px; height: 54px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 27px; background: #1C1C1C; box-shadow: 4px 4px 0 #D89585; color: #FBF8F1; font-family: inherit; font-size: 16px; font-weight: 700; letter-spacing: 1px; cursor: pointer">{{exportLabel}}</button>
+<span role="status" style="margin-top: 10px; min-height: 18px; text-align: center; font-size: 12.5px; line-height: 18px; color: #2F5E60">{{doneText}}</span>
+</section>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nav":{"editor":null},"variant":{"editor":"enum","options":["a","b","c","d"],"default":"a"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sheet: false, range: 'all', fmt: 'md', notes: true, source: true, done: false };
+  }
+
+  renderVals() {
+    const __nav = this.props.nav;
+    const __go = (to, href) => ({ href: __nav ? '#' : href, click: (e) => { if (__nav) { if (e && e.preventDefault) e.preventDefault(); __nav(to); } } });
+    const L = {settings: __go('settings', 'Settings.dc.html'), today: __go('today', 'GreetB.dc.html'), library: __go('library', 'LibV6.dc.html'), vocab: __go('vocab', 'VocabB.dc.html'), highlights: __go('highlights', 'Highlights.dc.html')};
+    const s = this.state || {};
+    const v = this.props.variant ?? 'a';
+    const TODAY = 28;
+    const missed = [4, 5, 12, 20];
+    const dots = [];
+    const bars = [];
+    for (let d = 1; d <= 30; d++) {
+      const future = d > TODAY;
+      const miss = missed.indexOf(d) >= 0;
+      let bg = '#2F5E60', border = 'none', h = '26px', c = '#2F5E60';
+      if (d === TODAY) { bg = '#D89585'; c = '#D89585'; }
+      if (miss) { bg = 'transparent'; border = '1px solid #BDB7AC'; h = '8px'; c = '#CFCAC0'; }
+      if (future) { bg = '#ECE9E2'; border = 'none'; h = '4px'; c = '#DDD8CE'; }
+      dots.push({ bg, border });
+      bars.push({ h, c });
+    }
+    const rangeDefs = [
+      { id: 'all', label: '全部', n: 58 },
+      { id: 'month', label: '本月', n: 31 },
+      { id: 'news', label: '资讯', n: 14 },
+      { id: 'pro', label: '专业', n: 12 },
+      { id: 'book', label: '拆书', n: 22 },
+      { id: 'pod', label: '播客', n: 10 }
+    ];
+    const range = s.range || 'all';
+    const ranges = rangeDefs.map(r => {
+      const on = r.id === range;
+      return {
+        label: r.label, n: r.n,
+        pressed: on ? 'true' : 'false',
+        bg: on ? '#9EC0C0' : 'transparent',
+        border: on ? '1.5px solid #1C1C1C' : '1px solid #CFCAC0',
+        pick: () => this.setState({ range: r.id, done: false })
+      };
+    });
+    const count = (rangeDefs.find(r => r.id === range) || rangeDefs[0]).n;
+    const fmtDefs = [
+      { id: 'text', title: '复制为文本', sub: '粘贴到备忘录、微信，哪里都行', ext: '' },
+      { id: 'md', title: 'Markdown', sub: 'Notion、Obsidian 直接导入', ext: '.md' },
+      { id: 'pdf', title: 'PDF', sub: '排好版，可以打印', ext: '.pdf' }
+    ];
+    const fmt = s.fmt || 'md';
+    const fmts = fmtDefs.map(f => {
+      const on = f.id === fmt;
+      return {
+        title: f.title, sub: f.sub,
+        pressed: on ? 'true' : 'false',
+        bg: on ? '#DCE8E7' : 'transparent',
+        border: on ? '1.5px solid #1C1C1C' : '1px solid #CFCAC0',
+        dot: on ? '#1C1C1C' : 'transparent',
+        pick: () => this.setState({ fmt: f.id, done: false })
+      };
+    });
+    const curFmt = fmtDefs.find(f => f.id === fmt) || fmtDefs[1];
+    const notes = s.notes !== false;
+    const source = s.source !== false;
+    let doneText = '';
+    if (s.done) {
+      doneText = fmt === 'text'
+        ? '已复制 ' + count + ' 条划线，可以直接粘贴'
+        : '已生成 Underline划线_' + count + '条' + curFmt.ext;
+    }
+    return {
+      L: L,
+      bg: v === 'a' ? '#FFFFFF' : (v === 'b' ? '#ECE9E2' : '#F7F4ED'),
+      isA: v === 'a',
+      isB: v === 'b',
+      isC: v === 'c',
+      isD: v === 'd',
+      dots,
+      bars,
+      sheet: !!s.sheet,
+      ranges,
+      fmts,
+      notesStr: notes ? 'true' : 'false',
+      sourceStr: source ? 'true' : 'false',
+      notesBg: notes ? '#9EC0C0' : '#ECE9E2',
+      sourceBg: source ? '#9EC0C0' : '#ECE9E2',
+      notesKnob: notes ? '20px' : '2px',
+      sourceKnob: source ? '20px' : '2px',
+      exportLabel: s.done ? '完成' : '导出 ' + count + ' 条',
+      doneText,
+      openSheet: () => this.setState({ sheet: true, done: false }),
+      closeSheet: () => this.setState({ sheet: false, done: false }),
+      toggleNotes: () => this.setState({ notes: !notes, done: false }),
+      toggleSource: () => this.setState({ source: !source, done: false }),
+      doExport: () => (s.done ? this.setState({ sheet: false, done: false }) : this.setState({ done: true }))
+    };
+  }
+}
+</script>
+</body>
+</html>

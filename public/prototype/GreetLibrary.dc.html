@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>问候语 · 按时段轮换</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 700px; box-sizing: border-box; padding: 30px 24px; background: #9EC0C0; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; display: flex; flex-direction: column; gap: 20px">
+
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 700">问候语 · 按时段轮换</h1>
+<p style="margin: 0; font-size: 13px; line-height: 20px">每次打开首页，头像按当下时间说一句。下划线落在最有情绪的那个词上。</p>
+</div>
+
+<div style="display: flex; flex-direction: column; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 18px; box-shadow: 4px 4px 0 #1C1C1C; padding: 4px 18px">
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-bottom: 1px solid #E6E1D6">
+<span style="font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: 1px; color: #56524D">06:00–11:00 · 早上</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 32px; letter-spacing: -0.3px">Good morning, <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">early bird</span>.</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-bottom: 1px solid #E6E1D6">
+<span style="font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: 1px; color: #56524D">11:00–14:00 · 中午</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 32px; letter-spacing: -0.3px">A <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">quick read</span> before lunch?</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-bottom: 1px solid #E6E1D6">
+<span style="font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: 1px; color: #56524D">14:00–18:00 · 下午</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 32px; letter-spacing: -0.3px">Between <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">classes</span>?</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-bottom: 1px solid #E6E1D6">
+<span style="font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: 1px; color: #56524D">18:00–23:00 · 晚上</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 32px; letter-spacing: -0.3px">Evening, <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">reader</span>.</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-bottom: 1px solid #E6E1D6">
+<span style="display: flex; align-items: center; gap: 8px">
+<span style="font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: 1px; color: #56524D">23:00–06:00 · 深夜</span>
+<span style="display: inline-flex; align-items: center; height: 18px; padding: 0 7px; border-radius: 9px; background: #1C1C1C; color: #FBF8F1; font-size: 10px; font-weight: 600">首页现在用的</span>
+</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 32px; letter-spacing: -0.3px">Still up, <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">night owl</span>?</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-bottom: 1px solid #E6E1D6">
+<span style="font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: 1px; color: #56524D">周末 · 任何时间</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 32px; letter-spacing: -0.3px">It’s <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">Saturday</span>. No rush.</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0">
+<span style="font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: 1px; color: #56524D">隔了 3 天以上才打开</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 32px; letter-spacing: -0.3px">Look who’s <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">back</span>.</span>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

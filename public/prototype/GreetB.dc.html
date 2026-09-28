@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Underline 首页 · 问候 B</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; overflow: hidden; background: #9EC0C0">
+<dc-import name="UnderlineHome" variant="b" hint-size="390px,844px"></dc-import>
+<p style="margin: 0">音频播放页设计如下：
+
+1. 页面布局：
+   - 点开音频播放后，会像播客一样展示一整个页面。
+   - 中间是一个大插图，用上面的插图来带动。
+   - 下面是正常的进度条。
+
+2. 功能与交互：
+   - 支持搜索功能。
+   - 支持多种操作，比如播放、快进、倍速、记笔记等。
+   - 页面下方有一个向下收拢的界面。
+
+3. 调研要求：
+   - 先去调研视频上是否有这种音频播放页的设计。
+
+说了之后，它就会变成一个小的弹窗在屏幕的最下方。
+
+关于生词本，你就是做一个小的……
+
+这种页面，米色作为背景，具体设计如下：
+
+1. 单词展示与交互：
+   (a) 点击可以将文字分开，变成单词。
+   (b) 再点击一次，会有一个入口可以查看语境。
+
+2. 划线列表：
+   (a) 列表颜色采用原来的色系。
+   (b) 每一个划线项都可以点击回到原文对应的位置。
+
+3. 会员登录与兑换码：
+   (a) 会员登录界面采用一个非常简单的蓝色底。
+   (b) 界面上有一个“请输入兑换码”的输入框。
+
+你直接把这三张图我刚才画的都设计出来，主要是音频播放页，音频播放页做成黑色底的，也就是暗色底的。</p></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

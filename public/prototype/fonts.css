@@ -1,0 +1,4 @@
+/* 原型里的英文衬线字体 Newsreader（SIL OFL），放在本地，代替设计稿里的 Google Fonts 链接（国内打不开）。
+   中文字体用各系统自带的（苹方 / 微软雅黑等），设计稿里写的 Noto Sans SC / Noto Serif SC 会自动退回到这些字体。 */
+@font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400 600; font-display: swap; src: url(fonts/newsreader.woff2) format('woff2'); }
+@font-face { font-family: 'Newsreader'; font-style: italic; font-weight: 400 600; font-display: swap; src: url(fonts/newsreader-italic.woff2) format('woff2'); }
