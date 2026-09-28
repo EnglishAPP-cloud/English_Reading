@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>资料库 3 · 类型 × 难度</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #9EC0C0; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 44px 0 124px 0">
+
+<div style="padding: 0 12px 0 24px; display: flex; align-items: center; justify-content: space-between">
+<h1 style="margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 30px; line-height: 44px; letter-spacing: 2px">资料库</h1>
+<button type="button" aria-label="搜索" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
+</button>
+</div>
+
+<div role="group" aria-label="类型" style="margin-top: 6px; padding: 0 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1.5px solid #1C1C1C">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="height: 48px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; gap: 4px; font-family: inherit; color: #1C1C1C; cursor: pointer">
+<span style="font-size: 15px; line-height: 22px; font-weight: {{t.weight}}; text-decoration-line: {{t.deco}}; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 8px">{{t.label}}</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 13px; line-height: 22px">{{t.count}}</span>
+</button>
+</sc-for>
+</div>
+
+<div role="group" aria-label="难度" style="padding: 14px 24px 0 24px; display: flex; gap: 8px">
+<sc-for list="{{levels}}" as="l" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="height: 34px; box-sizing: border-box; padding: 0 13px; border: 1.5px solid #1C1C1C; border-radius: 17px; background: {{l.bg}}; color: {{l.fg}}; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer">{{l.label}}</button>
+</sc-for>
+</div>
+
+<div style="margin: 14px 16px 0 16px; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 18px; box-shadow: 4px 4px 0 #1C1C1C; overflow: hidden">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="4">
+<a href="#" style="display: flex; flex-direction: column; gap: 6px; padding: 14px 16px 0 16px; border-bottom: 1px solid #E6E1D6; text-decoration: none; color: #1C1C1C">
+<span style="font-family: Newsreader, 'Noto Sans SC', serif; font-size: 17px; line-height: 22px; font-weight: 500">{{it.title}}</span>
+<span style="font-size: 13px; line-height: 20px; color: #56524D; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{it.line}}</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 16px; color: #56524D">
+<span style="display: inline-flex; align-items: center; height: 18px; box-sizing: border-box; padding: 0 6px; border: 1px solid #1C1C1C; border-radius: 6px; color: #1C1C1C; font-size: 11px; font-weight: 500">{{it.level}}</span>
+<span>{{it.meta}}</span>
+</span>
+<span aria-hidden="true" style="margin: 8px -16px 0 -16px; height: 4px; background: #E1DDD3; display: flex"><span style="width: {{it.pct}}; background: #1C1C1C"></span></span>
+</a>
+</sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+<div style="padding: 28px 16px; font-size: 13px; line-height: 20px; color: #56524D; text-align: center">这个难度下暂时没有内容</div>
+</sc-if>
+</div>
+
+</div>
+
+<nav aria-label="主导航" style="position: absolute; left: 101px; bottom: 30px; display: flex; gap: 4px; padding: 6px; border-radius: 28px; background: #1C1C1C; box-shadow: 0 10px 24px rgba(28, 28, 28, 0.28)">
+<a href="GreetB.dc.html" aria-label="今日" style="width: 56px; height: 44px; border-radius: 22px; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"></rect><path d="M7 10h6"></path><path d="M7 14h10"></path></svg>
+</a>
+<a href="#" aria-label="资料库" aria-current="page" style="width: 56px; height: 44px; border-radius: 22px; background: #9EC0C0; color: #1C1C1C; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+</a>
+<button type="button" aria-label="我的" style="width: 56px; height: 44px; border: 0; padding: 0; border-radius: 22px; background: transparent; color: #D9D4C9; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.5 18.5c1.3-2.2 3.3-3.3 5.5-3.3s4.2 1.1 5.5 3.3"></path></svg>
+</button>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { type: 'news', level: 'all' };
+  }
+
+  renderVals() {
+    const s = this.state || {};
+    const type = s.type || 'news';
+    const level = s.level || 'all';
+    const DATA = [
+      { type: 'news', title: 'Why Every Company Suddenly Wants an AI Agent', line: 'AI 智能体开始走进日常工作，公司们在急什么', level: '六级', meta: '418 词', p: 0.6 },
+      { type: 'news', title: 'What a Four-Day Week Really Changes', line: '少上一天班，真正变化的是什么', level: '四级', meta: '536 词', p: 1 },
+      { type: 'news', title: 'The Science of Procrastination', line: '拖延不是懒，是情绪管理出了问题', level: '四级', meta: '472 词', p: 0.3 },
+      { type: 'news', title: 'Inside the Race to Build Cheaper Batteries', line: '电池成本每降一截，世界就换一个样子', level: '托雅', meta: '690 词', p: 0 },
+      { type: 'pro', title: 'Opportunity Cost, Explained', line: '你放弃的，才是真正的价格', level: '托雅', meta: '经济学', p: 1 },
+      { type: 'pro', title: 'The Spotlight Effect', line: '其实没那么多人在看你', level: '六级', meta: '心理学', p: 0.4 },
+      { type: 'pro', title: 'How Neural Networks Learn', line: '从一个神经元讲到一整个网络', level: '托雅', meta: '计算机', p: 0 },
+      { type: 'book', title: 'How to Know a Person', line: '让人觉得被看见，也是一种本事', level: '六级', meta: 'David Brooks', p: 0.25 },
+      { type: 'book', title: 'Atomic Habits', line: '每天进步一点点，剩下的交给复利', level: '四级', meta: 'James Clear', p: 1 },
+      { type: 'book', title: 'Thinking, Fast and Slow', line: '你的大脑里住着两套系统', level: '托雅', meta: 'Daniel Kahneman', p: 0.5 },
+      { type: 'pod', title: '拆书播客 · How to Know a Person', line: '二十分钟听完一本书的骨架', level: '六级', meta: '24 分钟', p: 0 },
+      { type: 'pod', title: '资讯快听 · AI Agents', line: '把今天的资讯讲给你听', level: '六级', meta: '12 分钟', p: 0.7 }
+    ];
+    const tabDefs = [
+      { id: 'news', label: '资讯' },
+      { id: 'pro', label: '专业' },
+      { id: 'book', label: '拆书' },
+      { id: 'pod', label: '播客' }
+    ];
+    const tabs = tabDefs.map((t) => {
+      const on = type === t.id;
+      return {
+        label: t.label,
+        count: DATA.filter((d) => d.type === t.id).length,
+        weight: on ? '700' : '500',
+        deco: on ? 'underline' : 'none',
+        pressed: on ? 'true' : 'false',
+        pick: () => this.setState({ type: t.id })
+      };
+    });
+    const levelDefs = [
+      { id: 'all', label: '全部难度' },
+      { id: '四级', label: '四级' },
+      { id: '六级', label: '六级' },
+      { id: '托雅', label: '托雅' }
+    ];
+    const levels = levelDefs.map((l) => {
+      const on = level === l.id;
+      return {
+        label: l.label,
+        bg: on ? '#1C1C1C' : '#FBF8F1',
+        fg: on ? '#FBF8F1' : '#1C1C1C',
+        pressed: on ? 'true' : 'false',
+        pick: () => this.setState({ level: l.id })
+      };
+    });
+    const items = DATA.filter((d) => d.type === type && (level === 'all' || d.level === level)).map((d) => ({
+      title: d.title,
+      line: d.line,
+      level: d.level,
+      meta: d.meta,
+      pct: Math.round(d.p * 100) + '%'
+    }));
+    return { tabs: tabs, levels: levels, items: items, empty: items.length === 0 };
+  }
+}
+</script>
+</body>
+</html>

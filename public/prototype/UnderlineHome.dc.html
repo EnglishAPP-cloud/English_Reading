@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Underline · 首页</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #9EC0C0; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 92px 0 124px 0">
+
+<sc-if value="{{greetA}}" hint-placeholder-val="{{true}}">
+<div style="padding: 10px 24px 0 24px; display: flex; flex-direction: column; gap: 10px">
+<h1 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 40px; line-height: 46px; letter-spacing: -0.8px; color: #1C1C1C">Hello, <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 7px">night owl.</span></h1>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #1C1C1C">今天这本，已经拆好了。</p>
+</div>
+</sc-if>
+
+<sc-if value="{{greetB}}" hint-placeholder-val="{{false}}">
+<div style="padding: 6px 16px 0 8px; display: flex; align-items: flex-start; gap: 6px">
+<div style="width: 44px; flex-shrink: 0; display: flex; justify-content: center; padding-top: 4px">
+<span aria-hidden="true" style="width: 40px; height: 40px; flex-shrink: 0; box-sizing: border-box; border-radius: 20px; border: 1.5px solid #1C1C1C; background: #FBF8F1; box-shadow: 2px 2px 0 #1C1C1C; display: flex; align-items: center; justify-content: center; font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 500; font-size: 20px; line-height: 20px; color: #1C1C1C; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 2px; text-underline-offset: 3px">U</span>
+</div>
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column">
+<h1 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 34px; line-height: 42px; letter-spacing: -0.6px; color: #1C1C1C">Still up, <span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 7px">night owl</span>?</h1>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{greetC}}" hint-placeholder-val="{{false}}">
+<div style="padding: 10px 24px 0 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 1.8px; color: #1C1C1C">HELLO, NIGHT OWL</span>
+<h1 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 32px; line-height: 40px; letter-spacing: -0.5px; color: #1C1C1C">Tonight, let’s learn<br><span style="font-style: italic; text-decoration-line: underline; text-decoration-color: #925F50; text-decoration-thickness: 3px; text-underline-offset: 6px">how to know a person.</span></h1>
+</div>
+</sc-if>
+
+<div style="padding: 22px 16px 0 8px; display: flex; flex-direction: column; gap: 22px">
+
+<div id="today" style="display: flex; align-items: flex-start; gap: 6px">
+<div style="width: 44px; flex-shrink: 0; display: flex; justify-content: center; padding-top: 24px">
+<span aria-hidden="true" style="width: 40px; height: 40px; flex-shrink: 0; box-sizing: border-box; border-radius: 20px; border: 1.5px solid #1C1C1C; background: #FBF8F1; box-shadow: 2px 2px 0 #1C1C1C; display: flex; align-items: center; justify-content: center; font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 500; font-size: 20px; line-height: 20px; color: #1C1C1C; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 2px; text-underline-offset: 3px">U</span>
+</div>
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; line-height: 18px; font-weight: 500; color: #1C1C1C">今天 · 拆书日推</span>
+<div style="position: relative; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 18px; box-shadow: 4px 4px 0 #1C1C1C; padding: 16px 16px 18px 18px; display: flex; flex-direction: column">
+<span aria-hidden="true" style="position: absolute; left: -6px; top: 12.5px; width: 12px; height: 12px; box-sizing: border-box; background: #FBF8F1; border-left: 1.5px solid #1C1C1C; border-bottom: 1.5px solid #1C1C1C; transform: rotate(45deg)"></span>
+
+<button type="button" aria-expanded="{{todayExpanded}}" onClick="{{toggleToday}}" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 0; margin: -10px 0; border: 0; background: transparent; font-family: inherit; color: #1C1C1C; cursor: pointer; text-align: left">
+<span style="display: flex; align-items: center; gap: 6px">
+<span style="font-size: 17px; line-height: 24px; font-weight: 700; color: #925F50">#</span>
+<span style="font-size: 15px; line-height: 24px; font-weight: 600">日推</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 18px; line-height: 24px; font-weight: 500">496</span>
+<span style="display: inline-flex; align-items: center; height: 20px; box-sizing: border-box; padding: 0 7px; margin-left: 2px; border: 1.5px solid #1C1C1C; border-radius: 10px; font-size: 11px; font-weight: 600">拆书</span>
+</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 17px; font-weight: 500; color: #2F5E60">
+<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" fill="none" stroke="#E1DDD3" stroke-width="3"></circle><circle cx="10" cy="10" r="7.5" fill="none" stroke="#1C1C1C" stroke-width="3" stroke-dasharray="{{countDash}}" transform="rotate(-90 10 10)"></circle></svg>
+<sc-if value="{{todayOpen}}" hint-placeholder-val="{{true}}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
+</sc-if>
+<sc-if value="{{todayClosed}}" hint-placeholder-val="{{false}}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+</sc-if>
+</span>
+</button>
+
+<a href="{{L.book.href}}" onClick="{{L.book.click}}" style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #1C1C1C; text-decoration: none"><h2 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 25px; line-height: 32px; letter-spacing: -0.2px; color: #1C1C1C; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 5px">How to Know a Person</h2><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M9 6l6 6-6 6"></path></svg></a>
+
+<sc-if value="{{todayOpen}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-direction: column">
+<div style="margin-top: 6px; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 14px; line-height: 18px; color: #56524D">David Brooks</div>
+<p style="margin: 12px 0 0 0; font-size: 14px; line-height: 22px; font-weight: 500; color: #1C1C1C">从社会心理学的角度打开深度社交之门</p>
+<p style="margin: 2px 0 0 0; font-size: 13px; line-height: 20px; color: #56524D">原来，让人觉得被看见也是一种天生的本事。</p>
+<div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{resources}}" as="r" hint-placeholder-count="4">
+<a href="{{r.href}}" onClick="{{r.pick}}" style="display: flex; align-items: center; gap: 12px; width: 100%; height: 56px; box-sizing: border-box; padding: 0 10px 0 12px; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{r.rowBg}}; font-family: inherit; color: #1C1C1C; cursor: pointer; text-align: left; text-decoration: none">
+<sc-if value="{{r.notOpened}}" hint-placeholder-val="{{true}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M5 6l6 6-6 6"></path><path d="M12 6l6 6-6 6"></path></svg>
+</sc-if>
+<sc-if value="{{r.isOpened}}" hint-placeholder-val="{{false}}">
+<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex-shrink: 0"><circle cx="11" cy="11" r="11" fill="#2F5E60"></circle><path d="M6.5 11.3l3 3L15.5 8" fill="none" stroke="#FBF8F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</sc-if>
+<span style="flex-grow: 1; min-width: 0; font-size: 15px; line-height: 20px; font-weight: 500">{{r.label}}</span>
+<span aria-hidden="true" style="position: relative; width: 30px; height: 36px; flex-shrink: 0; box-sizing: border-box; border-radius: 4px; background: {{r.badgeBg}}; clip-path: polygon(0 0, 68% 0, 100% 28%, 100% 100%, 0 100%); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 5px">
+<span style="position: absolute; right: 0; top: 0; width: 32%; height: 28%; background: rgba(255, 255, 255, 0.42); clip-path: polygon(0 0, 0 100%, 100% 100%)"></span>
+<span style="font-size: 9px; line-height: 10px; font-weight: 700; letter-spacing: 0.4px; color: {{r.badgeFg}}">{{r.badge}}</span>
+</span>
+</a>
+</sc-for>
+</div>
+<div style="margin-top: 14px; display: flex; align-items: center">
+<sc-if value="{{notInShelf}}" hint-placeholder-val="{{true}}">
+<button type="button" onClick="{{toggleShelfAdd}}" style="height: 40px; box-sizing: border-box; padding: 0 16px 0 12px; border: 1.5px solid #1C1C1C; border-radius: 20px; background: transparent; display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 13px; font-weight: 600; color: #1C1C1C; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+<span>加入书架</span>
+</button>
+</sc-if>
+<sc-if value="{{inShelf}}" hint-placeholder-val="{{false}}">
+<button type="button" onClick="{{toggleShelfAdd}}" style="height: 40px; box-sizing: border-box; padding: 0 16px 0 12px; border: 1.5px solid #1C1C1C; border-radius: 20px; background: #1C1C1C; display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 13px; font-weight: 600; color: #FBF8F1; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span>已在书架</span>
+</button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div id="shelf" style="display: flex; align-items: flex-start; gap: 6px">
+<div style="width: 44px; flex-shrink: 0; display: flex; justify-content: center; padding-top: 24px">
+<span aria-hidden="true" style="width: 40px; height: 40px; flex-shrink: 0; box-sizing: border-box; border-radius: 20px; border: 1.5px solid #1C1C1C; background: #FBF8F1; box-shadow: 2px 2px 0 #1C1C1C; display: flex; align-items: center; justify-content: center; font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 500; font-size: 20px; line-height: 20px; color: #1C1C1C; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 2px; text-underline-offset: 3px">U</span>
+</div>
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; line-height: 18px; font-weight: 500; color: #1C1C1C">你的书架</span>
+<div style="position: relative; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 18px; box-shadow: 4px 4px 0 #1C1C1C; padding: 16px 16px 18px 18px; display: flex; flex-direction: column">
+<span aria-hidden="true" style="position: absolute; left: -6px; top: 12.5px; width: 12px; height: 12px; box-sizing: border-box; background: #FBF8F1; border-left: 1.5px solid #1C1C1C; border-bottom: 1.5px solid #1C1C1C; transform: rotate(45deg)"></span>
+
+<button type="button" aria-expanded="{{shelfExpanded}}" onClick="{{toggleShelf}}" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 0; margin: -10px 0; border: 0; background: transparent; font-family: inherit; color: #1C1C1C; cursor: pointer; text-align: left">
+<span style="display: flex; align-items: baseline; gap: 6px">
+<span style="font-size: 17px; line-height: 24px; font-weight: 700; color: #925F50">#</span>
+<span style="font-size: 15px; line-height: 24px; font-weight: 600">书架</span>
+</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 17px; font-weight: 500; color: #2F5E60">
+<span>{{shelfCount}} 本</span>
+<sc-if value="{{shelfOpen}}" hint-placeholder-val="{{false}}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
+</sc-if>
+<sc-if value="{{shelfClosed}}" hint-placeholder-val="{{true}}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+</sc-if>
+</span>
+</button>
+
+<sc-if value="{{shelfClosed}}" hint-placeholder-val="{{true}}">
+<div style="margin-top: 14px; display: flex; align-items: flex-end; gap: 14px">
+<div aria-hidden="true" style="display: flex; align-items: flex-end; gap: 4px; padding: 0 6px; border-bottom: 2px solid #1C1C1C; flex-shrink: 0">
+<sc-if value="{{inShelf}}" hint-placeholder-val="{{false}}">
+<span style="width: 14px; height: 38px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-bottom: 0; border-radius: 3px 3px 0 0; background: #D89585"></span>
+</sc-if>
+<span style="width: 14px; height: 34px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-bottom: 0; border-radius: 3px 3px 0 0; background: #2F5E60"></span>
+<span style="width: 14px; height: 42px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-bottom: 0; border-radius: 3px 3px 0 0; background: #925F50"></span>
+<span style="width: 14px; height: 30px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-bottom: 0; border-radius: 3px 3px 0 0; background: #1C1C1C"></span>
+</div>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding-bottom: 2px">
+<span style="font-size: 13px; line-height: 18px; font-weight: 500; color: #1C1C1C">共 {{shelfCount}} 本</span>
+<span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 13px; line-height: 17px; color: #56524D; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">最近：{{shelfLead}}</span>
+</span>
+</div>
+</sc-if>
+
+<sc-if value="{{shelfOpen}}" hint-placeholder-val="{{false}}">
+<div style="margin-top: 10px; display: flex; flex-direction: column">
+<sc-if value="{{inShelf}}" hint-placeholder-val="{{false}}">
+<a href="{{L.book.href}}" onClick="{{L.book.click}}" style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E6E1D6; text-decoration: none; color: #1C1C1C">
+<span aria-hidden="true" style="width: 10px; height: 30px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 2px; background: #D89585"></span>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 16px; line-height: 20px; font-weight: 500">How to Know a Person</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D">David Brooks · 刚加入</span>
+</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+</sc-if>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E6E1D6; text-decoration: none; color: #1C1C1C">
+<span aria-hidden="true" style="width: 10px; height: 30px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 2px; background: #2F5E60"></span>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 16px; line-height: 20px; font-weight: 500">Atomic Habits</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D">James Clear</span>
+</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E6E1D6; text-decoration: none; color: #1C1C1C">
+<span aria-hidden="true" style="width: 10px; height: 30px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 2px; background: #925F50"></span>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 16px; line-height: 20px; font-weight: 500">Thinking, Fast and Slow</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D">Daniel Kahneman</span>
+</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 10px 0 0 0; text-decoration: none; color: #1C1C1C">
+<span aria-hidden="true" style="width: 10px; height: 30px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 2px; background: #1C1C1C"></span>
+<span style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Newsreader, Georgia, serif; font-size: 16px; line-height: 20px; font-weight: 500">The Anxious Generation</span>
+<span style="font-size: 12px; line-height: 16px; color: #56524D">Jonathan Haidt</span>
+</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div id="history" style="display: flex; align-items: center; gap: 10px; padding: 8px 8px 0 12px">
+<span style="flex-grow: 1; height: 1px; background: rgba(28, 28, 28, 0.35)"></span>
+<span style="font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 1px; color: #1C1C1C">往期日推</span>
+<span style="flex-grow: 1; height: 1px; background: rgba(28, 28, 28, 0.35)"></span>
+</div>
+
+<sc-for list="{{history}}" as="h" hint-placeholder-count="4">
+<div style="display: flex; align-items: flex-start; gap: 6px">
+<div style="width: 44px; flex-shrink: 0; display: flex; justify-content: center; padding-top: 24px">
+<span aria-hidden="true" style="width: 40px; height: 40px; flex-shrink: 0; box-sizing: border-box; border-radius: 20px; border: 1.5px solid #1C1C1C; background: #FBF8F1; box-shadow: 2px 2px 0 #1C1C1C; display: flex; align-items: center; justify-content: center; font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 500; font-size: 20px; line-height: 20px; color: #1C1C1C; text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 2px; text-underline-offset: 3px">U</span>
+</div>
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; line-height: 18px; font-weight: 500; color: #1C1C1C">{{h.when}}</span>
+<div style="position: relative; box-sizing: border-box; background: #FBF8F1; border: 1.5px solid #1C1C1C; border-radius: 16px; box-shadow: 3px 3px 0 #1C1C1C">
+<span aria-hidden="true" style="position: absolute; left: -6px; top: 12.5px; width: 12px; height: 12px; box-sizing: border-box; background: #FBF8F1; border-left: 1.5px solid #1C1C1C; border-bottom: 1.5px solid #1C1C1C; transform: rotate(45deg)"></span>
+<a href="{{h.href}}" onClick="{{h.click}}" style="display: flex; flex-direction: column; padding: 14px 14px 16px 16px; text-decoration: none; color: #1C1C1C">
+<span style="display: flex; align-items: center; justify-content: space-between">
+<span style="display: flex; align-items: baseline; gap: 6px">
+<span style="font-size: 15px; line-height: 20px; font-weight: 700; color: #925F50">#</span>
+<span style="font-size: 13px; line-height: 20px; font-weight: 600">日推</span>
+<span style="font-family: Newsreader, Georgia, serif; font-size: 16px; line-height: 20px; font-weight: 500">{{h.no}}</span>
+</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</span>
+<span style="margin-top: 6px; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 24px; font-weight: 500">{{h.title}}</span>
+<span style="margin-top: 2px; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 13px; line-height: 18px; color: #56524D">{{h.author}}</span>
+<span style="margin-top: 6px; font-size: 13px; line-height: 20px; color: #1C1C1C">{{h.line}}</span>
+<span aria-hidden="true" style="margin-top: 12px; display: flex; gap: 6px">
+<span style="width: 18px; height: 22px; border-radius: 3px; background: #925F50; clip-path: polygon(0 0, 66% 0, 100% 28%, 100% 100%, 0 100%)"></span>
+<span style="width: 18px; height: 22px; border-radius: 3px; background: #2F5E60; clip-path: polygon(0 0, 66% 0, 100% 28%, 100% 100%, 0 100%)"></span>
+<span style="width: 18px; height: 22px; border-radius: 3px; background: #1C1C1C; clip-path: polygon(0 0, 66% 0, 100% 28%, 100% 100%, 0 100%)"></span>
+<span style="width: 18px; height: 22px; border-radius: 3px; background: #D89585; clip-path: polygon(0 0, 66% 0, 100% 28%, 100% 100%, 0 100%)"></span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</sc-for>
+
+</div>
+</div>
+
+<div style="position: absolute; left: 0; top: 0; right: 0; height: 92px; box-sizing: border-box; padding: 44px 12px 0 20px; background: #9EC0C0; display: flex; align-items: center; justify-content: space-between">
+<span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 500; font-size: 24px; line-height: 30px; letter-spacing: -0.2px; color: #1C1C1C; text-decoration-line: underline; text-decoration-color: #1C1C1C; text-decoration-thickness: 2px; text-underline-offset: 5px">Underline</span>
+<button type="button" aria-label="菜单" style="width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+</button>
+</div>
+
+<nav aria-label="主导航" style="position: absolute; left: 101px; bottom: 30px; display: flex; gap: 4px; padding: 6px; border-radius: 28px; background: #1C1C1C; box-shadow: 0 10px 24px rgba(28, 28, 28, 0.28)">
+<a href="#today" aria-label="今日" aria-current="page" style="width: 56px; height: 44px; border-radius: 22px; background: #9EC0C0; color: #1C1C1C; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"></rect><path d="M7 10h6"></path><path d="M7 14h10"></path></svg>
+</a>
+<a href="{{L.library.href}}" onClick="{{L.library.click}}" aria-label="资料库" style="width: 56px; height: 44px; border-radius: 22px; background: transparent; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+</a>
+<a href="{{L.me.href}}" onClick="{{L.me.click}}" aria-label="我的" style="width: 56px; height: 44px; border-radius: 22px; background: transparent; color: #D9D4C9; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.5 18.5c1.3-2.2 3.3-3.3 5.5-3.3s4.2 1.1 5.5 3.3"></path></svg>
+</a>
+</nav>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nav":{"editor":null},"variant":{"editor":"enum","options":["a","b","c"],"default":"a"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: 'today', opened: {}, inShelf: false };
+  }
+
+  openResource(id) {
+    const prev = (this.state && this.state.opened) || {};
+    const opened = Object.assign({}, prev);
+    opened[id] = true;
+    this.setState({ opened: opened });
+  }
+
+  renderVals() {
+    const __nav = this.props.nav;
+    const __go = (to, href) => ({ href: __nav ? '#' : href, click: (e) => { if (__nav) { if (e && e.preventDefault) e.preventDefault(); __nav(to); } } });
+    const L = {intro: __go('intro', 'ArticleIntroPhoto.dc.html'), library: __go('library', 'LibV6.dc.html'), me: __go('me', 'MeD.dc.html'), player: __go('player', 'PlayerC.dc.html'), book: __go('book', 'Book.dc.html')};
+    const s = this.state || {};
+    const variant = this.props.variant ?? 'a';
+    const open = s.open === undefined ? 'today' : s.open;
+    const opened = s.opened || {};
+    const inShelf = !!s.inShelf;
+    const defs = [
+      { id: 'pdf', label: '优质语段精选', badge: 'PDF', badgeBg: '#925F50', badgeFg: '#FBF8F1' },
+      { id: 'map', label: '全书思维导图', badge: 'MAP', badgeBg: '#2F5E60', badgeFg: '#FBF8F1' },
+      { id: 'doc', label: '关键表达词库', badge: 'DOC', badgeBg: '#1C1C1C', badgeFg: '#FBF8F1' },
+      { id: 'aud', label: '拆书播客', badge: 'AUD', badgeBg: '#D89585', badgeFg: '#1C1C1C' }
+    ];
+    const resources = defs.map((r) => {
+      const isOpened = !!opened[r.id];
+      return Object.assign({}, r, {
+        isOpened: isOpened,
+        notOpened: !isOpened,
+        rowBg: isOpened ? '#E6EFEE' : '#FFFDF8',
+        href: r.id === 'pdf' ? L.intro.href : (r.id === 'aud' ? L.player.href : '#'),
+        pick: (e) => { this.openResource(r.id); if (r.id === 'pdf') { L.intro.click(e); } else if (r.id === 'aud') { L.player.click(e); } else if (e && e.preventDefault) { e.preventDefault(); } }
+      });
+    });
+    const count = resources.filter((r) => r.isOpened).length;
+    const history = [
+      { no: '495', when: '昨天', title: 'The Anxious Generation', author: 'Jonathan Haidt', line: '手机是怎样重塑一代人的童年的' },
+      { no: '494', when: '周六', title: 'Atomic Habits', author: 'James Clear', line: '每天进步一点点，剩下的交给复利' },
+      { no: '493', when: '周五', title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', line: '你的大脑里住着两套系统' },
+      { no: '492', when: '周四', title: 'Range', author: 'David Epstein', line: '为什么通才能在专精的世界里胜出' }
+    ];
+    return {
+      L: L,
+      greetA: variant === 'a',
+      greetB: variant === 'b',
+      greetC: variant === 'c',
+      resources: resources,
+      count: count,
+      countDash: ((count / 4) * 2 * Math.PI * 7.5).toFixed(2) + ' ' + (2 * Math.PI * 7.5).toFixed(2),
+      history: history.map((h) => Object.assign({}, h, { href: L.intro.href, click: L.intro.click })),
+      todayOpen: open === 'today',
+      todayClosed: open !== 'today',
+      shelfOpen: open === 'shelf',
+      shelfClosed: open !== 'shelf',
+      todayExpanded: open === 'today' ? 'true' : 'false',
+      shelfExpanded: open === 'shelf' ? 'true' : 'false',
+      toggleToday: () => this.setState({ open: open === 'today' ? null : 'today' }),
+      toggleShelf: () => this.setState({ open: open === 'shelf' ? null : 'shelf' }),
+      inShelf: inShelf,
+      notInShelf: !inShelf,
+      toggleShelfAdd: () => this.setState({ inShelf: !inShelf }),
+      shelfCount: inShelf ? 4 : 3,
+      shelfLead: inShelf ? 'How to Know a Person' : 'Atomic Habits'
+    };
+  }
+}
+</script>
+</body>
+</html>

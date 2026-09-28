@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>生词本</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #F7F4ED; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', sans-serif">
+
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow-y: auto; scrollbar-width: none; box-sizing: border-box; padding: 44px 0 48px 0">
+
+<div style="padding: 0 16px 0 10px; display: flex; align-items: center; justify-content: space-between">
+<span style="display: flex; align-items: center; gap: 2px">
+<a href="{{L.back.href}}" onClick="{{L.back.click}}" aria-label="返回我的" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #1C1C1C; text-decoration: none"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+<h1 style="margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 26px; line-height: 44px; letter-spacing: 2px">生词本</h1>
+</span>
+<button type="button" aria-haspopup="dialog" onClick="{{openExport}}" style="height: 34px; box-sizing: border-box; padding: 0 12px 0 10px; border: 1.5px solid #1C1C1C; border-radius: 17px; background: #FBF8F1; color: #1C1C1C; display: inline-flex; align-items: center; gap: 5px; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M5 20h14"></path></svg>批量导出</button>
+</div>
+
+<sc-if value="{{isA}}" hint-placeholder-val="{{true}}">
+<div style="padding: 14px 24px 0 24px; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; justify-content: space-between">
+<span style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 46px; line-height: 50px">126</span><span style="font-size: 14px; line-height: 20px; font-weight: 600">个词</span></span>
+<button type="button" onClick="{{startReview}}" style="height: 48px; box-sizing: border-box; padding: 0 18px; border: 1.5px solid #1C1C1C; border-radius: 24px; background: #1C1C1C; color: #FBF8F1; box-shadow: 3px 3px 0 #D89585; display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">开始复习<span style="height: 22px; min-width: 22px; box-sizing: border-box; padding: 0 6px; border-radius: 11px; background: #D89585; color: #1C1C1C; display: inline-flex; align-items: center; justify-content: center; font-size: 12.5px; font-variant-numeric: tabular-nums">{{dueCount}}</span></button>
+</div>
+<span style="margin-top: 22px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">最近加入 · 点一下翻面</span>
+<div style="margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{words}}" as="w" hint-placeholder-count="6">
+<div style="position: relative; height: 122px; perspective: 900px">
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.3, 0.7, 0.2, 1); transform: {{w.rot}}">
+<button type="button" aria-label="{{w.frontAria}}" onClick="{{w.flip}}" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 14px 14px 12px 14px; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; box-shadow: 3px 3px 0 #1C1C1C; color: #1C1C1C; backface-visibility: hidden; pointer-events: {{w.frontPE}}; display: flex; flex-direction: column; justify-content: space-between; text-align: left; font-family: inherit; cursor: pointer">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 24px; line-height: 28px">{{w.w}}</span>
+<span style="width: 100%; display: flex; align-items: center; justify-content: space-between">
+<span style="height: 20px; box-sizing: border-box; padding: 0 7px; border: 1px solid #CFCAC0; border-radius: 6px; display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; color: #56524D">{{w.level}}</span>
+<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#2F5E60" stroke-width="8.5" stroke-dasharray="{{w.dash}}" transform="rotate(-90 10 10)"></circle></svg>
+</span>
+</button>
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #DCE8E7; box-shadow: 3px 3px 0 #1C1C1C; backface-visibility: hidden; transform: rotateY(180deg); pointer-events: {{w.backPE}}; display: flex; flex-direction: column">
+<button type="button" aria-label="翻回单词" onClick="{{w.flip}}" style="flex: 1; min-height: 0; border: 0; padding: 12px 14px 0 14px; background: transparent; color: #1C1C1C; display: flex; flex-direction: column; text-align: left; font-family: inherit; cursor: pointer">
+<span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 12.5px; line-height: 16px; color: #2F5E60">{{w.pos}}</span>
+<span style="margin-top: 4px; font-size: 15px; line-height: 21px; font-weight: 700">{{w.zh}}</span>
+</button>
+<button type="button" onClick="{{w.openSrc}}" style="align-self: flex-start; margin: 0 0 10px 12px; height: 26px; box-sizing: border-box; padding: 0 10px; border: 1px solid #1C1C1C; border-radius: 13px; background: #FBF8F1; color: #1C1C1C; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer">原文 ›</button>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isB}}" hint-placeholder-val="{{false}}">
+<div style="padding: 14px 24px 0 24px; display: flex; flex-direction: column">
+<button type="button" onClick="{{startReview}}" style="position: relative; height: 112px; box-sizing: border-box; padding: 16px 18px; border: 1.5px solid #1C1C1C; border-radius: 18px; background: #9EC0C0; box-shadow: 4px 4px 0 #1C1C1C; color: #1C1C1C; display: flex; align-items: center; justify-content: space-between; text-align: left; font-family: inherit; cursor: pointer; overflow: hidden">
+<span style="display: flex; flex-direction: column">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 36px; line-height: 40px">{{dueWords}}</span>
+<span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 16px; line-height: 22px">to be reviewed</span>
+<span style="margin-top: 8px; font-size: 13px; line-height: 18px; font-weight: 700">开始过卡 ›</span>
+</span>
+<span aria-hidden="true" style="position: relative; width: 112px; height: 80px">
+<span style="position: absolute; left: 22px; top: 2px; width: 84px; height: 58px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 10px; background: #FBF8F1; transform: rotate(8deg)"></span>
+<span style="position: absolute; left: 12px; top: 8px; width: 84px; height: 58px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 10px; background: #FBF8F1; transform: rotate(-4deg)"></span>
+<span style="position: absolute; left: 4px; top: 16px; width: 84px; height: 58px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 10px; background: #FBF8F1; box-shadow: 3px 3px 0 #D89585; display: flex; align-items: center; justify-content: center; font-family: Newsreader, Georgia, serif; font-size: 19px; font-weight: 500">latent</span>
+</span>
+</button>
+<span style="margin-top: 22px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">所有生词</span>
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="2">
+<section style="margin-top: 12px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 16px; background: #FBF8F1; display: flex; flex-direction: column; overflow: hidden">
+<span style="padding: 12px 16px 10px 16px; display: flex; flex-direction: column; border-bottom: 1px solid #E4DFD6">
+<span style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 17px; line-height: 22px">{{g.title}}</span><span style="flex-shrink: 0; font-size: 12px; line-height: 16px; color: #8A857C; font-variant-numeric: tabular-nums">{{g.date}}</span></span>
+<sc-if value="{{g.hasSub}}" hint-placeholder-val="{{false}}"><span style="font-size: 11.5px; line-height: 16px; color: #8A857C">{{g.sub}}</span></sc-if>
+</span>
+<sc-for list="{{g.items}}" as="w" hint-placeholder-count="3">
+<div style="min-height: 62px; box-sizing: border-box; padding: 0 12px 0 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #EFEBE3">
+<span style="width: 118px; flex-shrink: 0; display: flex; flex-direction: column">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 19px; line-height: 23px">{{w.w}}</span>
+<span style="font-size: 11.5px; line-height: 16px; color: #8A857C">{{w.ipa}}</span>
+</span>
+<span style="position: relative; flex: 1; min-width: 0; height: 46px; perspective: 700px">
+<span style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; transform-style: preserve-3d; transition: transform 0.45s cubic-bezier(0.3, 0.7, 0.2, 1); transform: {{w.rotX}}">
+<button type="button" aria-label="{{w.frontAria}}" onClick="{{w.flip}}" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; box-sizing: border-box; border: 1px dashed #BDB7AC; border-radius: 10px; background: #F4F1EA; color: #8A857C; backface-visibility: hidden; pointer-events: {{w.frontPE}}; display: flex; align-items: center; justify-content: center; font-family: inherit; font-size: 12px; font-weight: 500; cursor: pointer">点一下看意思</button>
+<span style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; box-sizing: border-box; border: 1px solid #1C1C1C; border-radius: 10px; background: #DCE8E7; backface-visibility: hidden; transform: rotateX(180deg); pointer-events: {{w.backPE}}; display: flex; align-items: center">
+<button type="button" aria-label="收起意思" onClick="{{w.flip}}" style="flex: 1; min-width: 0; height: 44px; border: 0; padding: 0 0 0 10px; background: transparent; color: #1C1C1C; text-align: left; font-family: inherit; font-size: 13px; line-height: 17px; font-weight: 700; cursor: pointer; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{w.zhShort}}</button>
+<button type="button" onClick="{{w.openSrc}}" style="margin-right: 6px; height: 28px; flex-shrink: 0; box-sizing: border-box; padding: 0 8px; border: 1px solid #1C1C1C; border-radius: 14px; background: #FBF8F1; color: #1C1C1C; font-family: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer">原文 ›</button>
+</span>
+</span>
+</span>
+<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" style="flex-shrink: 0"><circle cx="10" cy="10" r="8.5" fill="none" stroke="#1C1C1C" stroke-width="1.5"></circle><circle cx="10" cy="10" r="4.25" fill="none" stroke="#2F5E60" stroke-width="8.5" stroke-dasharray="{{w.dash}}" transform="rotate(-90 10 10)"></circle></svg>
+</div>
+</sc-for>
+</section>
+</sc-for>
+</div>
+</sc-if>
+
+</div>
+
+<sc-if value="{{reviewing}}" hint-placeholder-val="{{false}}">
+<section role="dialog" aria-label="复习" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; box-sizing: border-box; background: #F7F4ED; display: flex; flex-direction: column; align-items: center">
+<div style="margin-top: 44px; width: 390px; box-sizing: border-box; padding: 0 20px 0 10px; display: flex; align-items: center; gap: 8px">
+<button type="button" aria-label="结束复习" onClick="{{closeReview}}" style="width: 44px; height: 44px; flex-shrink: 0; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span role="img" aria-label="{{deckAria}}" style="flex: 1; display: flex; gap: 4px">
+<sc-for list="{{segs}}" as="sg" hint-placeholder-count="6">
+<span style="flex: 1; height: 5px; border-radius: 3px; background: {{sg.bg}}"></span>
+</sc-for>
+</span>
+<span style="width: 34px; text-align: right; font-size: 12px; font-weight: 600; color: #56524D; font-variant-numeric: tabular-nums">{{deckPos}}</span>
+</div>
+
+<sc-if value="{{inDeck}}" hint-placeholder-val="{{true}}">
+<div style="margin-top: 34px; position: relative; width: 326px; height: 440px; perspective: 1200px">
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.3, 0.7, 0.2, 1); transform: {{cardRot}}">
+<button type="button" aria-label="翻面看意思" onClick="{{flipCard}}" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 24px; border: 1.5px solid #1C1C1C; border-radius: 22px; background: #FBF8F1; box-shadow: 5px 5px 0 #D89585; color: #1C1C1C; backface-visibility: hidden; pointer-events: {{cardFrontPE}}; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: inherit; cursor: pointer">
+<span style="height: 22px; box-sizing: border-box; padding: 0 8px; border: 1px solid #CFCAC0; border-radius: 6px; display: inline-flex; align-items: center; font-size: 11.5px; font-weight: 600; color: #56524D">{{card.level}}</span>
+<span style="margin-top: 22px; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 46px; line-height: 52px">{{card.w}}</span>
+<span style="margin-top: 8px; font-size: 15px; line-height: 20px; color: #8A857C">{{card.ipa}}</span>
+<span style="position: absolute; bottom: 20px; font-size: 12px; color: #8A857C">点卡片翻面</span>
+</button>
+<div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 24px 24px 20px 24px; border: 1.5px solid #1C1C1C; border-radius: 22px; background: #FBF8F1; box-shadow: -5px 5px 0 #D89585; backface-visibility: hidden; transform: rotateY(180deg); pointer-events: {{cardBackPE}}; display: flex; flex-direction: column">
+<button type="button" aria-label="翻回单词" onClick="{{flipCard}}" style="border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; flex-direction: column; text-align: left; font-family: inherit; cursor: pointer">
+<span style="display: flex; align-items: baseline; gap: 8px"><span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 22px; line-height: 28px">{{card.w}}</span><span style="font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 14px; color: #2F5E60">{{card.pos}}</span></span>
+<span style="margin-top: 12px; font-size: 24px; line-height: 32px; font-weight: 700">{{card.zh}}</span>
+</button>
+<span aria-hidden="true" style="margin: 20px 0 16px 0; border-top: 1px dashed #D89585"></span>
+<span style="font-size: 12px; line-height: 16px; font-weight: 600; color: #56524D">原文里是这样用的</span>
+<p style="margin: 8px 0 0 0; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 27px">{{card.pre}}<span style="text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 4px; text-decoration-skip-ink: none; font-weight: 600">{{card.hit}}</span>{{card.post}}</p>
+<span style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<span style="min-width: 0; font-size: 12px; line-height: 16px; color: #8A857C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{card.src}}</span>
+<a href="{{L.reader.href}}" onClick="{{L.reader.click}}" style="height: 30px; flex-shrink: 0; box-sizing: border-box; padding: 0 12px; border: 1px solid #1C1C1C; border-radius: 15px; display: inline-flex; align-items: center; color: #1C1C1C; text-decoration: none; font-size: 12.5px; font-weight: 600">去原文 ›</a>
+</span>
+</div>
+</div>
+</div>
+<div style="margin-top: 34px; width: 326px; display: flex; gap: 12px">
+<button type="button" onClick="{{again}}" style="flex: 1; height: 54px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 27px; background: #FBF8F1; color: #1C1C1C; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">再看看</button>
+<button type="button" onClick="{{gotIt}}" style="flex: 1; height: 54px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 27px; background: #1C1C1C; color: #FBF8F1; box-shadow: 3px 3px 0 #D89585; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">记住了</button>
+</div>
+</sc-if>
+
+<sc-if value="{{deckDone}}" hint-placeholder-val="{{false}}">
+<div style="margin-top: 80px; width: 326px; box-sizing: border-box; padding: 32px 24px 26px 24px; border: 1.5px solid #1C1C1C; border-radius: 22px; background: #FBF8F1; box-shadow: 5px 5px 0 #D89585; display: flex; flex-direction: column; align-items: center; text-align: center">
+<span style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 64px; line-height: 66px">{{deckLen}}</span>
+<span style="margin-top: 6px; font-size: 16px; line-height: 22px; font-weight: 700">今天的词都过完了</span>
+<span style="margin-top: 18px; display: flex; gap: 8px">
+<span style="height: 30px; box-sizing: border-box; padding: 0 12px; border: 1.5px solid #1C1C1C; border-radius: 15px; background: #9EC0C0; display: inline-flex; align-items: center; font-size: 13px; font-weight: 700">记住了 {{knownCount}}</span>
+<span style="height: 30px; box-sizing: border-box; padding: 0 12px; border: 1px solid #CFCAC0; border-radius: 15px; display: inline-flex; align-items: center; font-size: 13px; font-weight: 600">再看看 {{againCount}}</span>
+</span>
+<span style="margin-top: 14px; font-size: 12.5px; line-height: 18px; color: #56524D">「再看看」的词明天会再出现</span>
+<button type="button" onClick="{{closeReview}}" style="margin-top: 22px; width: 100%; height: 52px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 26px; background: #1C1C1C; color: #FBF8F1; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">完成</button>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{sheetOpen}}" hint-placeholder-val="{{false}}">
+<button type="button" aria-label="关闭" onClick="{{closeSheet}}" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; border: 0; padding: 0; background: rgba(28, 28, 28, 0.38); cursor: pointer"></button>
+</sc-if>
+
+<sc-if value="{{srcOpen}}" hint-placeholder-val="{{false}}">
+<section role="dialog" aria-label="原文位置" style="position: absolute; left: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 10px 24px 34px 24px; background: #FBF8F1; border-top: 1.5px solid #1C1C1C; border-radius: 24px 24px 0 0; display: flex; flex-direction: column">
+<span aria-hidden="true" style="align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #CFCAC0"></span>
+<span style="margin-top: 16px; font-size: 12px; line-height: 16px; font-weight: 600; color: #56524D">「{{src.w}}」上一次出现在</span>
+<span style="margin-top: 6px; font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 22px; line-height: 28px">{{src.title}}</span>
+<span style="margin-top: 2px; font-size: 12px; line-height: 16px; color: #8A857C">{{src.meta}}</span>
+<p style="margin: 16px 0 0 0; box-sizing: border-box; padding: 14px 16px; border: 1px solid #1C1C1C; border-radius: 14px; background: #FFFFFF; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 27px">{{src.pre}}<span style="text-decoration-line: underline; text-decoration-color: #D89585; text-decoration-thickness: 3px; text-underline-offset: 4px; text-decoration-skip-ink: none; font-weight: 600">{{src.hit}}</span>{{src.post}}</p>
+<a href="{{L.reader.href}}" onClick="{{L.reader.click}}" style="margin-top: 18px; height: 52px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 26px; background: #1C1C1C; box-shadow: 3px 3px 0 #D89585; color: #FBF8F1; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 15px; font-weight: 700">去原文看这一段 ›</a>
+</section>
+</sc-if>
+
+<sc-if value="{{exportOpen}}" hint-placeholder-val="{{false}}">
+<section role="dialog" aria-label="导出生词" style="position: absolute; left: 0; right: 0; bottom: 0; box-sizing: border-box; padding: 10px 24px 34px 24px; background: #FBF8F1; border-top: 1.5px solid #1C1C1C; border-radius: 24px 24px 0 0; display: flex; flex-direction: column">
+<span aria-hidden="true" style="align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #CFCAC0"></span>
+<span style="margin-top: 6px; display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 700">导出生词</h2>
+<button type="button" aria-label="关闭" onClick="{{closeSheet}}" style="width: 44px; height: 44px; margin-right: -12px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</span>
+<span style="margin-top: 6px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">范围</span>
+<span style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{ranges}}" as="r" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{r.pressed}}" onClick="{{r.pick}}" style="height: 34px; box-sizing: border-box; padding: 0 12px; border: {{r.border}}; border-radius: 17px; background: {{r.bg}}; color: #1C1C1C; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{r.label}}<span style="font-weight: 500; color: #56524D; font-variant-numeric: tabular-nums">{{r.n}}</span></button>
+</sc-for>
+</span>
+<span style="margin-top: 20px; font-size: 13px; line-height: 18px; font-weight: 600; color: #56524D">格式</span>
+<span style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{fmts}}" as="f" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="min-height: 54px; box-sizing: border-box; padding: 8px 14px; border: {{f.border}}; border-radius: 12px; background: {{f.bg}}; color: #1C1C1C; display: flex; align-items: center; gap: 12px; text-align: left; font-family: inherit; cursor: pointer">
+<span aria-hidden="true" style="width: 18px; height: 18px; flex-shrink: 0; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; display: flex; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{f.dot}}"></span></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 14.5px; line-height: 20px; font-weight: 600">{{f.title}}</span><span style="font-size: 12px; line-height: 17px; color: #56524D">{{f.sub}}</span></span>
+</button>
+</sc-for>
+</span>
+<span style="margin-top: 12px; display: flex; flex-direction: column">
+<button type="button" role="switch" aria-checked="{{exStr}}" onClick="{{toggleEx}}" style="min-height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: space-between; font-family: inherit; cursor: pointer">
+<span style="font-size: 14px; line-height: 20px; font-weight: 500">附上原文例句</span>
+<span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{exBg}}"><span style="position: absolute; top: 2px; left: {{exKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span>
+</button>
+<button type="button" role="switch" aria-checked="{{srcStr}}" onClick="{{toggleSrcOpt}}" style="min-height: 44px; border: 0; padding: 0; background: transparent; color: #1C1C1C; display: flex; align-items: center; justify-content: space-between; font-family: inherit; cursor: pointer">
+<span style="font-size: 14px; line-height: 20px; font-weight: 500">附上出处（文章 · 日期）</span>
+<span aria-hidden="true" style="position: relative; width: 42px; height: 24px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 12px; background: {{srcBg}}"><span style="position: absolute; top: 2px; left: {{srcKnob}}; width: 17px; height: 17px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 9px; background: #FBF8F1"></span></span>
+</button>
+</span>
+<button type="button" onClick="{{doExport}}" style="margin-top: 14px; height: 54px; box-sizing: border-box; border: 1.5px solid #1C1C1C; border-radius: 27px; background: #1C1C1C; box-shadow: 4px 4px 0 #D89585; color: #FBF8F1; font-family: inherit; font-size: 16px; font-weight: 700; letter-spacing: 1px; cursor: pointer">{{exportLabel}}</button>
+<span role="status" style="margin-top: 10px; min-height: 18px; text-align: center; font-size: 12.5px; line-height: 18px; color: #2F5E60">{{doneText}}</span>
+</section>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nav":{"editor":null},"variant":{"editor":"enum","options":["a","b"],"default":"a"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { flipped: {}, reviewing: false, idx: 0, rflip: false, results: [], sheet: '', srcId: '', range: 'all', fmt: 'csv', ex: true, srcOpt: true, done: false };
+  }
+
+  words() {
+    return [
+      { id: 'perceive', w: 'perceive', ipa: '/pəˈsiːv/', pos: 'v.', zh: '察觉；意识到', level: '六级', m: 0.25, art: 'seen', pre: 'Researchers have a name for it, connective labor: the effort of ', hit: 'perceiving', post: ' another person and letting them know they have been perceived.' },
+      { id: 'streamline', w: 'streamline', ipa: '/ˈstriːmlaɪn/', pos: 'v.', zh: '精简（流程），使更高效', level: '六级', m: 0.1, art: 'seen', pre: 'So when an organization looks for something to ', hit: 'streamline', post: ', it is often the first thing to go.' },
+      { id: 'recognition', w: 'recognition', ipa: '/ˌrekəɡˈnɪʃn/', pos: 'n.', zh: '认可；赏识', level: '四级', m: 0.6, art: 'seen', pre: 'But efficiency is not the same as ', hit: 'recognition', post: ', and people can feel the difference long before they can name it.' },
+      { id: 'hesitation', w: 'hesitation', ipa: '/ˌhezɪˈteɪʃn/', pos: 'n.', zh: '犹豫；迟疑', level: '四级', m: 0.5, art: 'seen', pre: '…a teacher who caught the ', hit: 'hesitation', post: ' before you raised your hand.' },
+      { id: 'overlook', w: 'overlook', ipa: '/ˌəʊvəˈlʊk/', pos: 'v.', zh: '忽视；忽略', level: '四级', m: 0.8, art: 'seen', pre: 'These moments are small and easy to ', hit: 'overlook', post: '.' },
+      { id: 'premium', w: 'premium', ipa: '/ˈpriːmiəm/', pos: 'adj.', zh: '高端的；需额外付费的', level: '六级', m: 0.3, art: 'seen', pre: '…with a human on the other end becoming a ', hit: 'premium', post: ' feature and everyone else getting the app.' },
+      { id: 'compound', w: 'compound', ipa: '/kəmˈpaʊnd/', pos: 'v.', zh: '复合增长，利滚利（熟词僻义）', level: '六级', m: 0.4, art: 'goals', pre: 'Yet after a year, those small improvements ', hit: 'compound', post: ' to roughly thirty-seven times where you started.' },
+      { id: 'latent', w: 'latent', ipa: '/ˈleɪtnt/', pos: 'adj.', zh: '潜在的；尚未显现的', level: '托雅', m: 0.15, art: 'goals', pre: 'Clear calls this stage the Plateau of ', hit: 'Latent', post: ' Potential.' },
+      { id: 'ambition', w: 'ambition', ipa: '/æmˈbɪʃn/', pos: 'n.', zh: '抱负；雄心', level: '四级', m: 0.9, art: 'goals', pre: 'The problem is rarely a lack of ', hit: 'ambition', post: '.' },
+      { id: 'arithmetic', w: 'arithmetic', ipa: '/əˈrɪθmətɪk/', pos: 'n.', zh: '算术；文中指「一笔账」', level: '六级', m: 0.55, art: 'goals', pre: 'Consider the ', hit: 'arithmetic', post: ' of tiny changes.' },
+      { id: 'routine', w: 'routine', ipa: '/ruːˈtiːn/', pos: 'n.', zh: '日常惯例', level: '四级', m: 1, art: 'goals', pre: 'Start by designing a smaller ', hit: 'routine', post: ': ten minutes of reading after dinner, every day.' }
+    ];
+  }
+
+  articles() {
+    return {
+      seen: { title: 'The Work of Being Seen', meta: '9.28', date: '9.28', sub: '' },
+      goals: { title: 'Your Goals Are Not Enough', meta: 'Atomic Habits 1/5 · 9.22', date: '9.22', sub: 'Atomic Habits 1/5' }
+    };
+  }
+
+  renderVals() {
+    const __nav = this.props.nav;
+    const __go = (to, href) => ({ href: __nav ? '#' : href, click: (e) => { if (__nav) { if (e && e.preventDefault) e.preventDefault(); __nav(to); } } });
+    const L = {back: __go('back', 'MeD.dc.html'), reader: __go('reader', 'ReadDPure.dc.html')};
+    const s = this.state || {};
+    const v = this.props.variant ?? 'a';
+    const W = this.words();
+    const A = this.articles();
+    const flipped = s.flipped || {};
+    const setFlip = (id) => { const f = Object.assign({}, flipped); f[id] = !f[id]; this.setState({ flipped: f }); };
+    const item = (x) => {
+      const on = !!flipped[x.id];
+      return Object.assign({}, x, {
+        rot: on ? 'rotateY(180deg)' : 'rotateY(0deg)',
+        rotX: on ? 'rotateX(180deg)' : 'rotateX(0deg)',
+        frontPE: on ? 'none' : 'auto',
+        backPE: on ? 'auto' : 'none',
+        frontAria: x.w + '，点一下看意思',
+        zhShort: x.pos + ' ' + x.zh,
+        dash: (x.m * 26.7).toFixed(2) + ' 26.7',
+        flip: () => setFlip(x.id),
+        openSrc: () => this.setState({ sheet: 'src', srcId: x.id })
+      });
+    };
+    const words = W.map(item);
+    const groups = ['seen', 'goals'].map((k) => ({
+      title: A[k].title,
+      date: A[k].date,
+      sub: A[k].sub,
+      hasSub: !!A[k].sub,
+      items: words.filter((x) => x.art === k)
+    }));
+    const deckIds = ['streamline', 'latent', 'perceive', 'premium', 'compound', 'hesitation'];
+    const deck = deckIds.map((id) => W.find((x) => x.id === id));
+    const idx = s.idx || 0;
+    const results = s.results || [];
+    const inDeck = idx < deck.length;
+    const c = inDeck ? deck[idx] : deck[0];
+    const card = Object.assign({}, c, { src: '《' + A[c.art].title + '》· ' + A[c.art].meta.split(' · ').pop() });
+    const segs = deck.map((d, i) => ({ bg: i < idx ? '#1C1C1C' : (i === idx ? '#D89585' : '#DDD8CE') }));
+    const answer = (ok) => this.setState({ idx: idx + 1, rflip: false, results: results.concat([ok]) });
+    const sx = W.find((x) => x.id === s.srcId) || W[0];
+    const src = Object.assign({}, sx, { title: A[sx.art].title, meta: A[sx.art].meta });
+    const rangeDefs = [{ id: 'all', label: '全部', n: 126 }, { id: 'month', label: '本月', n: 48 }, { id: 'due', label: '待复习', n: 6 }];
+    const range = s.range || 'all';
+    const seg = (on) => ({ bg: on ? '#9EC0C0' : 'transparent', border: on ? '1.5px solid #1C1C1C' : '1px solid #CFCAC0', pressed: on ? 'true' : 'false' });
+    const ranges = rangeDefs.map((r) => Object.assign({ label: r.label, n: r.n, pick: () => this.setState({ range: r.id, done: false }) }, seg(r.id === range)));
+    const count = (rangeDefs.find((r) => r.id === range) || rangeDefs[0]).n;
+    const fmtDefs = [
+      { id: 'text', title: '复制为文本', sub: '粘贴到备忘录、微信，哪里都行', ext: '' },
+      { id: 'csv', title: '表格（CSV）', sub: '可以导入 Anki、Excel', ext: '.csv' },
+      { id: 'pdf', title: 'PDF 单词卡', sub: '排好版，可以打印', ext: '.pdf' }
+    ];
+    const fmt = s.fmt || 'csv';
+    const fmts = fmtDefs.map((f) => { const on = f.id === fmt; return { title: f.title, sub: f.sub, pressed: on ? 'true' : 'false', bg: on ? '#DCE8E7' : 'transparent', border: on ? '1.5px solid #1C1C1C' : '1px solid #CFCAC0', dot: on ? '#1C1C1C' : 'transparent', pick: () => this.setState({ fmt: f.id, done: false }) }; });
+    const curFmt = fmtDefs.find((f) => f.id === fmt) || fmtDefs[1];
+    const ex = s.ex !== false;
+    const so = s.srcOpt !== false;
+    const sheet = s.sheet || '';
+    return {
+      L: L,
+      isA: v === 'a',
+      isB: v === 'b',
+      words: words,
+      groups: groups,
+      dueCount: String(deck.length),
+      dueWords: (['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'][deck.length] || String(deck.length)) + (deck.length === 1 ? ' word' : ' words'),
+      reviewing: !!s.reviewing,
+      inDeck: inDeck,
+      deckDone: !inDeck,
+      deckLen: String(deck.length),
+      deckPos: Math.min(idx + 1, deck.length) + '/' + deck.length,
+      deckAria: '第 ' + Math.min(idx + 1, deck.length) + ' 张，共 ' + deck.length + ' 张',
+      segs: segs,
+      card: card,
+      cardRot: s.rflip ? 'rotateY(180deg)' : 'rotateY(0deg)',
+      cardFrontPE: s.rflip ? 'none' : 'auto',
+      cardBackPE: s.rflip ? 'auto' : 'none',
+      knownCount: String(results.filter((r) => r).length),
+      againCount: String(results.filter((r) => !r).length),
+      sheetOpen: sheet !== '',
+      srcOpen: sheet === 'src',
+      exportOpen: sheet === 'export',
+      src: src,
+      ranges: ranges,
+      fmts: fmts,
+      exStr: ex ? 'true' : 'false', exBg: ex ? '#9EC0C0' : '#ECE9E2', exKnob: ex ? '20px' : '2px',
+      srcStr: so ? 'true' : 'false', srcBg: so ? '#9EC0C0' : '#ECE9E2', srcKnob: so ? '20px' : '2px',
+      exportLabel: s.done ? '完成' : '导出 ' + count + ' 个',
+      doneText: s.done ? (fmt === 'text' ? '已复制 ' + count + ' 个生词，可以直接粘贴' : '已生成 Underline生词_' + count + '个' + curFmt.ext) : '',
+      startReview: () => this.setState({ reviewing: true, idx: 0, rflip: false, results: [] }),
+      closeReview: () => this.setState({ reviewing: false }),
+      flipCard: () => this.setState({ rflip: !s.rflip }),
+      again: () => answer(false),
+      gotIt: () => answer(true),
+      openExport: () => this.setState({ sheet: 'export', done: false }),
+      closeSheet: () => this.setState({ sheet: '', done: false }),
+      toggleEx: () => this.setState({ ex: !ex, done: false }),
+      toggleSrcOpt: () => this.setState({ srcOpt: !so, done: false }),
+      doExport: () => (s.done ? this.setState({ sheet: '', done: false }) : this.setState({ done: true }))
+    };
+  }
+}
+</script>
+</body>
+</html>
