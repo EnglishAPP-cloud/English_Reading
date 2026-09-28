@@ -43,6 +43,8 @@ npm run build:web    # 打包网页版到 dist/（发布由 GitHub 自动做，�
 .github/workflows/deploy-web.yml  打包网页版并发布到 GitHub Pages（gh-pages 分支）
 app.config.js             打包网页版时补上网址前缀 baseUrl（读环境变量 WEB_BASE_URL），平时原样用 app.json
 public/index.html         网页版的页面模板（背景色、电脑上居中显示手机宽度一栏）
+public/design/            设计稿的静态网页版（发链接给别人看），不属于 APP 代码；打包网页时原样复制
+  book-b/                 拆书详情页 B 版：/English_Reading/design/book-b/
 app/                      只放路由和页面拼装，不写业务逻辑
   _layout.tsx             根布局：加载 Lora 字体、等本地数据读回、Stack 导航
   (tabs)/_layout.tsx      底部三个标签：今日 / 知识库 / 单词；右上角"设置"
@@ -283,6 +285,10 @@ status 为 ready 必须有 articleId；期号不重复且不超过 total；文�
   - baseUrl 只在打包网页时通过 `app.config.js` 加上：写进 app.json 会连带改掉开发服务器给手机的地址。
   - 网页版是正式包（`__DEV__` 为 false）：设置页的开发工具（模拟日期、预览未发布、清空数据）不显示。
   - 电脑宽屏上由 `public/index.html` 的 CSS 把 APP 限制在居中 480px 一栏；底部弹出卡片（Modal）仍是整屏宽。
+  - **设计稿演示页** `public/design/<名字>/index.html`：把 Design 画布里的一页改写成独立的静态 HTML（纯 HTML/CSS/少量 JS，
+    图片和英文字体 Newsreader 放在同一文件夹，不依赖 Google Fonts，国内也能打开），随网页版一起发布。
+    它们只是给人看的设计稿，数据是示例，不走 `src/theme` tokens、不接 APP 的 store；设计定稿后要在 APP 里按规矩重新实现。
+    现有：`book-b/` ← 画布 https://claude.ai/artifact/EHPysrp2AwP7dC7fmL8nUJ 的 `Main.dc.html`（改了画布记得同步这里）。
 - Lora 字体在 `app/_layout.tsx` 加载完才渲染页面；Lora 的粗细靠字体名区分（安卓不认 fontWeight）。
 
 ## 验收自测记录（阶段 5，2026-09-25）

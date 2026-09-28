@@ -113,6 +113,11 @@ npm start
 进度在仓库的 Actions 页面看"发布网页版"和"pages build and deployment"。
 仓库里的 `gh-pages` 分支只放打包好的网页文件，由自动发布整个覆盖，不用管它、也不要手改。
 
+**设计稿演示页**（和网页版一起发布）：
+
+- 拆书详情页 B 版：https://englishapp-cloud.github.io/English_Reading/design/book-b/
+  （可以直接发某一栏，比如末尾加 `#words` 就打开词库；页面里的进度、人数是示例数据）
+
 **网址打不开（404）时**：打开仓库 **Settings → Pages**，确认 Source 是 **Deploy from a branch**、Branch 是 **gh-pages** / **/ (root)**（已经设好了，一般不用动）。
 
 **和手机 APP 的区别**：
